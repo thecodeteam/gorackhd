@@ -1,3 +1,9 @@
+glide.lock
+swagger
+vendor/
+client/
+models/
+
 # Compiled source #
 ###################
 *.com
