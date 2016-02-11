@@ -5,8 +5,11 @@ GLIDE_YAML := glide.yaml
 GLIDE_LOCK := glide.lock
 GLIDE_SWAGGER_YAML := glide-swagger.yaml
 GO_GET := .go.get
-SWAGGER_SRC := vendor/github.com/go-swagger/go-swagger/cmd/swagger/swagger.go
-SWAGGER := $(CURDIR)/swagger
+SWAGGER := $(GOPATH)/bin/swagger
+SWAGGER_PKG := github.com/go-swagger/go-swagger
+SWAGGER_CMD_SRC := $(SWAGGER_PKG)/cmd/swagger/swagger.go
+GOPATH_SWAGGER_CMD_SRC := $(GOPATH)/src/$(SWAGGER_CMD_SRC)
+VENDORED_SWAGGER_CMD_SRC := vendor/$(SWAGGER_CMD_SRC)
 SPEC_FILE := swagger-spec/monorail.yml
 CLIENT := client
 MODELS := models
@@ -29,14 +32,13 @@ $(GLIDE_LOCK): $(GLIDE_YAML) | $(GLIDE) $(CLIENT_BINDINGS)
 $(GLIDE):
 	go get -u github.com/Masterminds/glide
 
-$(SWAGGER): $(SWAGGER_SRC)
-	cd $(dir $(<D)) && go build -o $@ ./swagger && cd $(@D)
+$(GOPATH_SWAGGER_CMD_SRC): $(VENDORED_SWAGGER_CMD_SRC)
+$(VENDORED_SWAGGER_CMD_SRC): $(GLIDE_SWAGGER_YAML) | $(GLIDE)
+	$(GLIDE) --home $(HOME) --yaml $< up --quick --cache-gopath --use-gopath
 
-$(SWAGGER_SRC): $(GLIDE_SWAGGER_YAML) | $(GLIDE)
-	$(GLIDE) --home $(HOME) up --quick --use-gopath --file $<
-
-$(CLIENT_BINDINGS): $(SWAGGER) $(SPEC_FILE)
-	$(SWAGGER) generate client -f $(SPEC_FILE)
+client-bindings: $(CLIENT_BINDINGS)
+$(CLIENT_BINDINGS): $(VENDORED_SWAGGER_CMD_SRC) $(GOPATH_SWAGGER_CMD_SRC) $(SPEC_FILE)
+	go run $(GOPATH_SWAGGER_CMD_SRC) generate client -f $(SPEC_FILE)
 
 install: $(CLIENT_BINDINGS) $(GO_GET)
 	go install -v $$($(GLIDE) nv)
@@ -52,6 +54,13 @@ clean:
 	rm -fr $(GLIDE_LOCK) $(GO_GET) $(COVER_OUT) $(CLIENT) $(MODELS)
 
 clobber: clean
-	rm -fr vendor $(SWAGGER)
+	rm -fr vendor
 
-.PHONY: all deps install test cover clean clobber
+clobber-gopath-swagger:
+	rm -fr $(SWAGGER)
+	rm -fr $(GOPATH)/src/$(SWAGGER_PKG)
+	rm -fr $(GOPATH)/pkg/*/$(SWAGGER_PKG)
+
+.PHONY: all deps install test cover \
+		clean clobber clobber-gopath-swagger \
+		client-bindings
