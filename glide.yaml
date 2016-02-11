@@ -1,0 +1,5 @@
+package: github.com/emccode/gorackhd
+import:
+  - package: github.com/go-swagger/go-swagger
+    ref:     bb86d63b17832bd6d930101040119a803c456f70
+    vcs:     git
