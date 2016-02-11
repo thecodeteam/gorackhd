@@ -1,4 +1,7 @@
 package: github.com/emccode/gorackhd
+ignore:
+- client
+- models
 import:
   - package: github.com/go-swagger/go-swagger
     ref:     bb86d63b17832bd6d930101040119a803c456f70

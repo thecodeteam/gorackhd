@@ -1,35 +1,57 @@
 export GO15VENDOREXPERIMENT=1
 
+GLIDE := $(GOPATH)/bin/glide
+GLIDE_YAML := glide.yaml
+GLIDE_LOCK := glide.lock
+GLIDE_SWAGGER_YAML := glide-swagger.yaml
+GO_GET := .go.get
+SWAGGER_SRC := vendor/github.com/go-swagger/go-swagger/cmd/swagger/swagger.go
+SWAGGER := $(CURDIR)/swagger
+SPEC_FILE := swagger-spec/monorail.yml
+CLIENT := client
+MODELS := models
+CLIENT_BINDINGS := $(CLIENT)/monorail_client.go
+GOCOV := $(GOPATH)/bin/gocov
+GOVERALLS := $(GOPATH)/bin/goveralls
+COVER := $(GOPATH)/bin/cover
+COVER_OUT := cover.out
+
 all: install
 
-deps:
-	go get github.com/Masterminds/glide
-	glide --home $(HOME) up
-	go get -d $$(glide nv)
-	go get -v github.com/axw/gocov/gocov
-	go get -v github.com/mattn/goveralls
-	go get -v golang.org/x/tools/cmd/cover
+deps: $(CLIENT_BINDINGS) $(GO_GET)
 
-vendor/github.com/go-swagger/go-swagger/cmd/swagger/swagger.go:
-	glide --home $(HOME) up
+$(GO_GET): | $(GLIDE_LOCK)
+	go get -d $$($(GLIDE) nv) && touch $@
 
-swagger: vendor/github.com/go-swagger/go-swagger/cmd/swagger/swagger.go
-	cd vendor/github.com/go-swagger/go-swagger/cmd && \
-		go build -o $(CURDIR)/swagger ./swagger && \
-		cd -
+$(GLIDE_LOCK): $(GLIDE_YAML) | $(GLIDE) $(CLIENT_BINDINGS)
+	$(GLIDE) --home $(HOME) up
 
-client/monorail_client.go: swagger swagger-spec/monorail.yml
-	rm -fr client models && \
-		./swagger generate client -f swagger-spec/monorail.yml
+$(GLIDE):
+	go get -u github.com/Masterminds/glide
 
-install: client/monorail_client.go
-	go install -v $$(glide nv)
+$(SWAGGER): $(SWAGGER_SRC)
+	cd $(dir $(<D)) && go build -o $@ ./swagger && cd $(@D)
 
-test: cover.out
-cover.out:
-	go test -v $$(glide nv) -cover -coverprofile cover.out
+$(SWAGGER_SRC): $(GLIDE_SWAGGER_YAML) | $(GLIDE)
+	$(GLIDE) --home $(HOME) up --quick --use-gopath --file $<
 
-cover: cover.out
-	goveralls -coverprofile=cover.out
+$(CLIENT_BINDINGS): $(SWAGGER) $(SPEC_FILE)
+	$(SWAGGER) generate client -f $(SPEC_FILE)
 
-.PHONY: all deps install test cover
+install: $(CLIENT_BINDINGS) $(GO_GET)
+	go install -v $$($(GLIDE) nv)
+
+test: $(COVER_OUT)
+$(COVER_OUT):
+	go test -v $$($(GLIDE) nv) -cover -coverprofile $@
+
+cover: $(COVER_OUT) | $(GOCOV) $(GOVERALLS) $(COVER)
+	$(GOVERALLS) -coverprofile=$<
+
+clean:
+	rm -fr $(GLIDE_LOCK) $(GO_GET) $(COVER_OUT) $(CLIENT) $(MODELS)
+
+clobber: clean
+	rm -fr vendor $(SWAGGER)
+
+.PHONY: all deps install test cover clean clobber
