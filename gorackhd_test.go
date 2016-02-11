@@ -15,7 +15,7 @@ import (
 	"github.com/emccode/gorackhd/client/nodes"
 )
 
-func TestGetOperation(t *testing.T) {
+func TestNodeGetOperation(t *testing.T) {
 
 	// create the transport
 	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
@@ -29,14 +29,14 @@ func TestGetOperation(t *testing.T) {
 	client := apiclient.New(transport, strfmt.Default)
 
 	//use any function to do REST operations
-	resp, err := client.Skus.GetSkus(nil)
+	resp, err := client.Nodes.GetNodes(nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("%#v\n", resp.Payload)
 }
 
-func TestPostOperation(t *testing.T) {
+func TestNodePostOperation(t *testing.T) {
 
 	// create the transport
 	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
@@ -52,7 +52,7 @@ func TestPostOperation(t *testing.T) {
 
 	c := &Node{
 		ID:   "1234abcd1234abcd1234abcd",
-		Name: "namenioveno",
+		Name: "somename",
 		Type: "compute",
 		ObmSettings: []*ObmSettings{&ObmSettings{
 			Service: "ipmi-obm-service",
@@ -75,6 +75,28 @@ func TestPostOperation(t *testing.T) {
 		log.Fatal(err)
 	}
 	t.Logf("%+v", resp.Payload)
+}
+
+func TestNodeDeleteOperation(t *testing.T) {
+
+	// create the transport
+	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+
+	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
+	if os.Getenv("GORACKHD_ENDPOINT") != "" {
+		transport.Host = os.Getenv("GORACKHD_ENDPOINT")
+	}
+
+	// create the API client, with the transport
+	client := apiclient.New(transport, strfmt.Default)
+
+	//use any function to do REST operations
+	resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
+	//resp, err := client.Skus.GetSkusIdentifier(&skus.GetSkusIdentifierParams{Identifier: "568e8b76c3354ff04bab27e0"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%#v\n", resp)
 }
 
 type ObmConfig struct {

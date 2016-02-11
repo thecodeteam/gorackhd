@@ -16,45 +16,39 @@ Install the client into your `$GOPATH`
 go get github.com/emccode/gorackhd
 ```
 
+
 ## Environment Variables
 | Name        | Description           |
 | ------------- |:-------------:|
-| `GOPATH`                 | it's required to set your [$GOPATH](https://golang.org/doc/code.html#GOPATH)    |
-| `GORACKHD_ENDPOINT`      | the API endpoint, `localhost:9090` or `192.168.90.100`               |
+| `GORACKHD_ENDPOINT`      | the API endpoint. `localhost:9090` is used by default if not set             |
 
 
 ## Using the client
-Below is a sample script used to retrieve all Skus. 
+
+This sample script will retrieve (GET) all nodes 
+
 ```
 package main
 
 import (
     "fmt"
-    apiclient "github.com/emccode/gorackhd/client"
-    httptransport "github.com/go-swagger/go-swagger/httpkit/client"
-    "github.com/go-swagger/go-swagger/spec"
-    "github.com/go-swagger/go-swagger/strfmt"
     "log"
     "os"
+
+    //swagclient "github.com/go-swagger/go-swagger/client"
+    httptransport "github.com/go-swagger/go-swagger/httpkit/client"
+    "github.com/go-swagger/go-swagger/strfmt"
+
+    apiclient "github.com/emccode/gorackhd/client"
+    "github.com/emccode/gorackhd/client/nodes"
 )
 
 func main() {
 
-    // load the swagger spec from local $GOPATH and binding
-    goPath := os.Getenv("GOPATH")
-    doc, err := spec.Load(goPath + "/src/github.com/emccode/gorackhd/swagger-spec/monorail.yml")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    //Retrieve everything over http vs https. Https is defaulted
-    spec := doc.Spec()
-    spec.Schemes = []string{"http"}
-
     // create the transport
-    transport := httptransport.New(doc)
+    transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
 
-    // configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
+    // If not using the Vagrant image, set this environment variable to something other than localhost:9090
     if os.Getenv("GORACKHD_ENDPOINT") != "" {
         transport.Host = os.Getenv("GORACKHD_ENDPOINT")
     }
@@ -63,7 +57,7 @@ func main() {
     client := apiclient.New(transport, strfmt.Default)
 
     //use any function to do REST operations
-    resp, err := client.Skus.GetSkus(nil)
+    resp, err := client.Nodes.GetNodes(nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -73,20 +67,74 @@ func main() {
 
 ```
 
-### Using the client to get fetch individual items
+### Use the client to create (POST) a new item
+Import the library for what you are trying to post:
+```
+import (
+    ...
+    "github.com/emccode/gorackhd/client/nodes"
+    ...
+)
+```
+
+Create the JSON struct
+```
+type ObmConfig struct {
+    Host     string `json:"host"`
+    User     string `json:"user"`
+    Password string `json:"password"`
+}
+
+type ObmSettings struct {
+    Service string     `json:"service"`
+    Config  *ObmConfig `json:"config"`
+}
+
+type Node struct {
+    ID          string         `json:"id"`
+    Name        string         `json:"name"`
+    Type        string         `json:"type"`
+    ObmSettings []*ObmSettings `json:"obmSettings"`
+}
+```
+
+
+```
+    c := &Node{
+        ID:   "1234abcd1234abcd1234abcd",
+        Name: "somename",
+        Type: "compute",
+        ObmSettings: []*ObmSettings{&ObmSettings{
+            Service: "ipmi-obm-service",
+            Config: &ObmConfig{
+                Host:     "1.2.3.4",
+                User:     "myuser",
+                Password: "mypass",
+            },
+        }},
+    }
+
+    resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c})
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%#v\n", resp.Payload)
+```
+
+### Use the client to fetch (GET) individual items
 
 Import the library for what you are trying to retrieve:
 ```
 import (
     ...
-    "github.com/emccode/gorackhd/client/skus"
+    "github.com/emccode/gorackhd/client/nodes"
     ...
 )
 ```
 
 Lookup the params that are required in a struct:
 ```
-resp, err := client.Skus.GetSkusIdentifier(&skus.GetSkusIdentifierParams{Identifier: "568e8b76c3354ff04bab27e0"})
+resp, err := client.Skus.GetSkusIdentifier(&nodes.GetNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
     if err != nil {
         log.Fatal(err)
     }
@@ -94,12 +142,49 @@ resp, err := client.Skus.GetSkusIdentifier(&skus.GetSkusIdentifierParams{Identif
 
 ```
 
+### Use the client to remove (DELETE) individual items
+Import the library for what you are trying to retrieve:
+```
+import (
+    ...
+    "github.com/emccode/gorackhd/client/nodes"
+    ...
+)
+```
+
+Lookup the params that are required in a struct:
+```
+resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%#v\n", resp)
+```
 
 ## Future
 - Add documentation to show examples of the main API calls needed for administration. This includes GET/PUT/POST/DELETE for Skus, Workflows, & Catalogs.
 
 ## Contribution
-Create a fork of the project into your own reposity. Make all necessary changes and create a pull request with a description on what was added or removed and details explaining the changes in lines of code. If approved, project owners will merge it.
+Create a fork of the project into your own repository. 
+
+Use the latest version of `go-swagger` to validate the swagger spec.
+```
+go get github.com/emccode/gorackhd
+cd $GOPATH/src/github.com/emccode/gorackhd
+make deps
+make install
+```
+
+Run the tests provided in `gorackhd_test.go` to verify GET/POST/DELETE still function:
+```
+env DEBUG=1 go test -run TestNodePostOperation -v
+env DEBUG=1 go test -run TestNodeGetOperation -v
+env DEBUG=1 go test -run TestNodeDeleteOperation -v
+```
+
+If tests do not pass, please create an issue so it can be addressed or fix and create a PR.
+
+If all tests pass, make changes and create a pull request with a description on what was added or removed and details explaining the changes in lines of code. If approved, project owners will merge it.
 
 ## Licensing
 gorackhd is freely distributed under the [MIT License](http://emccode.github.io/sampledocs/LICENSE "LICENSE"). See LICENSE for details.
