@@ -1326,14 +1326,14 @@ paths:
   /lookups:
     get:
       summary: |
-        find all
+        find all or by query parameter
       description: |
-        find all
+        find all or by query parameter
       parameters:
         - name: q
           in: query
-          description: thing to lookup
-          required: true
+          description: query object to pass through to waterline.
+          required: false
           type: string
       tags:
         - lookups
