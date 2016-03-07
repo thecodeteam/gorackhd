@@ -12,6 +12,7 @@ import (
 	"github.com/go-swagger/go-swagger/strfmt"
 
 	apiclient "github.com/emccode/gorackhd/client"
+	"github.com/emccode/gorackhd/client/lookups"
 	"github.com/emccode/gorackhd/client/nodes"
 )
 
@@ -30,6 +31,29 @@ func TestNodeGetOperation(t *testing.T) {
 
 	//use any function to do REST operations
 	resp, err := client.Nodes.GetNodes(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%#v\n", resp.Payload)
+}
+
+func TestNodeLookupOperation(t *testing.T) {
+
+	// create the transport
+	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+
+	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
+	if os.Getenv("GORACKHD_ENDPOINT") != "" {
+		transport.Host = os.Getenv("GORACKHD_ENDPOINT")
+	}
+
+	// create the API client, with the transport
+	client := apiclient.New(transport, strfmt.Default)
+
+	//use any function to do REST operations
+	// "56dde3441722c192796e3a38")
+
+	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"})
 	if err != nil {
 		log.Fatal(err)
 	}

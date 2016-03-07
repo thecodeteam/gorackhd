@@ -1329,6 +1329,12 @@ paths:
         find all
       description: |
         find all
+      parameters:
+        - name: q
+          in: query
+          description: thing to lookup
+          required: true
+          type: string
       tags:
         - lookups
         - get
