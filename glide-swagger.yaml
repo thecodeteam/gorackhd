@@ -4,5 +4,5 @@ ignore:
 - models
 import:
   - package: github.com/go-swagger/go-swagger
-    ref:     bb86d63b17832bd6d930101040119a803c456f70
+    ref:     111e63c8b3ff391206986fe5271017e17237b2e8
     vcs:     git
