@@ -30,7 +30,7 @@ func TestNodeGetOperation(t *testing.T) {
 	client := apiclient.New(transport, strfmt.Default)
 
 	//use any function to do REST operations
-	resp, err := client.Nodes.GetNodes(nil)
+	resp, err := client.Nodes.GetNodes(nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,7 +53,7 @@ func TestNodeLookupOperation(t *testing.T) {
 	//use any function to do REST operations
 	// "56dde3441722c192796e3a38")
 
-	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"})
+	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -94,7 +94,7 @@ func TestNodePostOperation(t *testing.T) {
 	}
 	fmt.Println(string(b))
 
-	resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c})
+	resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -115,7 +115,7 @@ func TestNodeDeleteOperation(t *testing.T) {
 	client := apiclient.New(transport, strfmt.Default)
 
 	//use any function to do REST operations
-	resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
+	resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"}, nil)
 	//resp, err := client.Skus.GetSkusIdentifier(&skus.GetSkusIdentifierParams{Identifier: "568e8b76c3354ff04bab27e0"})
 	if err != nil {
 		log.Fatal(err)
