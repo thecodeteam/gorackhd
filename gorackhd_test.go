@@ -51,8 +51,6 @@ func TestNodeLookupOperation(t *testing.T) {
 	client := apiclient.New(transport, strfmt.Default)
 
 	//use any function to do REST operations
-	// "56dde3441722c192796e3a38")
-
 	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -69,7 +67,6 @@ func TestNodePostOperation(t *testing.T) {
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
 		transport.Host = os.Getenv("GORACKHD_ENDPOINT")
 	}
-	//fmt.Println(fmt.Sprintf("%+v", transport))
 
 	// create the API client, with the transport
 	client := apiclient.New(transport, strfmt.Default)
@@ -116,7 +113,6 @@ func TestNodeDeleteOperation(t *testing.T) {
 
 	//use any function to do REST operations
 	resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"}, nil)
-	//resp, err := client.Skus.GetSkusIdentifier(&skus.GetSkusIdentifierParams{Identifier: "568e8b76c3354ff04bab27e0"})
 	if err != nil {
 		log.Fatal(err)
 	}
