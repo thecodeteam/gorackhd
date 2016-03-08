@@ -95,7 +95,7 @@ func TestNodePostOperation(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	t.Logf("%+v", resp.Payload)
+	fmt.Printf("%#v\n", resp.Payload)
 }
 
 func TestNodeDeleteOperation(t *testing.T) {
