@@ -1437,7 +1437,7 @@ paths:
         - name: q
           in: query
           description: query object to pass through to waterline.
-          required: false
+          required: true
           type: string
       tags:
         - lookups
