@@ -52,6 +52,7 @@ func TestNodeLookupOperation(t *testing.T) {
 
 	//use any function to do REST operations
 	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"}, nil)
+	//resp, err := client.Nodes.GetNodes(nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -91,6 +92,7 @@ func TestNodePostOperation(t *testing.T) {
 	}
 	fmt.Println(string(b))
 
+	//resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c}, nil)
 	resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c}, nil)
 	if err != nil {
 		log.Fatal(err)
