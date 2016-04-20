@@ -3,7 +3,7 @@
 ### Go bindings for RackHD
 
 ## Description
-gorackhd represents API bindings for Go that allow you to manage [RackHD](https://github.com/RackHD/RackHD). The intended functions are a direct implementation of what's available within the RackHD API.
+gorackhd represents API bindings for Go that allow you to manage [RackHD](https://github.com/RackHD/RackHD). The intended functions are a direct implementation of what's available within the RackHD Monorail API. To manage machines with IPMI, also use [gorackhdRedfish](https://github.com/emccode/gorackhdRedfish) that talks to the RackHD Redfish API.
 
 ## Compatibility
 gorackhd is created using [go-swagger](https://github.com/go-swagger/go-swagger) client generator. 
@@ -18,7 +18,7 @@ $ cd $GOPATH/src/github.com/emccode/gorackhd
 $ make
 ```
 
-The Makefile utilizes [glide](https://github.com/Masterminds/glide) to reference git commit `bb86d63b17` of [go-swagger](https://github.com/go-swagger/go-swagger) that has been tested and known to be working. The Makefile will generate a go-swagger directory in `/vendor/github.com/` and then create the client. 
+The Makefile utilizes [glide](https://github.com/Masterminds/glide) to reference git commit `6b712512cbe1f` of [go-swagger](https://github.com/go-swagger/go-swagger) that has been tested and known to be working. The Makefile will generate a go-swagger directory in `/vendor/github.com/` and then create the client. 
 
 ## Environment Variables
 | Name        | Description           |
@@ -164,9 +164,6 @@ resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierPara
     fmt.Printf("%#v\n", resp)
 ```
 
-## Future
-- Add documentation to show examples of the main API calls needed for administration. This includes GET/PUT/POST/DELETE for Skus, Workflows, & Catalogs.
-
 ## Contribution
 Create a fork of the project into your own repository. 
 
@@ -180,7 +177,7 @@ env DEBUG=1 go test -run TestNodeDeleteOperation -v
 If tests do not pass, please create an issue so it can be addressed or fix and create a PR.
 
 If all tests pass, make changes and create a pull request with a description on what was added or removed and details explaining the changes in lines of code. If approved, project owners will merge it.
-git 
+
 ## Licensing
 gorackhd is freely distributed under the [MIT License](http://emccode.github.io/sampledocs/LICENSE "LICENSE"). See LICENSE for details.
 
