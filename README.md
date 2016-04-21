@@ -3,7 +3,7 @@
 ### Go bindings for RackHD
 
 ## Description
-gorackhd represents API bindings for Go that allow you to manage [RackHD](https://github.com/RackHD/RackHD). The intended functions are a direct implementation of what's available within the RackHD Monorail API. To manage machines with IPMI, also use [gorackhdRedfish](https://github.com/emccode/gorackhdRedfish) that talks to the RackHD Redfish API.
+gorackhd represents API bindings for Go that allow you to manage [RackHD](https://github.com/RackHD/RackHD). The intended functions are a direct implementation of what's available within the RackHD Monorail API. To manage machines with IPMI, also use [gorackhdRedfish](https://github.com/emccode/gorackhd-redfish) that talks to the RackHD Redfish API.
 
 ## Compatibility
 gorackhd is created using [go-swagger](https://github.com/go-swagger/go-swagger) client generator. 
