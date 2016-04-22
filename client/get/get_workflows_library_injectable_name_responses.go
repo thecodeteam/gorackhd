@@ -101,14 +101,14 @@ func (o *GetWorkflowsLibraryInjectableNameDefault) readResponse(response runtime
 	return nil
 }
 
-/*GetWorkflowsLibraryInjectableNameOKBodyBody get workflows library injectable name o k body body
-
-swagger:model GetWorkflowsLibraryInjectableNameOKBodyBody
-*/
-type GetWorkflowsLibraryInjectableNameOKBodyBody interface{}
-
 /*GetWorkflowsLibraryInjectableNameDefaultBodyBody get workflows library injectable name default body body
 
 swagger:model GetWorkflowsLibraryInjectableNameDefaultBodyBody
 */
 type GetWorkflowsLibraryInjectableNameDefaultBodyBody interface{}
+
+/*GetWorkflowsLibraryInjectableNameOKBodyBody get workflows library injectable name o k body body
+
+swagger:model GetWorkflowsLibraryInjectableNameOKBodyBody
+*/
+type GetWorkflowsLibraryInjectableNameOKBodyBody interface{}
