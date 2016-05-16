@@ -39,7 +39,7 @@ func (a *Client) GetVersions(params *GetVersionsParams, authInfo runtime.ClientA
 		Method:             "GET",
 		PathPattern:        "/versions",
 		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetVersionsReader{formats: a.formats},
