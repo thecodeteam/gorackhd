@@ -110,6 +110,35 @@ func (a *Client) DeleteNodesIdentifier(params *DeleteNodesIdentifierParams, auth
 }
 
 /*
+DeleteNodesIdentifierTagsTagname removes tag from specified node
+
+Remove tag from specified node.
+
+*/
+func (a *Client) DeleteNodesIdentifierTagsTagname(params *DeleteNodesIdentifierTagsTagnameParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteNodesIdentifierTagsTagnameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteNodesIdentifierTagsTagnameParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeleteNodesIdentifierTagsTagname",
+		Method:             "DELETE",
+		PathPattern:        "/nodes/{identifier}/tags/{tagname}",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteNodesIdentifierTagsTagnameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteNodesIdentifierTagsTagnameOK), nil
+}
+
+/*
 DeleteNodesIdentifierWorkflowsActive cancels currently running workflows for specified node
 
 Cancel currently running workflows for specified node

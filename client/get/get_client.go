@@ -489,6 +489,35 @@ func (a *Client) GetNodesIdentifierPollers(params *GetNodesIdentifierPollersPara
 }
 
 /*
+GetNodesIdentifierTags gets the tags associated with a node
+
+get the tags associated with a node.
+
+*/
+func (a *Client) GetNodesIdentifierTags(params *GetNodesIdentifierTagsParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesIdentifierTagsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetNodesIdentifierTagsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetNodesIdentifierTags",
+		Method:             "GET",
+		PathPattern:        "/nodes/{identifier}/tags",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetNodesIdentifierTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetNodesIdentifierTagsOK), nil
+}
+
+/*
 GetNodesIdentifierWorkflows fetches all workflows for specified node
 
 Fetch all workflows for specified node
@@ -892,6 +921,35 @@ func (a *Client) GetSkusIdentifierNodes(params *GetSkusIdentifierNodesParams, au
 		return nil, err
 	}
 	return result.(*GetSkusIdentifierNodesOK), nil
+}
+
+/*
+GetTags fetches tags
+
+Fetch tags
+
+*/
+func (a *Client) GetTags(params *GetTagsParams, authInfo runtime.ClientAuthInfoWriter) (*GetTagsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTagsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetTags",
+		Method:             "GET",
+		PathPattern:        "/tags",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetTagsOK), nil
 }
 
 /*

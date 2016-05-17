@@ -255,6 +255,35 @@ func (a *Client) PostSkus(params *PostSkusParams, authInfo runtime.ClientAuthInf
 }
 
 /*
+PostTags posts tag
+
+create new tag
+
+*/
+func (a *Client) PostTags(params *PostTagsParams, authInfo runtime.ClientAuthInfoWriter) (*PostTagsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostTagsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostTags",
+		Method:             "POST",
+		PathPattern:        "/tags",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostTagsCreated), nil
+}
+
+/*
 PutFilesFileidentifier puts file based on filename
 
 Put file based on filename, returns the uuid of the stored file.
