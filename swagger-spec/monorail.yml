@@ -36,7 +36,9 @@ paths:
           description: |
             list of all pollers
           schema:
-            type: object
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -86,7 +88,9 @@ paths:
           description: |
             list of all pollers
           schema:
-            type: object
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -243,7 +247,9 @@ paths:
           description: |
             list of possible templates
           schema:
-            type: object
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -346,8 +352,10 @@ paths:
         200:
           description: |
              list of skus
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -492,8 +500,10 @@ paths:
         200:
           description: |
             return nodes associated with that sku
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         404:
           description: |
             There is no sku with identifier.
@@ -517,8 +527,10 @@ paths:
         200:
           description: |
             list of possible profiles
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -598,8 +610,10 @@ paths:
         200:
           description: |
             get list of possible OBM services
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -649,8 +663,10 @@ paths:
         200:
           description: |
             List all workflows available to run
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -674,8 +690,10 @@ paths:
         200:
           description: |
             List all workflows available to run
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -694,8 +712,10 @@ paths:
         200:
           description: |
             List workflow tasks library
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -715,8 +735,10 @@ paths:
         200:
           description: |
             Fetch tasks from task library
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -790,8 +812,10 @@ paths:
         200:
           description: |
             Fetch workflows
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         default:
           description: Unexpected error
           schema:
@@ -913,8 +937,10 @@ paths:
         200:
           description: |
             all workflows for specified node, empty object if none exist.
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         404:
           description: |
             The node with the identifier was not found 
@@ -1059,8 +1085,10 @@ paths:
         200:
           description: |
             all pollers of specified node, empty object if none exist.
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         404:
           description: |
             The node with the identifier was not found 
@@ -1134,8 +1162,10 @@ paths:
         200:
           description: |
             all catalogs of specified node, empty object if none exist.
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         404:
           description: |
             The node with the identifier was not found 
@@ -1237,8 +1267,10 @@ paths:
       responses:
         200:
           description: obm settings
-          schema: 
-            type: object
+          schema:
+            type: array
+            items:
+              type: object
         404:
           description: |
             The node with the identifier was not found or has no obm settings.
@@ -1802,7 +1834,7 @@ paths:
         - get
       responses:
         200:
-          description: An array of configuration objects
+          description: Configuration object
           schema:
             type: object
         default:
@@ -1879,9 +1911,7 @@ paths:
         200:
           description: A single catalog
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/catalog'
+            $ref: '#/definitions/catalog'
         default:
           description: NotFound error
   /dhcp:
@@ -1922,9 +1952,7 @@ paths:
         200:
           description: A single lease
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/lease'
+            $ref: '#/definitions/lease'
         default:
           description: NotFound error
     delete:

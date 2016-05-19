@@ -57,7 +57,7 @@ return nodes associated with that sku
 
 */
 type GetSkusIdentifierNodesOK struct {
-	Payload GetSkusIdentifierNodesOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetSkusIdentifierNodesOK) Error() string {
@@ -141,9 +141,3 @@ func (o *GetSkusIdentifierNodesDefault) readResponse(response runtime.ClientResp
 
 	return nil
 }
-
-/*GetSkusIdentifierNodesOKBodyBody get skus identifier nodes o k body body
-
-swagger:model GetSkusIdentifierNodesOKBodyBody
-*/
-type GetSkusIdentifierNodesOKBodyBody interface{}

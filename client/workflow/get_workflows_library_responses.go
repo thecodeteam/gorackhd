@@ -50,7 +50,7 @@ List all workflows available to run
 
 */
 type GetWorkflowsLibraryOK struct {
-	Payload GetWorkflowsLibraryOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsLibraryOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetWorkflowsLibraryDefault) readResponse(response runtime.ClientRespons
 
 	return nil
 }
-
-/*GetWorkflowsLibraryOKBodyBody get workflows library o k body body
-
-swagger:model GetWorkflowsLibraryOKBodyBody
-*/
-type GetWorkflowsLibraryOKBodyBody interface{}

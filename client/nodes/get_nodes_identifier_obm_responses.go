@@ -56,7 +56,7 @@ func NewGetNodesIdentifierObmOK() *GetNodesIdentifierObmOK {
 obm settings
 */
 type GetNodesIdentifierObmOK struct {
-	Payload GetNodesIdentifierObmOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetNodesIdentifierObmOK) Error() string {
@@ -140,9 +140,3 @@ func (o *GetNodesIdentifierObmDefault) readResponse(response runtime.ClientRespo
 
 	return nil
 }
-
-/*GetNodesIdentifierObmOKBodyBody get nodes identifier obm o k body body
-
-swagger:model GetNodesIdentifierObmOKBodyBody
-*/
-type GetNodesIdentifierObmOKBodyBody interface{}

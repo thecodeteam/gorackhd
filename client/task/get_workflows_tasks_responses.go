@@ -50,7 +50,7 @@ Fetch tasks from task library
 
 */
 type GetWorkflowsTasksOK struct {
-	Payload GetWorkflowsTasksOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsTasksOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetWorkflowsTasksDefault) readResponse(response runtime.ClientResponse,
 
 	return nil
 }
-
-/*GetWorkflowsTasksOKBodyBody get workflows tasks o k body body
-
-swagger:model GetWorkflowsTasksOKBodyBody
-*/
-type GetWorkflowsTasksOKBodyBody interface{}

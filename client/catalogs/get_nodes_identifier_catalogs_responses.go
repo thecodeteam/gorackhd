@@ -57,7 +57,7 @@ all catalogs of specified node, empty object if none exist.
 
 */
 type GetNodesIdentifierCatalogsOK struct {
-	Payload GetNodesIdentifierCatalogsOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetNodesIdentifierCatalogsOK) Error() string {
@@ -141,9 +141,3 @@ func (o *GetNodesIdentifierCatalogsDefault) readResponse(response runtime.Client
 
 	return nil
 }
-
-/*GetNodesIdentifierCatalogsOKBodyBody get nodes identifier catalogs o k body body
-
-swagger:model GetNodesIdentifierCatalogsOKBodyBody
-*/
-type GetNodesIdentifierCatalogsOKBodyBody interface{}

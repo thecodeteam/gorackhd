@@ -48,7 +48,7 @@ List all workflows available to run
 
 */
 type GetWorkflowsLibraryInjectableNameOK struct {
-	Payload GetWorkflowsLibraryInjectableNameOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsLibraryInjectableNameOK) Error() string {
@@ -106,9 +106,3 @@ func (o *GetWorkflowsLibraryInjectableNameDefault) readResponse(response runtime
 swagger:model GetWorkflowsLibraryInjectableNameDefaultBodyBody
 */
 type GetWorkflowsLibraryInjectableNameDefaultBodyBody interface{}
-
-/*GetWorkflowsLibraryInjectableNameOKBodyBody get workflows library injectable name o k body body
-
-swagger:model GetWorkflowsLibraryInjectableNameOKBodyBody
-*/
-type GetWorkflowsLibraryInjectableNameOKBodyBody interface{}

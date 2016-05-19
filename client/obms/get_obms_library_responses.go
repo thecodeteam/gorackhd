@@ -50,7 +50,7 @@ get list of possible OBM services
 
 */
 type GetObmsLibraryOK struct {
-	Payload GetObmsLibraryOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetObmsLibraryOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetObmsLibraryDefault) readResponse(response runtime.ClientResponse, co
 
 	return nil
 }
-
-/*GetObmsLibraryOKBodyBody get obms library o k body body
-
-swagger:model GetObmsLibraryOKBodyBody
-*/
-type GetObmsLibraryOKBodyBody interface{}

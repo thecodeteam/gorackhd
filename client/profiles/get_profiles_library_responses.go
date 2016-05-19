@@ -50,7 +50,7 @@ list of possible profiles
 
 */
 type GetProfilesLibraryOK struct {
-	Payload GetProfilesLibraryOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetProfilesLibraryOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetProfilesLibraryDefault) readResponse(response runtime.ClientResponse
 
 	return nil
 }
-
-/*GetProfilesLibraryOKBodyBody get profiles library o k body body
-
-swagger:model GetProfilesLibraryOKBodyBody
-*/
-type GetProfilesLibraryOKBodyBody interface{}

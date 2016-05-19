@@ -50,7 +50,7 @@ list of skus
 
 */
 type GetSkusOK struct {
-	Payload GetSkusOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetSkusOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetSkusDefault) readResponse(response runtime.ClientResponse, consumer 
 
 	return nil
 }
-
-/*GetSkusOKBodyBody get skus o k body body
-
-swagger:model GetSkusOKBodyBody
-*/
-type GetSkusOKBodyBody interface{}

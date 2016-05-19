@@ -46,7 +46,7 @@ func NewGetConfigOK() *GetConfigOK {
 
 /*GetConfigOK handles this case with default header values.
 
-An array of configuration objects
+Configuration object
 */
 type GetConfigOK struct {
 	Payload GetConfigOKBodyBody

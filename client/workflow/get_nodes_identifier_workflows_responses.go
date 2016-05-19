@@ -57,7 +57,7 @@ all workflows for specified node, empty object if none exist.
 
 */
 type GetNodesIdentifierWorkflowsOK struct {
-	Payload GetNodesIdentifierWorkflowsOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetNodesIdentifierWorkflowsOK) Error() string {
@@ -141,9 +141,3 @@ func (o *GetNodesIdentifierWorkflowsDefault) readResponse(response runtime.Clien
 
 	return nil
 }
-
-/*GetNodesIdentifierWorkflowsOKBodyBody get nodes identifier workflows o k body body
-
-swagger:model GetNodesIdentifierWorkflowsOKBodyBody
-*/
-type GetNodesIdentifierWorkflowsOKBodyBody interface{}
