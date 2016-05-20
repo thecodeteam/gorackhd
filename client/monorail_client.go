@@ -27,6 +27,7 @@ import (
 	"github.com/emccode/gorackhd/client/profiles"
 	"github.com/emccode/gorackhd/client/put"
 	"github.com/emccode/gorackhd/client/skus"
+	"github.com/emccode/gorackhd/client/tags"
 	"github.com/emccode/gorackhd/client/task"
 	"github.com/emccode/gorackhd/client/templates"
 	"github.com/emccode/gorackhd/client/versions"
@@ -42,7 +43,7 @@ func NewHTTPClient(formats strfmt.Registry) *Monorail {
 	if formats == nil {
 		formats = strfmt.Default
 	}
-	transport := httptransport.New("localhost", "/api/1.1", []string{"http", "https"})
+	transport := httptransport.New("localhost", "/api/1.1", []string{"https", "http"})
 	return New(transport, formats)
 }
 
@@ -86,6 +87,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Monorail {
 	cli.Put = put.New(transport, formats)
 
 	cli.Skus = skus.New(transport, formats)
+
+	cli.Tags = tags.New(transport, formats)
 
 	cli.Task = task.New(transport, formats)
 
@@ -137,6 +140,8 @@ type Monorail struct {
 	Put *put.Client
 
 	Skus *skus.Client
+
+	Tags *tags.Client
 
 	Task *task.Client
 
@@ -190,6 +195,8 @@ func (c *Monorail) SetTransport(transport runtime.ClientTransport) {
 	c.Put.SetTransport(transport)
 
 	c.Skus.SetTransport(transport)
+
+	c.Tags.SetTransport(transport)
 
 	c.Task.SetTransport(transport)
 

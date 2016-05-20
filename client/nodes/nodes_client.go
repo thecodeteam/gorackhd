@@ -52,6 +52,35 @@ func (a *Client) DeleteNodesIdentifier(params *DeleteNodesIdentifierParams, auth
 }
 
 /*
+DeleteNodesIdentifierTagsTagname removes tag from specified node
+
+Remove tag from specified node.
+
+*/
+func (a *Client) DeleteNodesIdentifierTagsTagname(params *DeleteNodesIdentifierTagsTagnameParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteNodesIdentifierTagsTagnameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteNodesIdentifierTagsTagnameParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "DeleteNodesIdentifierTagsTagname",
+		Method:             "DELETE",
+		PathPattern:        "/nodes/{identifier}/tags/{tagname}",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteNodesIdentifierTagsTagnameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteNodesIdentifierTagsTagnameOK), nil
+}
+
+/*
 DeleteNodesIdentifierWorkflowsActive cancels currently running workflows for specified node
 
 Cancel currently running workflows for specified node
@@ -313,6 +342,35 @@ func (a *Client) GetNodesIdentifierPollers(params *GetNodesIdentifierPollersPara
 }
 
 /*
+GetNodesIdentifierTags gets the tags associated with a node
+
+get the tags associated with a node.
+
+*/
+func (a *Client) GetNodesIdentifierTags(params *GetNodesIdentifierTagsParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesIdentifierTagsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetNodesIdentifierTagsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetNodesIdentifierTags",
+		Method:             "GET",
+		PathPattern:        "/nodes/{identifier}/tags",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetNodesIdentifierTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetNodesIdentifierTagsOK), nil
+}
+
+/*
 GetNodesIdentifierWorkflows fetches all workflows for specified node
 
 Fetch all workflows for specified node
@@ -426,6 +484,35 @@ func (a *Client) PatchNodesIdentifier(params *PatchNodesIdentifierParams, authIn
 		return nil, err
 	}
 	return result.(*PatchNodesIdentifierOK), nil
+}
+
+/*
+PatchNodesIdentifierTags patches specified node s tags
+
+Patch specified node's tags
+
+*/
+func (a *Client) PatchNodesIdentifierTags(params *PatchNodesIdentifierTagsParams, authInfo runtime.ClientAuthInfoWriter) (*PatchNodesIdentifierTagsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPatchNodesIdentifierTagsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PatchNodesIdentifierTags",
+		Method:             "PATCH",
+		PathPattern:        "/nodes/{identifier}/tags",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PatchNodesIdentifierTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PatchNodesIdentifierTagsOK), nil
 }
 
 /*
