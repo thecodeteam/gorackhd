@@ -7,9 +7,8 @@ import (
 	"os"
 	"testing"
 
-	//swagclient "github.com/go-swagger/go-swagger/client"
-	httptransport "github.com/go-swagger/go-swagger/httpkit/client"
-	"github.com/go-swagger/go-swagger/strfmt"
+	httptransport "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 
 	apiclient "github.com/emccode/gorackhd/client"
 	"github.com/emccode/gorackhd/client/lookups"
