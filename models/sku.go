@@ -62,5 +62,20 @@ func (m *Sku) validateNodes(formats strfmt.Registry) error {
 		return nil
 	}
 
+	for i := 0; i < len(m.Nodes); i++ {
+
+		if swag.IsZero(m.Nodes[i]) { // not required
+			continue
+		}
+
+		if m.Nodes[i] != nil {
+
+			if err := m.Nodes[i].Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }

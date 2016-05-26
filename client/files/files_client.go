@@ -86,7 +86,7 @@ PutFilesFileidentifier puts file based on filename
 Put file based on filename, returns the uuid of the stored file.
 
 */
-func (a *Client) PutFilesFileidentifier(params *PutFilesFileidentifierParams, authInfo runtime.ClientAuthInfoWriter) (*PutFilesFileidentifierCreated, error) {
+func (a *Client) PutFilesFileidentifier(params *PutFilesFileidentifierParams, authInfo runtime.ClientAuthInfoWriter) (*PutFilesFileidentifierOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPutFilesFileidentifierParams()
@@ -106,7 +106,7 @@ func (a *Client) PutFilesFileidentifier(params *PutFilesFileidentifierParams, au
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutFilesFileidentifierCreated), nil
+	return result.(*PutFilesFileidentifierOK), nil
 }
 
 // SetTransport changes the transport on the client

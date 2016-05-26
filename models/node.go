@@ -17,6 +17,14 @@ swagger:model node
 */
 type Node struct {
 
+	/* auto discover
+	 */
+	AutoDiscover bool `json:"autoDiscover,omitempty"`
+
+	/* boot settings
+	 */
+	BootSettings interface{} `json:"bootSettings,omitempty"`
+
 	/* catalogs
 	 */
 	Catalogs []*Catalog `json:"catalogs,omitempty"`
@@ -24,10 +32,6 @@ type Node struct {
 	/* id
 	 */
 	ID string `json:"id,omitempty"`
-
-	/* ip addresses
-	 */
-	IPAddresses interface{} `json:"ipAddresses,omitempty"`
 
 	/* name
 
@@ -37,17 +41,31 @@ type Node struct {
 
 	/* obm settings
 	 */
-	ObmSettings interface{} `json:"obmSettings,omitempty"`
+	ObmSettings []interface{} `json:"obmSettings,omitempty"`
 
-	/* profile
-
-	Required: true
-	*/
-	Profile *string `json:"profile"`
+	/* relations
+	 */
+	Relations []interface{} `json:"relations,omitempty"`
 
 	/* sku
 	 */
-	Sku *Sku `json:"sku,omitempty"`
+	Sku string `json:"sku,omitempty"`
+
+	/* snmp settings
+	 */
+	SnmpSettings interface{} `json:"snmpSettings,omitempty"`
+
+	/* ssh settings
+	 */
+	SSHSettings interface{} `json:"sshSettings,omitempty"`
+
+	/* tags
+	 */
+	Tags []interface{} `json:"tags,omitempty"`
+
+	/* type
+	 */
+	Type string `json:"type,omitempty"`
 
 	/* workflows
 	 */
@@ -64,11 +82,6 @@ func (m *Node) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateProfile(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -90,6 +103,21 @@ func (m *Node) validateCatalogs(formats strfmt.Registry) error {
 		return nil
 	}
 
+	for i := 0; i < len(m.Catalogs); i++ {
+
+		if swag.IsZero(m.Catalogs[i]) { // not required
+			continue
+		}
+
+		if m.Catalogs[i] != nil {
+
+			if err := m.Catalogs[i].Validate(formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -102,19 +130,25 @@ func (m *Node) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Node) validateProfile(formats strfmt.Registry) error {
-
-	if err := validate.Required("profile", "body", m.Profile); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *Node) validateWorkflows(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Workflows) { // not required
 		return nil
+	}
+
+	for i := 0; i < len(m.Workflows); i++ {
+
+		if swag.IsZero(m.Workflows[i]) { // not required
+			continue
+		}
+
+		if m.Workflows[i] != nil {
+
+			if err := m.Workflows[i].Validate(formats); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	return nil

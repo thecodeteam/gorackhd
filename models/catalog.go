@@ -75,6 +75,10 @@ func (m *Catalog) validateID(formats strfmt.Registry) error {
 
 func (m *Catalog) validateNode(formats strfmt.Registry) error {
 
+	if err := validate.Required("node", "body", m.Node); err != nil {
+		return err
+	}
+
 	if m.Node != nil {
 
 		if err := m.Node.Validate(formats); err != nil {
