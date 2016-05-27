@@ -49,7 +49,7 @@ func NewGetCatalogsIdentifierOK() *GetCatalogsIdentifierOK {
 A single catalog
 */
 type GetCatalogsIdentifierOK struct {
-	Payload []*models.Catalog
+	Payload *models.Catalog
 }
 
 func (o *GetCatalogsIdentifierOK) Error() string {
@@ -58,8 +58,10 @@ func (o *GetCatalogsIdentifierOK) Error() string {
 
 func (o *GetCatalogsIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.Catalog)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

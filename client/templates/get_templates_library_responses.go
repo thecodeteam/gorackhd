@@ -50,7 +50,7 @@ list of possible templates
 
 */
 type GetTemplatesLibraryOK struct {
-	Payload GetTemplatesLibraryOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetTemplatesLibraryOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetTemplatesLibraryDefault) readResponse(response runtime.ClientRespons
 
 	return nil
 }
-
-/*GetTemplatesLibraryOKBodyBody get templates library o k body body
-
-swagger:model GetTemplatesLibraryOKBodyBody
-*/
-type GetTemplatesLibraryOKBodyBody interface{}

@@ -50,7 +50,7 @@ List workflow tasks library
 
 */
 type GetWorkflowsTasksLibraryOK struct {
-	Payload GetWorkflowsTasksLibraryOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsTasksLibraryOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetWorkflowsTasksLibraryDefault) readResponse(response runtime.ClientRe
 
 	return nil
 }
-
-/*GetWorkflowsTasksLibraryOKBodyBody get workflows tasks library o k body body
-
-swagger:model GetWorkflowsTasksLibraryOKBodyBody
-*/
-type GetWorkflowsTasksLibraryOKBodyBody interface{}

@@ -50,7 +50,7 @@ list of all pollers
 
 */
 type GetPollersOK struct {
-	Payload GetPollersOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetPollersOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetPollersDefault) readResponse(response runtime.ClientResponse, consum
 
 	return nil
 }
-
-/*GetPollersOKBodyBody get pollers o k body body
-
-swagger:model GetPollersOKBodyBody
-*/
-type GetPollersOKBodyBody interface{}

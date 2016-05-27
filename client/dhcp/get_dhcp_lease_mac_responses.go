@@ -49,7 +49,7 @@ func NewGetDhcpLeaseMacOK() *GetDhcpLeaseMacOK {
 A single lease
 */
 type GetDhcpLeaseMacOK struct {
-	Payload []*models.Lease
+	Payload *models.Lease
 }
 
 func (o *GetDhcpLeaseMacOK) Error() string {
@@ -58,8 +58,10 @@ func (o *GetDhcpLeaseMacOK) Error() string {
 
 func (o *GetDhcpLeaseMacOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.Lease)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

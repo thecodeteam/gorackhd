@@ -57,7 +57,7 @@ all pollers of specified node, empty object if none exist.
 
 */
 type GetNodesIdentifierPollersOK struct {
-	Payload GetNodesIdentifierPollersOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetNodesIdentifierPollersOK) Error() string {
@@ -141,9 +141,3 @@ func (o *GetNodesIdentifierPollersDefault) readResponse(response runtime.ClientR
 
 	return nil
 }
-
-/*GetNodesIdentifierPollersOKBodyBody get nodes identifier pollers o k body body
-
-swagger:model GetNodesIdentifierPollersOKBodyBody
-*/
-type GetNodesIdentifierPollersOKBodyBody interface{}

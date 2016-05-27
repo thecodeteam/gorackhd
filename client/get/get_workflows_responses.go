@@ -50,7 +50,7 @@ Fetch workflows
 
 */
 type GetWorkflowsOK struct {
-	Payload GetWorkflowsOKBodyBody
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsOK) Error() string {
@@ -104,9 +104,3 @@ func (o *GetWorkflowsDefault) readResponse(response runtime.ClientResponse, cons
 
 	return nil
 }
-
-/*GetWorkflowsOKBodyBody get workflows o k body body
-
-swagger:model GetWorkflowsOKBodyBody
-*/
-type GetWorkflowsOKBodyBody interface{}
