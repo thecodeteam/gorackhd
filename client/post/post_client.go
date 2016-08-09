@@ -173,7 +173,7 @@ PostNodesIdentifierWorkflows creates workflow for specified node
 create workflow for specified node
 
 */
-func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostNodesIdentifierWorkflowsOK, error) {
+func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostNodesIdentifierWorkflowsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostNodesIdentifierWorkflowsParams()
@@ -193,7 +193,7 @@ func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostNodesIdentifierWorkflowsOK), nil
+	return result.(*PostNodesIdentifierWorkflowsCreated), nil
 }
 
 /*
@@ -281,6 +281,35 @@ func (a *Client) PostTags(params *PostTagsParams, authInfo runtime.ClientAuthInf
 		return nil, err
 	}
 	return result.(*PostTagsCreated), nil
+}
+
+/*
+PostWorkflows creates an unbound workflow
+
+create an unbound workflow
+
+*/
+func (a *Client) PostWorkflows(params *PostWorkflowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostWorkflowsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostWorkflowsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostWorkflows",
+		Method:             "POST",
+		PathPattern:        "/workflows",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &PostWorkflowsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostWorkflowsOK), nil
 }
 
 /*

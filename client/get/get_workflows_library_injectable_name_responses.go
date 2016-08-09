@@ -10,6 +10,8 @@ import (
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/emccode/gorackhd/models"
 )
 
 // GetWorkflowsLibraryInjectableNameReader is a Reader for the GetWorkflowsLibraryInjectableName structure.
@@ -79,7 +81,7 @@ Unexpected error
 type GetWorkflowsLibraryInjectableNameDefault struct {
 	_statusCode int
 
-	Payload GetWorkflowsLibraryInjectableNameDefaultBodyBody
+	Payload *models.Error
 }
 
 // Code gets the status code for the get workflows library injectable name default response
@@ -93,16 +95,12 @@ func (o *GetWorkflowsLibraryInjectableNameDefault) Error() string {
 
 func (o *GetWorkflowsLibraryInjectableNameDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.Error)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
 	return nil
 }
-
-/*GetWorkflowsLibraryInjectableNameDefaultBodyBody get workflows library injectable name default body body
-
-swagger:model GetWorkflowsLibraryInjectableNameDefaultBodyBody
-*/
-type GetWorkflowsLibraryInjectableNameDefaultBodyBody interface{}

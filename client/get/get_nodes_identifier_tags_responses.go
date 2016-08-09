@@ -49,7 +49,7 @@ func NewGetNodesIdentifierTagsOK() *GetNodesIdentifierTagsOK {
 tags
 */
 type GetNodesIdentifierTagsOK struct {
-	Payload GetNodesIdentifierTagsOKBodyBody
+	Payload []string
 }
 
 func (o *GetNodesIdentifierTagsOK) Error() string {
@@ -103,9 +103,3 @@ func (o *GetNodesIdentifierTagsDefault) readResponse(response runtime.ClientResp
 
 	return nil
 }
-
-/*GetNodesIdentifierTagsOKBodyBody get nodes identifier tags o k body body
-
-swagger:model GetNodesIdentifierTagsOKBodyBody
-*/
-type GetNodesIdentifierTagsOKBodyBody interface{}

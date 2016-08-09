@@ -49,8 +49,9 @@ func TestNodeLookupOperation(t *testing.T) {
 	// create the API client, with the transport
 	client := apiclient.New(transport, strfmt.Default)
 
+	nodeId := "56dde3441722c192796e3a38"
 	//use any function to do REST operations
-	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: "56dde3441722c192796e3a38"}, nil)
+	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: &nodeId}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

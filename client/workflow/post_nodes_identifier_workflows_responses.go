@@ -23,8 +23,8 @@ type PostNodesIdentifierWorkflowsReader struct {
 func (o *PostNodesIdentifierWorkflowsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
-	case 200:
-		result := NewPostNodesIdentifierWorkflowsOK()
+	case 201:
+		result := NewPostNodesIdentifierWorkflowsCreated()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -46,25 +46,25 @@ func (o *PostNodesIdentifierWorkflowsReader) ReadResponse(response runtime.Clien
 	}
 }
 
-// NewPostNodesIdentifierWorkflowsOK creates a PostNodesIdentifierWorkflowsOK with default headers values
-func NewPostNodesIdentifierWorkflowsOK() *PostNodesIdentifierWorkflowsOK {
-	return &PostNodesIdentifierWorkflowsOK{}
+// NewPostNodesIdentifierWorkflowsCreated creates a PostNodesIdentifierWorkflowsCreated with default headers values
+func NewPostNodesIdentifierWorkflowsCreated() *PostNodesIdentifierWorkflowsCreated {
+	return &PostNodesIdentifierWorkflowsCreated{}
 }
 
-/*PostNodesIdentifierWorkflowsOK handles this case with default header values.
+/*PostNodesIdentifierWorkflowsCreated handles this case with default header values.
 
 the workflow that was created
 
 */
-type PostNodesIdentifierWorkflowsOK struct {
-	Payload PostNodesIdentifierWorkflowsOKBodyBody
+type PostNodesIdentifierWorkflowsCreated struct {
+	Payload PostNodesIdentifierWorkflowsCreatedBodyBody
 }
 
-func (o *PostNodesIdentifierWorkflowsOK) Error() string {
-	return fmt.Sprintf("[POST /nodes/{identifier}/workflows][%d] postNodesIdentifierWorkflowsOK  %+v", 200, o.Payload)
+func (o *PostNodesIdentifierWorkflowsCreated) Error() string {
+	return fmt.Sprintf("[POST /nodes/{identifier}/workflows][%d] postNodesIdentifierWorkflowsCreated  %+v", 201, o.Payload)
 }
 
-func (o *PostNodesIdentifierWorkflowsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *PostNodesIdentifierWorkflowsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -142,8 +142,8 @@ func (o *PostNodesIdentifierWorkflowsDefault) readResponse(response runtime.Clie
 	return nil
 }
 
-/*PostNodesIdentifierWorkflowsOKBodyBody post nodes identifier workflows o k body body
+/*PostNodesIdentifierWorkflowsCreatedBodyBody post nodes identifier workflows created body body
 
-swagger:model PostNodesIdentifierWorkflowsOKBodyBody
+swagger:model PostNodesIdentifierWorkflowsCreatedBodyBody
 */
-type PostNodesIdentifierWorkflowsOKBodyBody interface{}
+type PostNodesIdentifierWorkflowsCreatedBodyBody interface{}
