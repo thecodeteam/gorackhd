@@ -26,11 +26,11 @@ type GetLookupsParams struct {
 	  query object to pass through to waterline.
 
 	*/
-	Q string
+	Q *string
 }
 
 // WithQ adds the q to the get lookups params
-func (o *GetLookupsParams) WithQ(Q string) *GetLookupsParams {
+func (o *GetLookupsParams) WithQ(Q *string) *GetLookupsParams {
 	o.Q = Q
 	return o
 }
@@ -40,13 +40,20 @@ func (o *GetLookupsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 
 	var res []error
 
-	// query param q
-	qrQ := o.Q
-	qQ := qrQ
-	if qQ != "" {
-		if err := r.SetQueryParam("q", qQ); err != nil {
-			return err
+	if o.Q != nil {
+
+		// query param q
+		var qrQ string
+		if o.Q != nil {
+			qrQ = *o.Q
 		}
+		qQ := qrQ
+		if qQ != "" {
+			if err := r.SetQueryParam("q", qQ); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if len(res) > 0 {

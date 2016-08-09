@@ -608,7 +608,7 @@ PostNodesIdentifierWorkflows creates workflow for specified node
 create workflow for specified node
 
 */
-func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostNodesIdentifierWorkflowsOK, error) {
+func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflowsParams, authInfo runtime.ClientAuthInfoWriter) (*PostNodesIdentifierWorkflowsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostNodesIdentifierWorkflowsParams()
@@ -628,7 +628,7 @@ func (a *Client) PostNodesIdentifierWorkflows(params *PostNodesIdentifierWorkflo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PostNodesIdentifierWorkflowsOK), nil
+	return result.(*PostNodesIdentifierWorkflowsCreated), nil
 }
 
 /*

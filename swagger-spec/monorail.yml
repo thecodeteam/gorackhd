@@ -697,7 +697,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            type: object
+            $ref: '#/definitions/Error'
 
   /workflows/tasks/library:
     get:
@@ -849,7 +849,36 @@ paths:
           description: Upload failed
           schema:
             $ref: '#/definitions/Error'
-
+    post:
+      summary: |
+        create an unbound workflow
+      description: |
+        create an unbound workflow
+      parameters:
+        - name: name
+          in: query
+          description: |
+            The injectable Graph name
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: false
+          schema:
+            type: object
+      tags:
+        - workflow
+        - post
+      responses:
+        200:
+          description: |
+            the workflow that was created
+          schema:
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /nodes/{identifier}/workflows/active:
     get:
       summary: |
@@ -978,7 +1007,7 @@ paths:
         - workflow
         - post
       responses:
-        200:
+        201:
           description: |
             the workflow that was created
           schema:
@@ -1337,7 +1366,9 @@ paths:
         200:
           description: tags
           schema:
-            type: object
+            type: array
+            items:
+              type: string
         default:
           description: Unexpected error
           schema:
@@ -1567,7 +1598,7 @@ paths:
         - name: q
           in: query
           description: query object to pass through to waterline.
-          required: true
+          required: false
           type: string
       tags:
         - lookups
@@ -1834,7 +1865,7 @@ paths:
         - get
       responses:
         200:
-          description: Configuration object
+          description: configuration object
           schema:
             type: object
         default:
