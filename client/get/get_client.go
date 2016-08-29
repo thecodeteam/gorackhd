@@ -315,9 +315,9 @@ func (a *Client) GetNodes(params *GetNodesParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-GetNodesIdentifier lists of all nodes or if there are none an empty object
+GetNodesIdentifier thes node by identifier
 
-List of all nodes or if there are none an empty object
+The node by identifier
 
 */
 func (a *Client) GetNodesIdentifier(params *GetNodesIdentifierParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesIdentifierOK, error) {
@@ -1127,9 +1127,9 @@ func (a *Client) GetWorkflowsLibrary(params *GetWorkflowsLibraryParams, authInfo
 }
 
 /*
-GetWorkflowsLibraryInjectableName lists all workflows available to run
+GetWorkflowsLibraryInjectableName fetches workflow by injectable name
 
-List all workflows available to run
+Fetch workflow by injectable name
 
 */
 func (a *Client) GetWorkflowsLibraryInjectableName(params *GetWorkflowsLibraryInjectableNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetWorkflowsLibraryInjectableNameOK, error) {

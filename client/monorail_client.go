@@ -43,7 +43,7 @@ func NewHTTPClient(formats strfmt.Registry) *Monorail {
 	if formats == nil {
 		formats = strfmt.Default
 	}
-	transport := httptransport.New("localhost", "/api/1.1", []string{"https", "http"})
+	transport := httptransport.New("localhost", "/api/1.1", []string{"http", "https"})
 	return New(transport, formats)
 }
 

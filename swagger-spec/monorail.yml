@@ -355,7 +355,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/sku'
         default:
           description: Unexpected error
           schema:
@@ -404,7 +404,7 @@ paths:
           description: |
             return sku
           schema:
-            type: object
+            $ref: '#/definitions/sku'
         404:
           description: |
             There is no sku with identifier.
@@ -434,7 +434,7 @@ paths:
           description: |
             sku to patch
           schema:
-            type: object
+            $ref: '#/definitions/sku'
         404:
           description: |
             Not found, no sku with identifier.
@@ -503,7 +503,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/node'
         404:
           description: |
             There is no sku with identifier.
@@ -675,9 +675,9 @@ paths:
   /workflows/library/{injectableName}:
     get:
       summary: |
-        List all workflows available to run
+        Fetch workflow by injectable name
       description: |
-        List all workflows available to run
+        Fetch workflow by injectable name
       parameters:
         - name: injectableName
           in: path
@@ -689,11 +689,9 @@ paths:
       responses:
         200:
           description: |
-            List all workflows available to run
+            Fetch workflow by injectable name
           schema:
-            type: array
-            items:
-              type: object
+            type: object
         default:
           description: Unexpected error
           schema:
@@ -793,7 +791,7 @@ paths:
           description: |
             Fetch workflows
           schema:
-            type: object
+            $ref: '#/definitions/graphobject'
         default:
           description: Unexpected error
           schema:
@@ -815,7 +813,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/graphobject'
         default:
           description: Unexpected error
           schema:
@@ -969,7 +967,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/graphobject'
         404:
           description: |
             The node with the identifier was not found
@@ -1446,9 +1444,9 @@ paths:
   /nodes/{identifier}:
     get:
       summary: |
-        List of all nodes or if there are none an empty object
+        The node by identifier
       description: |
-        List of all nodes or if there are none an empty object
+        The node by identifier
       parameters:
         - name: identifier
           in: path
@@ -1462,11 +1460,9 @@ paths:
         - get
       responses:
         200:
-          description: array of all
+          description: The node
           schema:
-            type: array
-            items:
-              type: object
+            $ref: '#/definitions/node'
         404:
           description: The node with the identifier was not found.
           schema:
@@ -1529,7 +1525,7 @@ paths:
         200:
           description: patch succeeded
           schema:
-            type: object
+            $ref: '#/definitions/node'
         404:
           description: Not found
           schema:
@@ -1553,7 +1549,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/node'
         400:
           description: invalidAttributes - 1 attribute is invalid
           schema:
@@ -2023,7 +2019,7 @@ paths:
           schema:
             type: array
             items:
-              type: object
+              $ref: '#/definitions/tag'
         default:
           description: Unexpected error
           schema:
@@ -2116,6 +2112,8 @@ definitions:
   graphobject:
     properties:
       id:
+        type: string
+      _status:
         type: string
       instanceid:
         type: string

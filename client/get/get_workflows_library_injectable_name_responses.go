@@ -46,11 +46,11 @@ func NewGetWorkflowsLibraryInjectableNameOK() *GetWorkflowsLibraryInjectableName
 
 /*GetWorkflowsLibraryInjectableNameOK handles this case with default header values.
 
-List all workflows available to run
+Fetch workflow by injectable name
 
 */
 type GetWorkflowsLibraryInjectableNameOK struct {
-	Payload []interface{}
+	Payload GetWorkflowsLibraryInjectableNameOKBodyBody
 }
 
 func (o *GetWorkflowsLibraryInjectableNameOK) Error() string {
@@ -104,3 +104,9 @@ func (o *GetWorkflowsLibraryInjectableNameDefault) readResponse(response runtime
 
 	return nil
 }
+
+/*GetWorkflowsLibraryInjectableNameOKBodyBody get workflows library injectable name o k body body
+
+swagger:model GetWorkflowsLibraryInjectableNameOKBodyBody
+*/
+type GetWorkflowsLibraryInjectableNameOKBodyBody interface{}
