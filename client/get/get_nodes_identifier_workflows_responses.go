@@ -57,7 +57,7 @@ all workflows for specified node, empty object if none exist.
 
 */
 type GetNodesIdentifierWorkflowsOK struct {
-	Payload []interface{}
+	Payload []*models.Graphobject
 }
 
 func (o *GetNodesIdentifierWorkflowsOK) Error() string {

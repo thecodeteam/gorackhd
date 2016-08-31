@@ -57,7 +57,7 @@ return sku
 
 */
 type GetSkusIdentifierOK struct {
-	Payload GetSkusIdentifierOKBodyBody
+	Payload *models.Sku
 }
 
 func (o *GetSkusIdentifierOK) Error() string {
@@ -66,8 +66,10 @@ func (o *GetSkusIdentifierOK) Error() string {
 
 func (o *GetSkusIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.Sku)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -141,9 +143,3 @@ func (o *GetSkusIdentifierDefault) readResponse(response runtime.ClientResponse,
 
 	return nil
 }
-
-/*GetSkusIdentifierOKBodyBody get skus identifier o k body body
-
-swagger:model GetSkusIdentifierOKBodyBody
-*/
-type GetSkusIdentifierOKBodyBody interface{}

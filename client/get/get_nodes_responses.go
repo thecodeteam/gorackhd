@@ -56,7 +56,7 @@ func NewGetNodesOK() *GetNodesOK {
 array of all
 */
 type GetNodesOK struct {
-	Payload []interface{}
+	Payload []*models.Node
 }
 
 func (o *GetNodesOK) Error() string {

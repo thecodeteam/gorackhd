@@ -197,9 +197,9 @@ func (a *Client) GetWorkflowsLibrary(params *GetWorkflowsLibraryParams, authInfo
 }
 
 /*
-GetWorkflowsLibraryInjectableName lists all workflows available to run
+GetWorkflowsLibraryInjectableName fetches workflow by injectable name
 
-List all workflows available to run
+Fetch workflow by injectable name
 
 */
 func (a *Client) GetWorkflowsLibraryInjectableName(params *GetWorkflowsLibraryInjectableNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetWorkflowsLibraryInjectableNameOK, error) {
