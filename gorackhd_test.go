@@ -10,9 +10,9 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	apiclient "github.com/emccode/gorackhd/client"
-	"github.com/emccode/gorackhd/client/lookups"
-	"github.com/emccode/gorackhd/client/nodes"
+	apiclient "github.com/codedellemc/gorackhd/client"
+	"github.com/codedellemc/gorackhd/client/lookups"
+	"github.com/codedellemc/gorackhd/client/nodes"
 )
 
 func TestNodeGetOperation(t *testing.T) {

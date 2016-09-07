@@ -5,6 +5,6 @@ import (
 	_ "github.com/go-swagger/go-swagger"
 
 	// import the generated go-swagger bindings
-	_ "github.com/emccode/gorackhd/client"
-	_ "github.com/emccode/gorackhd/models"
+	_ "github.com/codedellemc/gorackhd/client"
+	_ "github.com/codedellemc/gorackhd/models"
 )

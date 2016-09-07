@@ -9,30 +9,30 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/emccode/gorackhd/client/catalog"
-	"github.com/emccode/gorackhd/client/catalogs"
-	"github.com/emccode/gorackhd/client/config"
-	"github.com/emccode/gorackhd/client/delete"
-	"github.com/emccode/gorackhd/client/dhcp"
-	"github.com/emccode/gorackhd/client/files"
-	"github.com/emccode/gorackhd/client/get"
-	"github.com/emccode/gorackhd/client/identify"
-	"github.com/emccode/gorackhd/client/lookups"
-	"github.com/emccode/gorackhd/client/nodes"
-	"github.com/emccode/gorackhd/client/obm"
-	"github.com/emccode/gorackhd/client/obms"
-	"github.com/emccode/gorackhd/client/patch"
-	"github.com/emccode/gorackhd/client/pollers"
-	"github.com/emccode/gorackhd/client/post"
-	"github.com/emccode/gorackhd/client/profiles"
-	"github.com/emccode/gorackhd/client/put"
-	"github.com/emccode/gorackhd/client/skus"
-	"github.com/emccode/gorackhd/client/tags"
-	"github.com/emccode/gorackhd/client/task"
-	"github.com/emccode/gorackhd/client/templates"
-	"github.com/emccode/gorackhd/client/versions"
-	"github.com/emccode/gorackhd/client/whitelist"
-	"github.com/emccode/gorackhd/client/workflow"
+	"github.com/codedellemc/gorackhd/client/catalog"
+	"github.com/codedellemc/gorackhd/client/catalogs"
+	"github.com/codedellemc/gorackhd/client/config"
+	"github.com/codedellemc/gorackhd/client/delete"
+	"github.com/codedellemc/gorackhd/client/dhcp"
+	"github.com/codedellemc/gorackhd/client/files"
+	"github.com/codedellemc/gorackhd/client/get"
+	"github.com/codedellemc/gorackhd/client/identify"
+	"github.com/codedellemc/gorackhd/client/lookups"
+	"github.com/codedellemc/gorackhd/client/nodes"
+	"github.com/codedellemc/gorackhd/client/obm"
+	"github.com/codedellemc/gorackhd/client/obms"
+	"github.com/codedellemc/gorackhd/client/patch"
+	"github.com/codedellemc/gorackhd/client/pollers"
+	"github.com/codedellemc/gorackhd/client/post"
+	"github.com/codedellemc/gorackhd/client/profiles"
+	"github.com/codedellemc/gorackhd/client/put"
+	"github.com/codedellemc/gorackhd/client/skus"
+	"github.com/codedellemc/gorackhd/client/tags"
+	"github.com/codedellemc/gorackhd/client/task"
+	"github.com/codedellemc/gorackhd/client/templates"
+	"github.com/codedellemc/gorackhd/client/versions"
+	"github.com/codedellemc/gorackhd/client/whitelist"
+	"github.com/codedellemc/gorackhd/client/workflow"
 )
 
 // Default monorail HTTP client.
@@ -43,7 +43,7 @@ func NewHTTPClient(formats strfmt.Registry) *Monorail {
 	if formats == nil {
 		formats = strfmt.Default
 	}
-	transport := httptransport.New("localhost", "/api/1.1", []string{"http", "https"})
+	transport := httptransport.New("localhost", "/api/1.1", []string{"https", "http"})
 	return New(transport, formats)
 }
 

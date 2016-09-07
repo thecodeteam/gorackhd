@@ -11,7 +11,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/emccode/gorackhd/models"
+	"github.com/codedellemc/gorackhd/models"
 )
 
 // GetDhcpLeaseMacReader is a Reader for the GetDhcpLeaseMac structure.

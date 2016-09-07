@@ -11,7 +11,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/emccode/gorackhd/models"
+	"github.com/codedellemc/gorackhd/models"
 )
 
 // DeleteNodesMacaddressDhcpWhitelistReader is a Reader for the DeleteNodesMacaddressDhcpWhitelist structure.
