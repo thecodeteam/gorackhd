@@ -24,7 +24,7 @@ $ cd $GOPATH/src/github.com/codedellemc/gorackhd
 $ make
 ```
 
-The Makefile utilizes [glide](https://github.com/Masterminds/glide) to reference git commit `6b712512cbe1f` of [go-swagger](https://github.com/go-swagger/go-swagger) that has been tested and known to be working. The Makefile will generate a go-swagger directory in `/vendor/github.com/` and then create the client.
+The Makefile utilizes [glide](https://github.com/Masterminds/glide) to reference go-swagger `0.6.0` of [go-swagger](https://github.com/go-swagger/go-swagger). The Makefile will generate a go-swagger directory in `/vendor/github.com/` and then create the client.
 
 ## Environment Variables
 | Name        | Description           |
@@ -44,7 +44,7 @@ import (
     "log"
     "os"
 
-    httptransport "github.com/go-openapi/runtime/client"
+    rc "github.com/go-openapi/runtime/client"
     "github.com/go-openapi/strfmt"
 
     apiclient "github.com/codedellemc/gorackhd/client"
@@ -54,7 +54,7 @@ import (
 func main() {
 
     // create the transport
-    transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+    transport := rc.New("localhost:9090", "/api/1.1", []string{"http"})
 
     // If not using the Vagrant image, set this environment variable to something other than localhost:9090
     if os.Getenv("GORACKHD_ENDPOINT") != "" {
@@ -65,7 +65,7 @@ func main() {
     client := apiclient.New(transport, strfmt.Default)
 
     //use any function to do REST operations
-    resp, err := client.Nodes.GetNodes(nil)
+    resp, err := client.Nodes.GetNodes(nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -122,7 +122,9 @@ type Node struct {
         }},
     }
 
-    resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c})
+    params := nodes.NewPostNodesParams()
+    params = params.WithIdentifiers(c)
+    resp, err := client.Nodes.PostNodes(params, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -142,7 +144,9 @@ import (
 
 Lookup the params that are required in a struct:
 ```
-resp, err := client.Skus.GetSkusIdentifier(&nodes.GetNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
+    params := nodes.NewGetSkusIdentifierParams()
+    params = params.WithIdentifier("1234abcd1234abcd1234abcd")
+    resp, err := client.Skus.GetSkusIdentifier(params, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -162,7 +166,9 @@ import (
 
 Lookup the params that are required in a struct:
 ```
-resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"})
+    params := NewDeleteNodesIdentifierParams()
+    params = params.WithIdentifier("1234abcd1234abcd1234abcd")
+    resp, err := client.Nodes.DeleteNodesIdentifier(params, nil)
     if err != nil {
         log.Fatal(err)
     }
