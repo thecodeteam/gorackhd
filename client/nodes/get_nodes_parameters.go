@@ -4,8 +4,11 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,18 +17,33 @@ import (
 // with the default values initialized.
 func NewGetNodesParams() *GetNodesParams {
 
-	return &GetNodesParams{}
+	return &GetNodesParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetNodesParamsWithTimeout creates a new GetNodesParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetNodesParamsWithTimeout(timeout time.Duration) *GetNodesParams {
+
+	return &GetNodesParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetNodesParams contains all the parameters to send to the API endpoint
 for the get nodes operation typically these are written to a http.Request
 */
 type GetNodesParams struct {
+	timeout time.Duration
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetNodesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if len(res) > 0 {

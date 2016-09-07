@@ -4,8 +4,11 @@ package delete
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewDeletePollersIdentifierParams() *DeletePollersIdentifierParams {
 	var ()
-	return &DeletePollersIdentifierParams{}
+	return &DeletePollersIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewDeletePollersIdentifierParamsWithTimeout creates a new DeletePollersIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewDeletePollersIdentifierParamsWithTimeout(timeout time.Duration) *DeletePollersIdentifierParams {
+	var ()
+	return &DeletePollersIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*DeletePollersIdentifierParams contains all the parameters to send to the API endpoint
@@ -28,17 +44,20 @@ type DeletePollersIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the delete pollers identifier params
-func (o *DeletePollersIdentifierParams) WithIdentifier(Identifier string) *DeletePollersIdentifierParams {
-	o.Identifier = Identifier
+func (o *DeletePollersIdentifierParams) WithIdentifier(identifier string) *DeletePollersIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *DeletePollersIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

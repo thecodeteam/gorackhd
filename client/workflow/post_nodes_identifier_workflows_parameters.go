@@ -4,8 +4,11 @@ package workflow
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPostNodesIdentifierWorkflowsParams() *PostNodesIdentifierWorkflowsParams {
 	var ()
-	return &PostNodesIdentifierWorkflowsParams{}
+	return &PostNodesIdentifierWorkflowsParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostNodesIdentifierWorkflowsParamsWithTimeout creates a new PostNodesIdentifierWorkflowsParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostNodesIdentifierWorkflowsParamsWithTimeout(timeout time.Duration) *PostNodesIdentifierWorkflowsParams {
+	var ()
+	return &PostNodesIdentifierWorkflowsParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostNodesIdentifierWorkflowsParams contains all the parameters to send to the API endpoint
@@ -36,29 +52,32 @@ type PostNodesIdentifierWorkflowsParams struct {
 
 	*/
 	Name string
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the post nodes identifier workflows params
-func (o *PostNodesIdentifierWorkflowsParams) WithBody(Body interface{}) *PostNodesIdentifierWorkflowsParams {
-	o.Body = Body
+func (o *PostNodesIdentifierWorkflowsParams) WithBody(body interface{}) *PostNodesIdentifierWorkflowsParams {
+	o.Body = body
 	return o
 }
 
 // WithIdentifier adds the identifier to the post nodes identifier workflows params
-func (o *PostNodesIdentifierWorkflowsParams) WithIdentifier(Identifier string) *PostNodesIdentifierWorkflowsParams {
-	o.Identifier = Identifier
+func (o *PostNodesIdentifierWorkflowsParams) WithIdentifier(identifier string) *PostNodesIdentifierWorkflowsParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WithName adds the name to the post nodes identifier workflows params
-func (o *PostNodesIdentifierWorkflowsParams) WithName(Name string) *PostNodesIdentifierWorkflowsParams {
-	o.Name = Name
+func (o *PostNodesIdentifierWorkflowsParams) WithName(name string) *PostNodesIdentifierWorkflowsParams {
+	o.Name = name
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostNodesIdentifierWorkflowsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

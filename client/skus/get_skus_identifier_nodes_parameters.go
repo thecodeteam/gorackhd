@@ -4,8 +4,11 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetSkusIdentifierNodesParams() *GetSkusIdentifierNodesParams {
 	var ()
-	return &GetSkusIdentifierNodesParams{}
+	return &GetSkusIdentifierNodesParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetSkusIdentifierNodesParamsWithTimeout creates a new GetSkusIdentifierNodesParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetSkusIdentifierNodesParamsWithTimeout(timeout time.Duration) *GetSkusIdentifierNodesParams {
+	var ()
+	return &GetSkusIdentifierNodesParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetSkusIdentifierNodesParams contains all the parameters to send to the API endpoint
@@ -28,17 +44,20 @@ type GetSkusIdentifierNodesParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the get skus identifier nodes params
-func (o *GetSkusIdentifierNodesParams) WithIdentifier(Identifier string) *GetSkusIdentifierNodesParams {
-	o.Identifier = Identifier
+func (o *GetSkusIdentifierNodesParams) WithIdentifier(identifier string) *GetSkusIdentifierNodesParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetSkusIdentifierNodesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

@@ -4,8 +4,11 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,18 +17,33 @@ import (
 // with the default values initialized.
 func NewPostSkusParams() *PostSkusParams {
 
-	return &PostSkusParams{}
+	return &PostSkusParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostSkusParamsWithTimeout creates a new PostSkusParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostSkusParamsWithTimeout(timeout time.Duration) *PostSkusParams {
+
+	return &PostSkusParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostSkusParams contains all the parameters to send to the API endpoint
 for the post skus operation typically these are written to a http.Request
 */
 type PostSkusParams struct {
+	timeout time.Duration
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostSkusParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if len(res) > 0 {

@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	httptransport "github.com/go-openapi/runtime/client"
+	rc "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
 	apiclient "github.com/codedellemc/gorackhd/client"
@@ -18,7 +18,7 @@ import (
 func TestNodeGetOperation(t *testing.T) {
 
 	// create the transport
-	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+	transport := rc.New("localhost:9090", "/api/1.1", []string{"http"})
 
 	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
@@ -39,7 +39,7 @@ func TestNodeGetOperation(t *testing.T) {
 func TestNodeLookupOperation(t *testing.T) {
 
 	// create the transport
-	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+	transport := rc.New("localhost:9090", "/api/1.1", []string{"http"})
 
 	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
@@ -50,8 +50,10 @@ func TestNodeLookupOperation(t *testing.T) {
 	client := apiclient.New(transport, strfmt.Default)
 
 	nodeId := "56dde3441722c192796e3a38"
+	params := lookups.NewGetLookupsParams()
+	params = params.WithQ(&nodeId)
 	//use any function to do REST operations
-	resp, err := client.Lookups.GetLookups(&lookups.GetLookupsParams{Q: &nodeId}, nil)
+	resp, err := client.Lookups.GetLookups(params, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,7 +63,7 @@ func TestNodeLookupOperation(t *testing.T) {
 func TestNodePostOperation(t *testing.T) {
 
 	// create the transport
-	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+	transport := rc.New("localhost:9090", "/api/1.1", []string{"http"})
 
 	// configure the host
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
@@ -91,7 +93,9 @@ func TestNodePostOperation(t *testing.T) {
 	}
 	fmt.Println(string(b))
 
-	resp, err := client.Nodes.PostNodes(&nodes.PostNodesParams{Identifiers: c}, nil)
+	params := nodes.NewPostNodesParams()
+	params = params.WithIdentifiers(c)
+	resp, err := client.Nodes.PostNodes(params, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -101,7 +105,7 @@ func TestNodePostOperation(t *testing.T) {
 func TestNodeDeleteOperation(t *testing.T) {
 
 	// create the transport
-	transport := httptransport.New("localhost:9090", "/api/1.1", []string{"http"})
+	transport := rc.New("localhost:9090", "/api/1.1", []string{"http"})
 
 	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
@@ -111,8 +115,9 @@ func TestNodeDeleteOperation(t *testing.T) {
 	// create the API client, with the transport
 	client := apiclient.New(transport, strfmt.Default)
 
-	//use any function to do REST operations
-	resp, err := client.Nodes.DeleteNodesIdentifier(&nodes.DeleteNodesIdentifierParams{Identifier: "1234abcd1234abcd1234abcd"}, nil)
+	params := nodes.NewDeleteNodesIdentifierParams()
+	params = params.WithIdentifier("1234abcd1234abcd1234abcd")
+	resp, err := client.Nodes.DeleteNodesIdentifier(params, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

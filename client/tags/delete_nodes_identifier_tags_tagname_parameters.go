@@ -4,8 +4,11 @@ package tags
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewDeleteNodesIdentifierTagsTagnameParams() *DeleteNodesIdentifierTagsTagnameParams {
 	var ()
-	return &DeleteNodesIdentifierTagsTagnameParams{}
+	return &DeleteNodesIdentifierTagsTagnameParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewDeleteNodesIdentifierTagsTagnameParamsWithTimeout creates a new DeleteNodesIdentifierTagsTagnameParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewDeleteNodesIdentifierTagsTagnameParamsWithTimeout(timeout time.Duration) *DeleteNodesIdentifierTagsTagnameParams {
+	var ()
+	return &DeleteNodesIdentifierTagsTagnameParams{
+
+		timeout: timeout,
+	}
 }
 
 /*DeleteNodesIdentifierTagsTagnameParams contains all the parameters to send to the API endpoint
@@ -34,23 +50,26 @@ type DeleteNodesIdentifierTagsTagnameParams struct {
 
 	*/
 	Tagname string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the delete nodes identifier tags tagname params
-func (o *DeleteNodesIdentifierTagsTagnameParams) WithIdentifier(Identifier string) *DeleteNodesIdentifierTagsTagnameParams {
-	o.Identifier = Identifier
+func (o *DeleteNodesIdentifierTagsTagnameParams) WithIdentifier(identifier string) *DeleteNodesIdentifierTagsTagnameParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WithTagname adds the tagname to the delete nodes identifier tags tagname params
-func (o *DeleteNodesIdentifierTagsTagnameParams) WithTagname(Tagname string) *DeleteNodesIdentifierTagsTagnameParams {
-	o.Tagname = Tagname
+func (o *DeleteNodesIdentifierTagsTagnameParams) WithTagname(tagname string) *DeleteNodesIdentifierTagsTagnameParams {
+	o.Tagname = tagname
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteNodesIdentifierTagsTagnameParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

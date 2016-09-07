@@ -4,8 +4,11 @@ package get
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetCatalogsIdentifierParams() *GetCatalogsIdentifierParams {
 	var ()
-	return &GetCatalogsIdentifierParams{}
+	return &GetCatalogsIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetCatalogsIdentifierParamsWithTimeout creates a new GetCatalogsIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetCatalogsIdentifierParamsWithTimeout(timeout time.Duration) *GetCatalogsIdentifierParams {
+	var ()
+	return &GetCatalogsIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetCatalogsIdentifierParams contains all the parameters to send to the API endpoint
@@ -27,17 +43,20 @@ type GetCatalogsIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the get catalogs identifier params
-func (o *GetCatalogsIdentifierParams) WithIdentifier(Identifier string) *GetCatalogsIdentifierParams {
-	o.Identifier = Identifier
+func (o *GetCatalogsIdentifierParams) WithIdentifier(identifier string) *GetCatalogsIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetCatalogsIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

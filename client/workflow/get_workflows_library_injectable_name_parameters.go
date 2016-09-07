@@ -4,8 +4,11 @@ package workflow
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetWorkflowsLibraryInjectableNameParams() *GetWorkflowsLibraryInjectableNameParams {
 	var ()
-	return &GetWorkflowsLibraryInjectableNameParams{}
+	return &GetWorkflowsLibraryInjectableNameParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetWorkflowsLibraryInjectableNameParamsWithTimeout creates a new GetWorkflowsLibraryInjectableNameParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetWorkflowsLibraryInjectableNameParamsWithTimeout(timeout time.Duration) *GetWorkflowsLibraryInjectableNameParams {
+	var ()
+	return &GetWorkflowsLibraryInjectableNameParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetWorkflowsLibraryInjectableNameParams contains all the parameters to send to the API endpoint
@@ -24,17 +40,20 @@ type GetWorkflowsLibraryInjectableNameParams struct {
 
 	/*InjectableName*/
 	InjectableName string
+
+	timeout time.Duration
 }
 
 // WithInjectableName adds the injectableName to the get workflows library injectable name params
-func (o *GetWorkflowsLibraryInjectableNameParams) WithInjectableName(InjectableName string) *GetWorkflowsLibraryInjectableNameParams {
-	o.InjectableName = InjectableName
+func (o *GetWorkflowsLibraryInjectableNameParams) WithInjectableName(injectableName string) *GetWorkflowsLibraryInjectableNameParams {
+	o.InjectableName = injectableName
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetWorkflowsLibraryInjectableNameParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param injectableName

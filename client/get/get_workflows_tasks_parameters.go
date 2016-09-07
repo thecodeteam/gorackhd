@@ -4,8 +4,11 @@ package get
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,18 +17,33 @@ import (
 // with the default values initialized.
 func NewGetWorkflowsTasksParams() *GetWorkflowsTasksParams {
 
-	return &GetWorkflowsTasksParams{}
+	return &GetWorkflowsTasksParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetWorkflowsTasksParamsWithTimeout creates a new GetWorkflowsTasksParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetWorkflowsTasksParamsWithTimeout(timeout time.Duration) *GetWorkflowsTasksParams {
+
+	return &GetWorkflowsTasksParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetWorkflowsTasksParams contains all the parameters to send to the API endpoint
 for the get workflows tasks operation typically these are written to a http.Request
 */
 type GetWorkflowsTasksParams struct {
+	timeout time.Duration
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetWorkflowsTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if len(res) > 0 {

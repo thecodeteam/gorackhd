@@ -4,8 +4,11 @@ package get
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetCatalogsParams() *GetCatalogsParams {
 	var ()
-	return &GetCatalogsParams{}
+	return &GetCatalogsParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetCatalogsParamsWithTimeout creates a new GetCatalogsParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetCatalogsParamsWithTimeout(timeout time.Duration) *GetCatalogsParams {
+	var ()
+	return &GetCatalogsParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetCatalogsParams contains all the parameters to send to the API endpoint
@@ -27,17 +43,20 @@ type GetCatalogsParams struct {
 
 	*/
 	Query *string
+
+	timeout time.Duration
 }
 
 // WithQuery adds the query to the get catalogs params
-func (o *GetCatalogsParams) WithQuery(Query *string) *GetCatalogsParams {
-	o.Query = Query
+func (o *GetCatalogsParams) WithQuery(query *string) *GetCatalogsParams {
+	o.Query = query
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetCatalogsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if o.Query != nil {
