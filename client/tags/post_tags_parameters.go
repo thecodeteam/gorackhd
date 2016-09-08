@@ -4,8 +4,11 @@ package tags
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPostTagsParams() *PostTagsParams {
 	var ()
-	return &PostTagsParams{}
+	return &PostTagsParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostTagsParamsWithTimeout creates a new PostTagsParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostTagsParamsWithTimeout(timeout time.Duration) *PostTagsParams {
+	var ()
+	return &PostTagsParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostTagsParams contains all the parameters to send to the API endpoint
@@ -24,17 +40,20 @@ type PostTagsParams struct {
 
 	/*Body*/
 	Body interface{}
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the post tags params
-func (o *PostTagsParams) WithBody(Body interface{}) *PostTagsParams {
-	o.Body = Body
+func (o *PostTagsParams) WithBody(body interface{}) *PostTagsParams {
+	o.Body = body
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostTagsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

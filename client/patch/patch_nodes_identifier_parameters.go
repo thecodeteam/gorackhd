@@ -4,8 +4,11 @@ package patch
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPatchNodesIdentifierParams() *PatchNodesIdentifierParams {
 	var ()
-	return &PatchNodesIdentifierParams{}
+	return &PatchNodesIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPatchNodesIdentifierParamsWithTimeout creates a new PatchNodesIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPatchNodesIdentifierParamsWithTimeout(timeout time.Duration) *PatchNodesIdentifierParams {
+	var ()
+	return &PatchNodesIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PatchNodesIdentifierParams contains all the parameters to send to the API endpoint
@@ -35,23 +51,26 @@ type PatchNodesIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the patch nodes identifier params
-func (o *PatchNodesIdentifierParams) WithBody(Body interface{}) *PatchNodesIdentifierParams {
-	o.Body = Body
+func (o *PatchNodesIdentifierParams) WithBody(body interface{}) *PatchNodesIdentifierParams {
+	o.Body = body
 	return o
 }
 
 // WithIdentifier adds the identifier to the patch nodes identifier params
-func (o *PatchNodesIdentifierParams) WithIdentifier(Identifier string) *PatchNodesIdentifierParams {
-	o.Identifier = Identifier
+func (o *PatchNodesIdentifierParams) WithIdentifier(identifier string) *PatchNodesIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PatchNodesIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

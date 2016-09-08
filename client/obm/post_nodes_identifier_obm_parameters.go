@@ -4,8 +4,11 @@ package obm
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPostNodesIdentifierObmParams() *PostNodesIdentifierObmParams {
 	var ()
-	return &PostNodesIdentifierObmParams{}
+	return &PostNodesIdentifierObmParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostNodesIdentifierObmParamsWithTimeout creates a new PostNodesIdentifierObmParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostNodesIdentifierObmParamsWithTimeout(timeout time.Duration) *PostNodesIdentifierObmParams {
+	var ()
+	return &PostNodesIdentifierObmParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostNodesIdentifierObmParams contains all the parameters to send to the API endpoint
@@ -35,23 +51,26 @@ type PostNodesIdentifierObmParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the post nodes identifier obm params
-func (o *PostNodesIdentifierObmParams) WithBody(Body interface{}) *PostNodesIdentifierObmParams {
-	o.Body = Body
+func (o *PostNodesIdentifierObmParams) WithBody(body interface{}) *PostNodesIdentifierObmParams {
+	o.Body = body
 	return o
 }
 
 // WithIdentifier adds the identifier to the post nodes identifier obm params
-func (o *PostNodesIdentifierObmParams) WithIdentifier(Identifier string) *PostNodesIdentifierObmParams {
-	o.Identifier = Identifier
+func (o *PostNodesIdentifierObmParams) WithIdentifier(identifier string) *PostNodesIdentifierObmParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostNodesIdentifierObmParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

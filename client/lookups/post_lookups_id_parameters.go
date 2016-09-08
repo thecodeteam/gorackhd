@@ -4,8 +4,11 @@ package lookups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPostLookupsIDParams() *PostLookupsIDParams {
 	var ()
-	return &PostLookupsIDParams{}
+	return &PostLookupsIDParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostLookupsIDParamsWithTimeout creates a new PostLookupsIDParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostLookupsIDParamsWithTimeout(timeout time.Duration) *PostLookupsIDParams {
+	var ()
+	return &PostLookupsIDParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostLookupsIDParams contains all the parameters to send to the API endpoint
@@ -32,23 +48,26 @@ type PostLookupsIDParams struct {
 
 	*/
 	ID string
+
+	timeout time.Duration
 }
 
 // WithContent adds the content to the post lookups ID params
-func (o *PostLookupsIDParams) WithContent(Content interface{}) *PostLookupsIDParams {
-	o.Content = Content
+func (o *PostLookupsIDParams) WithContent(content interface{}) *PostLookupsIDParams {
+	o.Content = content
 	return o
 }
 
 // WithID adds the id to the post lookups ID params
-func (o *PostLookupsIDParams) WithID(ID string) *PostLookupsIDParams {
-	o.ID = ID
+func (o *PostLookupsIDParams) WithID(id string) *PostLookupsIDParams {
+	o.ID = id
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostLookupsIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Content); err != nil {

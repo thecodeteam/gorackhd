@@ -4,8 +4,11 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetNodesIdentifierParams() *GetNodesIdentifierParams {
 	var ()
-	return &GetNodesIdentifierParams{}
+	return &GetNodesIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetNodesIdentifierParamsWithTimeout creates a new GetNodesIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetNodesIdentifierParamsWithTimeout(timeout time.Duration) *GetNodesIdentifierParams {
+	var ()
+	return &GetNodesIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetNodesIdentifierParams contains all the parameters to send to the API endpoint
@@ -29,17 +45,20 @@ type GetNodesIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the get nodes identifier params
-func (o *GetNodesIdentifierParams) WithIdentifier(Identifier string) *GetNodesIdentifierParams {
-	o.Identifier = Identifier
+func (o *GetNodesIdentifierParams) WithIdentifier(identifier string) *GetNodesIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetNodesIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

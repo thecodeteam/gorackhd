@@ -4,8 +4,11 @@ package pollers
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetPollersLibraryIdentifierParams() *GetPollersLibraryIdentifierParams {
 	var ()
-	return &GetPollersLibraryIdentifierParams{}
+	return &GetPollersLibraryIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetPollersLibraryIdentifierParamsWithTimeout creates a new GetPollersLibraryIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetPollersLibraryIdentifierParamsWithTimeout(timeout time.Duration) *GetPollersLibraryIdentifierParams {
+	var ()
+	return &GetPollersLibraryIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetPollersLibraryIdentifierParams contains all the parameters to send to the API endpoint
@@ -28,17 +44,20 @@ type GetPollersLibraryIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the get pollers library identifier params
-func (o *GetPollersLibraryIdentifierParams) WithIdentifier(Identifier string) *GetPollersLibraryIdentifierParams {
-	o.Identifier = Identifier
+func (o *GetPollersLibraryIdentifierParams) WithIdentifier(identifier string) *GetPollersLibraryIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetPollersLibraryIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

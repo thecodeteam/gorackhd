@@ -4,8 +4,11 @@ package patch
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPatchSkusIdentifierParams() *PatchSkusIdentifierParams {
 	var ()
-	return &PatchSkusIdentifierParams{}
+	return &PatchSkusIdentifierParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPatchSkusIdentifierParamsWithTimeout creates a new PatchSkusIdentifierParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPatchSkusIdentifierParamsWithTimeout(timeout time.Duration) *PatchSkusIdentifierParams {
+	var ()
+	return &PatchSkusIdentifierParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PatchSkusIdentifierParams contains all the parameters to send to the API endpoint
@@ -28,17 +44,20 @@ type PatchSkusIdentifierParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the patch skus identifier params
-func (o *PatchSkusIdentifierParams) WithIdentifier(Identifier string) *PatchSkusIdentifierParams {
-	o.Identifier = Identifier
+func (o *PatchSkusIdentifierParams) WithIdentifier(identifier string) *PatchSkusIdentifierParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PatchSkusIdentifierParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

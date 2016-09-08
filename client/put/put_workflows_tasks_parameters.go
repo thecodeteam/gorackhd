@@ -4,8 +4,11 @@ package put
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPutWorkflowsTasksParams() *PutWorkflowsTasksParams {
 	var ()
-	return &PutWorkflowsTasksParams{}
+	return &PutWorkflowsTasksParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPutWorkflowsTasksParamsWithTimeout creates a new PutWorkflowsTasksParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPutWorkflowsTasksParamsWithTimeout(timeout time.Duration) *PutWorkflowsTasksParams {
+	var ()
+	return &PutWorkflowsTasksParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PutWorkflowsTasksParams contains all the parameters to send to the API endpoint
@@ -24,17 +40,20 @@ type PutWorkflowsTasksParams struct {
 
 	/*Body*/
 	Body interface{}
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the put workflows tasks params
-func (o *PutWorkflowsTasksParams) WithBody(Body interface{}) *PutWorkflowsTasksParams {
-	o.Body = Body
+func (o *PutWorkflowsTasksParams) WithBody(body interface{}) *PutWorkflowsTasksParams {
+	o.Body = body
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PutWorkflowsTasksParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

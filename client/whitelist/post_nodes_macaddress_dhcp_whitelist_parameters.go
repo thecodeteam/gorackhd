@@ -4,8 +4,11 @@ package whitelist
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewPostNodesMacaddressDhcpWhitelistParams() *PostNodesMacaddressDhcpWhitelistParams {
 	var ()
-	return &PostNodesMacaddressDhcpWhitelistParams{}
+	return &PostNodesMacaddressDhcpWhitelistParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewPostNodesMacaddressDhcpWhitelistParamsWithTimeout creates a new PostNodesMacaddressDhcpWhitelistParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewPostNodesMacaddressDhcpWhitelistParamsWithTimeout(timeout time.Duration) *PostNodesMacaddressDhcpWhitelistParams {
+	var ()
+	return &PostNodesMacaddressDhcpWhitelistParams{
+
+		timeout: timeout,
+	}
 }
 
 /*PostNodesMacaddressDhcpWhitelistParams contains all the parameters to send to the API endpoint
@@ -31,23 +47,26 @@ type PostNodesMacaddressDhcpWhitelistParams struct {
 
 	*/
 	Macaddress string
+
+	timeout time.Duration
 }
 
 // WithBody adds the body to the post nodes macaddress dhcp whitelist params
-func (o *PostNodesMacaddressDhcpWhitelistParams) WithBody(Body interface{}) *PostNodesMacaddressDhcpWhitelistParams {
-	o.Body = Body
+func (o *PostNodesMacaddressDhcpWhitelistParams) WithBody(body interface{}) *PostNodesMacaddressDhcpWhitelistParams {
+	o.Body = body
 	return o
 }
 
 // WithMacaddress adds the macaddress to the post nodes macaddress dhcp whitelist params
-func (o *PostNodesMacaddressDhcpWhitelistParams) WithMacaddress(Macaddress string) *PostNodesMacaddressDhcpWhitelistParams {
-	o.Macaddress = Macaddress
+func (o *PostNodesMacaddressDhcpWhitelistParams) WithMacaddress(macaddress string) *PostNodesMacaddressDhcpWhitelistParams {
+	o.Macaddress = macaddress
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PostNodesMacaddressDhcpWhitelistParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

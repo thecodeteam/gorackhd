@@ -4,8 +4,11 @@ package delete
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewDeleteNodesIdentifierWorkflowsActiveParams() *DeleteNodesIdentifierWorkflowsActiveParams {
 	var ()
-	return &DeleteNodesIdentifierWorkflowsActiveParams{}
+	return &DeleteNodesIdentifierWorkflowsActiveParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewDeleteNodesIdentifierWorkflowsActiveParamsWithTimeout creates a new DeleteNodesIdentifierWorkflowsActiveParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewDeleteNodesIdentifierWorkflowsActiveParamsWithTimeout(timeout time.Duration) *DeleteNodesIdentifierWorkflowsActiveParams {
+	var ()
+	return &DeleteNodesIdentifierWorkflowsActiveParams{
+
+		timeout: timeout,
+	}
 }
 
 /*DeleteNodesIdentifierWorkflowsActiveParams contains all the parameters to send to the API endpoint
@@ -29,17 +45,20 @@ type DeleteNodesIdentifierWorkflowsActiveParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the delete nodes identifier workflows active params
-func (o *DeleteNodesIdentifierWorkflowsActiveParams) WithIdentifier(Identifier string) *DeleteNodesIdentifierWorkflowsActiveParams {
-	o.Identifier = Identifier
+func (o *DeleteNodesIdentifierWorkflowsActiveParams) WithIdentifier(identifier string) *DeleteNodesIdentifierWorkflowsActiveParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *DeleteNodesIdentifierWorkflowsActiveParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier

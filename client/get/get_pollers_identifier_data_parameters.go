@@ -4,8 +4,11 @@ package get
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"time"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
@@ -14,7 +17,20 @@ import (
 // with the default values initialized.
 func NewGetPollersIdentifierDataParams() *GetPollersIdentifierDataParams {
 	var ()
-	return &GetPollersIdentifierDataParams{}
+	return &GetPollersIdentifierDataParams{
+
+		timeout: cr.DefaultTimeout,
+	}
+}
+
+// NewGetPollersIdentifierDataParamsWithTimeout creates a new GetPollersIdentifierDataParams object
+// with the default values initialized, and the ability to set a timeout on a request
+func NewGetPollersIdentifierDataParamsWithTimeout(timeout time.Duration) *GetPollersIdentifierDataParams {
+	var ()
+	return &GetPollersIdentifierDataParams{
+
+		timeout: timeout,
+	}
 }
 
 /*GetPollersIdentifierDataParams contains all the parameters to send to the API endpoint
@@ -28,17 +44,20 @@ type GetPollersIdentifierDataParams struct {
 
 	*/
 	Identifier string
+
+	timeout time.Duration
 }
 
 // WithIdentifier adds the identifier to the get pollers identifier data params
-func (o *GetPollersIdentifierDataParams) WithIdentifier(Identifier string) *GetPollersIdentifierDataParams {
-	o.Identifier = Identifier
+func (o *GetPollersIdentifierDataParams) WithIdentifier(identifier string) *GetPollersIdentifierDataParams {
+	o.Identifier = identifier
 	return o
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetPollersIdentifierDataParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
+	r.SetTimeout(o.timeout)
 	var res []error
 
 	// path param identifier
