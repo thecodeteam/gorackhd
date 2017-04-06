@@ -50,7 +50,7 @@ list of skus
 
 */
 type GetSkusOK struct {
-	Payload []*models.Sku
+	Payload []interface{}
 }
 
 func (o *GetSkusOK) Error() string {

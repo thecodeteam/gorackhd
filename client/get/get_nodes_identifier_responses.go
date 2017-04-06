@@ -53,10 +53,10 @@ func NewGetNodesIdentifierOK() *GetNodesIdentifierOK {
 
 /*GetNodesIdentifierOK handles this case with default header values.
 
-The node
+array of all
 */
 type GetNodesIdentifierOK struct {
-	Payload *models.Node
+	Payload []interface{}
 }
 
 func (o *GetNodesIdentifierOK) Error() string {
@@ -65,10 +65,8 @@ func (o *GetNodesIdentifierOK) Error() string {
 
 func (o *GetNodesIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Node)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

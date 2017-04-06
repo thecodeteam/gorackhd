@@ -64,7 +64,7 @@ sku to patch
 
 */
 type PatchSkusIdentifierOK struct {
-	Payload *models.Sku
+	Payload PatchSkusIdentifierOKBodyBody
 }
 
 func (o *PatchSkusIdentifierOK) Error() string {
@@ -73,10 +73,8 @@ func (o *PatchSkusIdentifierOK) Error() string {
 
 func (o *PatchSkusIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Sku)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -180,3 +178,9 @@ func (o *PatchSkusIdentifierDefault) readResponse(response runtime.ClientRespons
 
 	return nil
 }
+
+/*PatchSkusIdentifierOKBodyBody patch skus identifier o k body body
+
+swagger:model PatchSkusIdentifierOKBodyBody
+*/
+type PatchSkusIdentifierOKBodyBody interface{}

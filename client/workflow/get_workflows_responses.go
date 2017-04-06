@@ -50,7 +50,7 @@ Fetch workflows
 
 */
 type GetWorkflowsOK struct {
-	Payload []*models.Graphobject
+	Payload []interface{}
 }
 
 func (o *GetWorkflowsOK) Error() string {

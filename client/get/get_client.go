@@ -315,9 +315,9 @@ func (a *Client) GetNodes(params *GetNodesParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-GetNodesIdentifier thes node by identifier
+GetNodesIdentifier lists of all nodes or if there are none an empty object
 
-The node by identifier
+List of all nodes or if there are none an empty object
 
 */
 func (a *Client) GetNodesIdentifier(params *GetNodesIdentifierParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesIdentifierOK, error) {
@@ -1098,38 +1098,9 @@ func (a *Client) GetWorkflowsInstanceID(params *GetWorkflowsInstanceIDParams, au
 }
 
 /*
-GetWorkflowsLibrary lists all workflows available to run
+GetWorkflowsLibraryInjectableName gets a workflow definition
 
-List all workflows available to run
-
-*/
-func (a *Client) GetWorkflowsLibrary(params *GetWorkflowsLibraryParams, authInfo runtime.ClientAuthInfoWriter) (*GetWorkflowsLibraryOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetWorkflowsLibraryParams()
-	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetWorkflowsLibrary",
-		Method:             "GET",
-		PathPattern:        "/workflows/library",
-		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http", "https"},
-		Params:             params,
-		Reader:             &GetWorkflowsLibraryReader{formats: a.formats},
-		AuthInfo:           authInfo,
-	})
-	if err != nil {
-		return nil, err
-	}
-	return result.(*GetWorkflowsLibraryOK), nil
-}
-
-/*
-GetWorkflowsLibraryInjectableName fetches workflow by injectable name
-
-Fetch workflow by injectable name
+Get a workflow definition. To list all available workflows, use the '*' as a wildcard for the name.
 
 */
 func (a *Client) GetWorkflowsLibraryInjectableName(params *GetWorkflowsLibraryInjectableNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetWorkflowsLibraryInjectableNameOK, error) {

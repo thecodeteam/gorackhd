@@ -50,7 +50,7 @@ Fetch workflows
 
 */
 type GetWorkflowsInstanceIDOK struct {
-	Payload *models.Graphobject
+	Payload GetWorkflowsInstanceIDOKBodyBody
 }
 
 func (o *GetWorkflowsInstanceIDOK) Error() string {
@@ -59,10 +59,8 @@ func (o *GetWorkflowsInstanceIDOK) Error() string {
 
 func (o *GetWorkflowsInstanceIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Graphobject)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -106,3 +104,9 @@ func (o *GetWorkflowsInstanceIDDefault) readResponse(response runtime.ClientResp
 
 	return nil
 }
+
+/*GetWorkflowsInstanceIDOKBodyBody get workflows instance ID o k body body
+
+swagger:model GetWorkflowsInstanceIDOKBodyBody
+*/
+type GetWorkflowsInstanceIDOKBodyBody interface{}

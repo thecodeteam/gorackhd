@@ -16,10 +16,6 @@ swagger:model graphobject
 */
 type Graphobject struct {
 
-	/* status
-	 */
-	Status string `json:"_status,omitempty"`
-
 	/* context
 	 */
 	Context interface{} `json:"context,omitempty"`

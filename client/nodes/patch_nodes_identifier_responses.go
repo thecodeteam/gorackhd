@@ -56,7 +56,7 @@ func NewPatchNodesIdentifierOK() *PatchNodesIdentifierOK {
 patch succeeded
 */
 type PatchNodesIdentifierOK struct {
-	Payload *models.Node
+	Payload PatchNodesIdentifierOKBodyBody
 }
 
 func (o *PatchNodesIdentifierOK) Error() string {
@@ -65,10 +65,8 @@ func (o *PatchNodesIdentifierOK) Error() string {
 
 func (o *PatchNodesIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Node)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -141,3 +139,9 @@ func (o *PatchNodesIdentifierDefault) readResponse(response runtime.ClientRespon
 
 	return nil
 }
+
+/*PatchNodesIdentifierOKBodyBody patch nodes identifier o k body body
+
+swagger:model PatchNodesIdentifierOKBodyBody
+*/
+type PatchNodesIdentifierOKBodyBody interface{}

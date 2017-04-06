@@ -49,7 +49,7 @@ func NewGetTagsOK() *GetTagsOK {
 array of all tags fetched
 */
 type GetTagsOK struct {
-	Payload []*models.Tag
+	Payload []interface{}
 }
 
 func (o *GetTagsOK) Error() string {

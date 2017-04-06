@@ -168,9 +168,9 @@ func (a *Client) GetNodes(params *GetNodesParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-GetNodesIdentifier thes node by identifier
+GetNodesIdentifier lists of all nodes or if there are none an empty object
 
-The node by identifier
+List of all nodes or if there are none an empty object
 
 */
 func (a *Client) GetNodesIdentifier(params *GetNodesIdentifierParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesIdentifierOK, error) {

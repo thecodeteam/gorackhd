@@ -57,7 +57,7 @@ return nodes associated with that sku
 
 */
 type GetSkusIdentifierNodesOK struct {
-	Payload []*models.Node
+	Payload []interface{}
 }
 
 func (o *GetSkusIdentifierNodesOK) Error() string {
