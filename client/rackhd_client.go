@@ -9,7 +9,27 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/spiegela/gorackhd/client/api_2_0"
+	"github.com/spiegela/gorackhd/client/catalogs"
+	"github.com/spiegela/gorackhd/client/config"
+	"github.com/spiegela/gorackhd/client/files"
+	"github.com/spiegela/gorackhd/client/hooks"
+	"github.com/spiegela/gorackhd/client/ibms"
+	"github.com/spiegela/gorackhd/client/lookups"
+	"github.com/spiegela/gorackhd/client/nodes"
+	"github.com/spiegela/gorackhd/client/notifications"
+	"github.com/spiegela/gorackhd/client/obms"
+	"github.com/spiegela/gorackhd/client/operations"
+	"github.com/spiegela/gorackhd/client/pollers"
+	"github.com/spiegela/gorackhd/client/profiles"
+	"github.com/spiegela/gorackhd/client/roles"
+	"github.com/spiegela/gorackhd/client/schemas"
+	"github.com/spiegela/gorackhd/client/skus"
+	"github.com/spiegela/gorackhd/client/tags"
+	"github.com/spiegela/gorackhd/client/tasks"
+	"github.com/spiegela/gorackhd/client/templates"
+	"github.com/spiegela/gorackhd/client/users"
+	"github.com/spiegela/gorackhd/client/views"
+	"github.com/spiegela/gorackhd/client/workflows"
 )
 
 // Default rackhd HTTP client.
@@ -29,14 +49,94 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Rackhd {
 	cli := new(Rackhd)
 	cli.Transport = transport
 
-	cli.API20 = api_2_0.New(transport, formats)
+	cli.Catalogs = catalogs.New(transport, formats)
+
+	cli.Config = config.New(transport, formats)
+
+	cli.Files = files.New(transport, formats)
+
+	cli.Hooks = hooks.New(transport, formats)
+
+	cli.Ibms = ibms.New(transport, formats)
+
+	cli.Lookups = lookups.New(transport, formats)
+
+	cli.Nodes = nodes.New(transport, formats)
+
+	cli.Notifications = notifications.New(transport, formats)
+
+	cli.Obms = obms.New(transport, formats)
+
+	cli.Operations = operations.New(transport, formats)
+
+	cli.Pollers = pollers.New(transport, formats)
+
+	cli.Profiles = profiles.New(transport, formats)
+
+	cli.Roles = roles.New(transport, formats)
+
+	cli.Schemas = schemas.New(transport, formats)
+
+	cli.Skus = skus.New(transport, formats)
+
+	cli.Tags = tags.New(transport, formats)
+
+	cli.Tasks = tasks.New(transport, formats)
+
+	cli.Templates = templates.New(transport, formats)
+
+	cli.Users = users.New(transport, formats)
+
+	cli.Views = views.New(transport, formats)
+
+	cli.Workflows = workflows.New(transport, formats)
 
 	return cli
 }
 
 // Rackhd is a client for rackhd
 type Rackhd struct {
-	API20 *api_2_0.Client
+	Catalogs *catalogs.Client
+
+	Config *config.Client
+
+	Files *files.Client
+
+	Hooks *hooks.Client
+
+	Ibms *ibms.Client
+
+	Lookups *lookups.Client
+
+	Nodes *nodes.Client
+
+	Notifications *notifications.Client
+
+	Obms *obms.Client
+
+	Operations *operations.Client
+
+	Pollers *pollers.Client
+
+	Profiles *profiles.Client
+
+	Roles *roles.Client
+
+	Schemas *schemas.Client
+
+	Skus *skus.Client
+
+	Tags *tags.Client
+
+	Tasks *tasks.Client
+
+	Templates *templates.Client
+
+	Users *users.Client
+
+	Views *views.Client
+
+	Workflows *workflows.Client
 
 	Transport runtime.ClientTransport
 }
@@ -45,6 +145,46 @@ type Rackhd struct {
 func (c *Rackhd) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
-	c.API20.SetTransport(transport)
+	c.Catalogs.SetTransport(transport)
+
+	c.Config.SetTransport(transport)
+
+	c.Files.SetTransport(transport)
+
+	c.Hooks.SetTransport(transport)
+
+	c.Ibms.SetTransport(transport)
+
+	c.Lookups.SetTransport(transport)
+
+	c.Nodes.SetTransport(transport)
+
+	c.Notifications.SetTransport(transport)
+
+	c.Obms.SetTransport(transport)
+
+	c.Operations.SetTransport(transport)
+
+	c.Pollers.SetTransport(transport)
+
+	c.Profiles.SetTransport(transport)
+
+	c.Roles.SetTransport(transport)
+
+	c.Schemas.SetTransport(transport)
+
+	c.Skus.SetTransport(transport)
+
+	c.Tags.SetTransport(transport)
+
+	c.Tasks.SetTransport(transport)
+
+	c.Templates.SetTransport(transport)
+
+	c.Users.SetTransport(transport)
+
+	c.Views.SetTransport(transport)
+
+	c.Workflows.SetTransport(transport)
 
 }
