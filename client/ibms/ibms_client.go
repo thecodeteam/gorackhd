@@ -27,7 +27,7 @@ IbmsDefinitionsGetAll gets list of i b m s services
 
 Get a list of IBMS schemas, which define the properties required to create IBMS settings.
 */
-func (a *Client) IbmsDefinitionsGetAll(params *IbmsDefinitionsGetAllParams) (*IbmsDefinitionsGetAllOK, error) {
+func (a *Client) IbmsDefinitionsGetAll(params *IbmsDefinitionsGetAllParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsDefinitionsGetAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsDefinitionsGetAllParams()
@@ -37,11 +37,12 @@ func (a *Client) IbmsDefinitionsGetAll(params *IbmsDefinitionsGetAllParams) (*Ib
 		ID:                 "ibmsDefinitionsGetAll",
 		Method:             "GET",
 		PathPattern:        "/ibms/definitions",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsDefinitionsGetAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ IbmsDefinitionsGetByName gets an i b m s service definition
 
 Get the contents of the specified IBMS service schema.
 */
-func (a *Client) IbmsDefinitionsGetByName(params *IbmsDefinitionsGetByNameParams) (*IbmsDefinitionsGetByNameOK, error) {
+func (a *Client) IbmsDefinitionsGetByName(params *IbmsDefinitionsGetByNameParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsDefinitionsGetByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsDefinitionsGetByNameParams()
@@ -64,11 +65,12 @@ func (a *Client) IbmsDefinitionsGetByName(params *IbmsDefinitionsGetByNameParams
 		ID:                 "ibmsDefinitionsGetByName",
 		Method:             "GET",
 		PathPattern:        "/ibms/definitions/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsDefinitionsGetByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ IbmsDeleteByID deletes i b m s settings
 
 Delete the IBMS settings with the specified identifier.
 */
-func (a *Client) IbmsDeleteByID(params *IbmsDeleteByIDParams) (*IbmsDeleteByIDNoContent, error) {
+func (a *Client) IbmsDeleteByID(params *IbmsDeleteByIDParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsDeleteByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsDeleteByIDParams()
@@ -91,11 +93,12 @@ func (a *Client) IbmsDeleteByID(params *IbmsDeleteByIDParams) (*IbmsDeleteByIDNo
 		ID:                 "ibmsDeleteById",
 		Method:             "DELETE",
 		PathPattern:        "/ibms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsDeleteByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ IbmsGet gets list of all i b m service instances
 
 Get a list of all In Band Management settings that have been associated with nodes.
 */
-func (a *Client) IbmsGet(params *IbmsGetParams) (*IbmsGetOK, error) {
+func (a *Client) IbmsGet(params *IbmsGetParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsGetParams()
@@ -118,11 +121,12 @@ func (a *Client) IbmsGet(params *IbmsGetParams) (*IbmsGetOK, error) {
 		ID:                 "ibmsGet",
 		Method:             "GET",
 		PathPattern:        "/ibms",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ IbmsGetByID gets an i b m s service
 
 Get the IBMS settings associated with the specified identifier
 */
-func (a *Client) IbmsGetByID(params *IbmsGetByIDParams) (*IbmsGetByIDOK, error) {
+func (a *Client) IbmsGetByID(params *IbmsGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsGetByIDParams()
@@ -145,11 +149,12 @@ func (a *Client) IbmsGetByID(params *IbmsGetByIDParams) (*IbmsGetByIDOK, error) 
 		ID:                 "ibmsGetById",
 		Method:             "GET",
 		PathPattern:        "/ibms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -162,7 +167,7 @@ IbmsPatchByID patches i b m s settings
 
 Update the properties of the IBMS settings with the specified identifier.
 */
-func (a *Client) IbmsPatchByID(params *IbmsPatchByIDParams) (*IbmsPatchByIDOK, error) {
+func (a *Client) IbmsPatchByID(params *IbmsPatchByIDParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsPatchByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsPatchByIDParams()
@@ -172,11 +177,12 @@ func (a *Client) IbmsPatchByID(params *IbmsPatchByIDParams) (*IbmsPatchByIDOK, e
 		ID:                 "ibmsPatchById",
 		Method:             "PATCH",
 		PathPattern:        "/ibms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsPatchByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -189,7 +195,7 @@ IbmsPut puts an i b m service
 
 Create or update a single IBM service, and associate it with a node.
 */
-func (a *Client) IbmsPut(params *IbmsPutParams) (*IbmsPutCreated, error) {
+func (a *Client) IbmsPut(params *IbmsPutParams, authInfo runtime.ClientAuthInfoWriter) (*IbmsPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIbmsPutParams()
@@ -199,11 +205,12 @@ func (a *Client) IbmsPut(params *IbmsPutParams) (*IbmsPutCreated, error) {
 		ID:                 "ibmsPut",
 		Method:             "PUT",
 		PathPattern:        "/ibms",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &IbmsPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

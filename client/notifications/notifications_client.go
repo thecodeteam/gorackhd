@@ -28,7 +28,7 @@ NotificationAlertsPost publishes alerts redfish received to rack h d
 Publishes alerts(redfish) received to rackHD
 
 */
-func (a *Client) NotificationAlertsPost(params *NotificationAlertsPostParams) (*NotificationAlertsPostCreated, error) {
+func (a *Client) NotificationAlertsPost(params *NotificationAlertsPostParams, authInfo runtime.ClientAuthInfoWriter) (*NotificationAlertsPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNotificationAlertsPostParams()
@@ -38,11 +38,12 @@ func (a *Client) NotificationAlertsPost(params *NotificationAlertsPostParams) (*
 		ID:                 "notificationAlertsPost",
 		Method:             "POST",
 		PathPattern:        "/notification/alerts",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NotificationAlertsPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

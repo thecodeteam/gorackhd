@@ -32,11 +32,11 @@ import (
 	"github.com/spiegela/gorackhd/client/workflows"
 )
 
-// Default rackhd HTTP client.
+// Default monorail HTTP client.
 var Default = NewHTTPClient(nil)
 
-// NewHTTPClient creates a new rackhd HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *Rackhd {
+// NewHTTPClient creates a new monorail HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *Monorail {
 	if formats == nil {
 		formats = strfmt.Default
 	}
@@ -44,9 +44,9 @@ func NewHTTPClient(formats strfmt.Registry) *Rackhd {
 	return New(transport, formats)
 }
 
-// New creates a new rackhd client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Rackhd {
-	cli := new(Rackhd)
+// New creates a new monorail client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *Monorail {
+	cli := new(Monorail)
 	cli.Transport = transport
 
 	cli.Catalogs = catalogs.New(transport, formats)
@@ -94,8 +94,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Rackhd {
 	return cli
 }
 
-// Rackhd is a client for rackhd
-type Rackhd struct {
+// Monorail is a client for monorail
+type Monorail struct {
 	Catalogs *catalogs.Client
 
 	Config *config.Client
@@ -142,7 +142,7 @@ type Rackhd struct {
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *Rackhd) SetTransport(transport runtime.ClientTransport) {
+func (c *Monorail) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
 	c.Catalogs.SetTransport(transport)

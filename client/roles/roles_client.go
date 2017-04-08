@@ -27,7 +27,7 @@ AddRole posts a new role
 
 Create a new role and store it.
 */
-func (a *Client) AddRole(params *AddRoleParams) (*AddRoleCreated, error) {
+func (a *Client) AddRole(params *AddRoleParams, authInfo runtime.ClientAuthInfoWriter) (*AddRoleCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddRoleParams()
@@ -37,11 +37,12 @@ func (a *Client) AddRole(params *AddRoleParams) (*AddRoleCreated, error) {
 		ID:                 "addRole",
 		Method:             "POST",
 		PathPattern:        "/roles",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &AddRoleReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ GetRole gets a role
 
 Get information about the specified role.
 */
-func (a *Client) GetRole(params *GetRoleParams) (*GetRoleOK, error) {
+func (a *Client) GetRole(params *GetRoleParams, authInfo runtime.ClientAuthInfoWriter) (*GetRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetRoleParams()
@@ -64,11 +65,12 @@ func (a *Client) GetRole(params *GetRoleParams) (*GetRoleOK, error) {
 		ID:                 "getRole",
 		Method:             "GET",
 		PathPattern:        "/roles/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetRoleReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ ListRoles gets the list of roles
 
 Get the list of roles currently stored in the system.
 */
-func (a *Client) ListRoles(params *ListRolesParams) (*ListRolesOK, error) {
+func (a *Client) ListRoles(params *ListRolesParams, authInfo runtime.ClientAuthInfoWriter) (*ListRolesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListRolesParams()
@@ -91,11 +93,12 @@ func (a *Client) ListRoles(params *ListRolesParams) (*ListRolesOK, error) {
 		ID:                 "listRoles",
 		Method:             "GET",
 		PathPattern:        "/roles",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ListRolesReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ ModifyRole patches a role
 
 Modify the properties of a role.
 */
-func (a *Client) ModifyRole(params *ModifyRoleParams) (*ModifyRoleOK, error) {
+func (a *Client) ModifyRole(params *ModifyRoleParams, authInfo runtime.ClientAuthInfoWriter) (*ModifyRoleOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewModifyRoleParams()
@@ -118,11 +121,12 @@ func (a *Client) ModifyRole(params *ModifyRoleParams) (*ModifyRoleOK, error) {
 		ID:                 "modifyRole",
 		Method:             "PATCH",
 		PathPattern:        "/roles/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ModifyRoleReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ RemoveRole deletes a role
 
 Delete the specified Role.
 */
-func (a *Client) RemoveRole(params *RemoveRoleParams) (*RemoveRoleNoContent, error) {
+func (a *Client) RemoveRole(params *RemoveRoleParams, authInfo runtime.ClientAuthInfoWriter) (*RemoveRoleNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRemoveRoleParams()
@@ -145,11 +149,12 @@ func (a *Client) RemoveRole(params *RemoveRoleParams) (*RemoveRoleNoContent, err
 		ID:                 "removeRole",
 		Method:             "DELETE",
 		PathPattern:        "/roles/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &RemoveRoleReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

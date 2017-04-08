@@ -172,14 +172,14 @@ func (o *ListUsersDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*ListUsersUnauthorizedBodyBody list users unauthorized body body
-
-swagger:model ListUsersUnauthorizedBodyBody
-*/
-type ListUsersUnauthorizedBodyBody interface{}
-
 /*ListUsersForbiddenBodyBody list users forbidden body body
 
 swagger:model ListUsersForbiddenBodyBody
 */
 type ListUsersForbiddenBodyBody interface{}
+
+/*ListUsersUnauthorizedBodyBody list users unauthorized body body
+
+swagger:model ListUsersUnauthorizedBodyBody
+*/
+type ListUsersUnauthorizedBodyBody interface{}

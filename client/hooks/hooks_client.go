@@ -27,7 +27,7 @@ HooksDelByID deletes a hook
 
 Delete a hook based on hook id.
 */
-func (a *Client) HooksDelByID(params *HooksDelByIDParams) (*HooksDelByIDNoContent, error) {
+func (a *Client) HooksDelByID(params *HooksDelByIDParams, authInfo runtime.ClientAuthInfoWriter) (*HooksDelByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHooksDelByIDParams()
@@ -37,11 +37,12 @@ func (a *Client) HooksDelByID(params *HooksDelByIDParams) (*HooksDelByIDNoConten
 		ID:                 "hooksDelById",
 		Method:             "DELETE",
 		PathPattern:        "/hooks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &HooksDelByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ HooksGetAll gets all hooks
 
 Get all hooks
 */
-func (a *Client) HooksGetAll(params *HooksGetAllParams) (*HooksGetAllOK, error) {
+func (a *Client) HooksGetAll(params *HooksGetAllParams, authInfo runtime.ClientAuthInfoWriter) (*HooksGetAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHooksGetAllParams()
@@ -64,11 +65,12 @@ func (a *Client) HooksGetAll(params *HooksGetAllParams) (*HooksGetAllOK, error) 
 		ID:                 "hooksGetAll",
 		Method:             "GET",
 		PathPattern:        "/hooks",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &HooksGetAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ HooksGetByID gets a hook
 
 Get hook by id
 */
-func (a *Client) HooksGetByID(params *HooksGetByIDParams) (*HooksGetByIDOK, error) {
+func (a *Client) HooksGetByID(params *HooksGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*HooksGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHooksGetByIDParams()
@@ -91,11 +93,12 @@ func (a *Client) HooksGetByID(params *HooksGetByIDParams) (*HooksGetByIDOK, erro
 		ID:                 "hooksGetById",
 		Method:             "GET",
 		PathPattern:        "/hooks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &HooksGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ HooksPatchByID patches a hook
 
 Modify the properties of a hook.
 */
-func (a *Client) HooksPatchByID(params *HooksPatchByIDParams) (*HooksPatchByIDOK, error) {
+func (a *Client) HooksPatchByID(params *HooksPatchByIDParams, authInfo runtime.ClientAuthInfoWriter) (*HooksPatchByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHooksPatchByIDParams()
@@ -118,11 +121,12 @@ func (a *Client) HooksPatchByID(params *HooksPatchByIDParams) (*HooksPatchByIDOK
 		ID:                 "hooksPatchById",
 		Method:             "PATCH",
 		PathPattern:        "/hooks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &HooksPatchByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ HooksPost posts a hook
 
 Create a new hook.
 */
-func (a *Client) HooksPost(params *HooksPostParams) (*HooksPostCreated, error) {
+func (a *Client) HooksPost(params *HooksPostParams, authInfo runtime.ClientAuthInfoWriter) (*HooksPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewHooksPostParams()
@@ -145,11 +149,12 @@ func (a *Client) HooksPost(params *HooksPostParams) (*HooksPostCreated, error) {
 		ID:                 "hooksPost",
 		Method:             "POST",
 		PathPattern:        "/hooks",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &HooksPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

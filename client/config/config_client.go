@@ -27,7 +27,7 @@ ConfigGet gets server configuration
 
 Get the RackHD server configuration properties.
 */
-func (a *Client) ConfigGet(params *ConfigGetParams) (*ConfigGetOK, error) {
+func (a *Client) ConfigGet(params *ConfigGetParams, authInfo runtime.ClientAuthInfoWriter) (*ConfigGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewConfigGetParams()
@@ -37,11 +37,12 @@ func (a *Client) ConfigGet(params *ConfigGetParams) (*ConfigGetOK, error) {
 		ID:                 "configGet",
 		Method:             "GET",
 		PathPattern:        "/config",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ConfigGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ ConfigPatch patches server configuration
 
 Modify the RackHD server configuration.
 */
-func (a *Client) ConfigPatch(params *ConfigPatchParams) (*ConfigPatchOK, error) {
+func (a *Client) ConfigPatch(params *ConfigPatchParams, authInfo runtime.ClientAuthInfoWriter) (*ConfigPatchOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewConfigPatchParams()
@@ -64,11 +65,12 @@ func (a *Client) ConfigPatch(params *ConfigPatchParams) (*ConfigPatchOK, error) 
 		ID:                 "configPatch",
 		Method:             "PATCH",
 		PathPattern:        "/config",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ConfigPatchReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

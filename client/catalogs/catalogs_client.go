@@ -27,7 +27,7 @@ CatalogsGet gets all catalogs
 
 Get an array of catalog data describing all hardware in the system.
 */
-func (a *Client) CatalogsGet(params *CatalogsGetParams) (*CatalogsGetOK, error) {
+func (a *Client) CatalogsGet(params *CatalogsGetParams, authInfo runtime.ClientAuthInfoWriter) (*CatalogsGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCatalogsGetParams()
@@ -37,11 +37,12 @@ func (a *Client) CatalogsGet(params *CatalogsGetParams) (*CatalogsGetOK, error) 
 		ID:                 "catalogsGet",
 		Method:             "GET",
 		PathPattern:        "/catalogs",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &CatalogsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ CatalogsIDGet gets a catalog
 
 Get a catalog based on its catalog identifier.
 */
-func (a *Client) CatalogsIDGet(params *CatalogsIDGetParams) (*CatalogsIDGetOK, error) {
+func (a *Client) CatalogsIDGet(params *CatalogsIDGetParams, authInfo runtime.ClientAuthInfoWriter) (*CatalogsIDGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCatalogsIDGetParams()
@@ -64,11 +65,12 @@ func (a *Client) CatalogsIDGet(params *CatalogsIDGetParams) (*CatalogsIDGetOK, e
 		ID:                 "catalogsIdGet",
 		Method:             "GET",
 		PathPattern:        "/catalogs/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &CatalogsIDGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

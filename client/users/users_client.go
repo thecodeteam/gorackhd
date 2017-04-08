@@ -27,7 +27,7 @@ AddUser posts a new user
 
 Create a new user and store it.
 */
-func (a *Client) AddUser(params *AddUserParams) (*AddUserCreated, error) {
+func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoWriter) (*AddUserCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddUserParams()
@@ -37,11 +37,12 @@ func (a *Client) AddUser(params *AddUserParams) (*AddUserCreated, error) {
 		ID:                 "addUser",
 		Method:             "POST",
 		PathPattern:        "/users",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &AddUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ GetUser gets the specified user
 
 Get information about the specified user.
 */
-func (a *Client) GetUser(params *GetUserParams) (*GetUserOK, error) {
+func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter) (*GetUserOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetUserParams()
@@ -64,11 +65,12 @@ func (a *Client) GetUser(params *GetUserParams) (*GetUserOK, error) {
 		ID:                 "getUser",
 		Method:             "GET",
 		PathPattern:        "/users/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ ListUsers gets the list of users
 
 Get the list of users currently stored in the system.
 */
-func (a *Client) ListUsers(params *ListUsersParams) (*ListUsersOK, error) {
+func (a *Client) ListUsers(params *ListUsersParams, authInfo runtime.ClientAuthInfoWriter) (*ListUsersOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListUsersParams()
@@ -91,11 +93,12 @@ func (a *Client) ListUsers(params *ListUsersParams) (*ListUsersOK, error) {
 		ID:                 "listUsers",
 		Method:             "GET",
 		PathPattern:        "/users",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ListUsersReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ ModifyUser patches the specified user
 
 Modify the properties of a user.
 */
-func (a *Client) ModifyUser(params *ModifyUserParams) (*ModifyUserOK, error) {
+func (a *Client) ModifyUser(params *ModifyUserParams, authInfo runtime.ClientAuthInfoWriter) (*ModifyUserOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewModifyUserParams()
@@ -118,11 +121,12 @@ func (a *Client) ModifyUser(params *ModifyUserParams) (*ModifyUserOK, error) {
 		ID:                 "modifyUser",
 		Method:             "PATCH",
 		PathPattern:        "/users/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ModifyUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ RemoveUser deletes the specified user
 
 Delete the specified user.
 */
-func (a *Client) RemoveUser(params *RemoveUserParams) (*RemoveUserNoContent, error) {
+func (a *Client) RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAuthInfoWriter) (*RemoveUserNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewRemoveUserParams()
@@ -145,11 +149,12 @@ func (a *Client) RemoveUser(params *RemoveUserParams) (*RemoveUserNoContent, err
 		ID:                 "removeUser",
 		Method:             "DELETE",
 		PathPattern:        "/users/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &RemoveUserReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

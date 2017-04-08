@@ -28,7 +28,7 @@ FilesGetAllStatic lists all static files
 List all static files
 
 */
-func (a *Client) FilesGetAllStatic(params *FilesGetAllStaticParams) (*FilesGetAllStaticOK, error) {
+func (a *Client) FilesGetAllStatic(params *FilesGetAllStaticParams, authInfo runtime.ClientAuthInfoWriter) (*FilesGetAllStaticOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesGetAllStaticParams()
@@ -38,11 +38,12 @@ func (a *Client) FilesGetAllStatic(params *FilesGetAllStaticParams) (*FilesGetAl
 		ID:                 "filesGetAllStatic",
 		Method:             "GET",
 		PathPattern:        "/files/static/list",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesGetAllStaticReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

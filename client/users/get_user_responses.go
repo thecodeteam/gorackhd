@@ -174,14 +174,14 @@ func (o *GetUserDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*GetUserForbiddenBodyBody get user forbidden body body
-
-swagger:model GetUserForbiddenBodyBody
-*/
-type GetUserForbiddenBodyBody interface{}
-
 /*GetUserUnauthorizedBodyBody get user unauthorized body body
 
 swagger:model GetUserUnauthorizedBodyBody
 */
 type GetUserUnauthorizedBodyBody interface{}
+
+/*GetUserForbiddenBodyBody get user forbidden body body
+
+swagger:model GetUserForbiddenBodyBody
+*/
+type GetUserForbiddenBodyBody interface{}

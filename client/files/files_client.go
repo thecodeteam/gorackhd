@@ -27,7 +27,7 @@ FilesDelete deletes a file
 
 Delete a file based on uuid.
 */
-func (a *Client) FilesDelete(params *FilesDeleteParams) (*FilesDeleteNoContent, error) {
+func (a *Client) FilesDelete(params *FilesDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*FilesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesDeleteParams()
@@ -37,11 +37,12 @@ func (a *Client) FilesDelete(params *FilesDeleteParams) (*FilesDeleteNoContent, 
 		ID:                 "filesDelete",
 		Method:             "DELETE",
 		PathPattern:        "/files/{fileidentifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ FilesGet gets a file
 
 Get file based on uuid or file name.
 */
-func (a *Client) FilesGet(params *FilesGetParams) (*FilesGetOK, error) {
+func (a *Client) FilesGet(params *FilesGetParams, authInfo runtime.ClientAuthInfoWriter) (*FilesGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesGetParams()
@@ -64,11 +65,12 @@ func (a *Client) FilesGet(params *FilesGetParams) (*FilesGetOK, error) {
 		ID:                 "filesGet",
 		Method:             "GET",
 		PathPattern:        "/files/{fileidentifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ FilesGetAll gets all files
 
 Get a list of all files currently stored.
 */
-func (a *Client) FilesGetAll(params *FilesGetAllParams) (*FilesGetAllOK, error) {
+func (a *Client) FilesGetAll(params *FilesGetAllParams, authInfo runtime.ClientAuthInfoWriter) (*FilesGetAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesGetAllParams()
@@ -91,11 +93,12 @@ func (a *Client) FilesGetAll(params *FilesGetAllParams) (*FilesGetAllOK, error) 
 		ID:                 "filesGetAll",
 		Method:             "GET",
 		PathPattern:        "/files",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesGetAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ FilesMd5Get gets md5sum of file
 
 Get md5sum based on file name.
 */
-func (a *Client) FilesMd5Get(params *FilesMd5GetParams) (*FilesMd5GetOK, error) {
+func (a *Client) FilesMd5Get(params *FilesMd5GetParams, authInfo runtime.ClientAuthInfoWriter) (*FilesMd5GetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesMd5GetParams()
@@ -118,11 +121,12 @@ func (a *Client) FilesMd5Get(params *FilesMd5GetParams) (*FilesMd5GetOK, error) 
 		ID:                 "filesMd5Get",
 		Method:             "GET",
 		PathPattern:        "/files/{filename}/md5",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesMd5GetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ FilesMetadataGet gets file metadata
 
 Get file metadata by file name.
 */
-func (a *Client) FilesMetadataGet(params *FilesMetadataGetParams) (*FilesMetadataGetOK, error) {
+func (a *Client) FilesMetadataGet(params *FilesMetadataGetParams, authInfo runtime.ClientAuthInfoWriter) (*FilesMetadataGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesMetadataGetParams()
@@ -145,11 +149,12 @@ func (a *Client) FilesMetadataGet(params *FilesMetadataGetParams) (*FilesMetadat
 		ID:                 "filesMetadataGet",
 		Method:             "GET",
 		PathPattern:        "/files/{filename}/metadata",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesMetadataGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -162,7 +167,7 @@ FilesPut puts a file
 
 Put file based on its filename. Returns the uuid of the stored file.
 */
-func (a *Client) FilesPut(params *FilesPutParams) (*FilesPutCreated, error) {
+func (a *Client) FilesPut(params *FilesPutParams, authInfo runtime.ClientAuthInfoWriter) (*FilesPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewFilesPutParams()
@@ -172,11 +177,12 @@ func (a *Client) FilesPut(params *FilesPutParams) (*FilesPutCreated, error) {
 		ID:                 "filesPut",
 		Method:             "PUT",
 		PathPattern:        "/files/{fileidentifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/octet-stream", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &FilesPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

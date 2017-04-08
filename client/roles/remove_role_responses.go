@@ -166,14 +166,14 @@ func (o *RemoveRoleDefault) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*RemoveRoleForbiddenBodyBody remove role forbidden body body
-
-swagger:model RemoveRoleForbiddenBodyBody
-*/
-type RemoveRoleForbiddenBodyBody interface{}
-
 /*RemoveRoleUnauthorizedBodyBody remove role unauthorized body body
 
 swagger:model RemoveRoleUnauthorizedBodyBody
 */
 type RemoveRoleUnauthorizedBodyBody interface{}
+
+/*RemoveRoleForbiddenBodyBody remove role forbidden body body
+
+swagger:model RemoveRoleForbiddenBodyBody
+*/
+type RemoveRoleForbiddenBodyBody interface{}

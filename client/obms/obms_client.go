@@ -27,7 +27,7 @@ ObmsDefinitionsGetAll gets list of o b m services
 
 Get a list of OBM schemas, which define the properties required to create OBM settings.
 */
-func (a *Client) ObmsDefinitionsGetAll(params *ObmsDefinitionsGetAllParams) (*ObmsDefinitionsGetAllOK, error) {
+func (a *Client) ObmsDefinitionsGetAll(params *ObmsDefinitionsGetAllParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsDefinitionsGetAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsDefinitionsGetAllParams()
@@ -37,11 +37,12 @@ func (a *Client) ObmsDefinitionsGetAll(params *ObmsDefinitionsGetAllParams) (*Ob
 		ID:                 "obmsDefinitionsGetAll",
 		Method:             "GET",
 		PathPattern:        "/obms/definitions",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsDefinitionsGetAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ ObmsDefinitionsGetByName gets an o b m service definition
 
 Get the contents of the specified OBM service schema.
 */
-func (a *Client) ObmsDefinitionsGetByName(params *ObmsDefinitionsGetByNameParams) (*ObmsDefinitionsGetByNameOK, error) {
+func (a *Client) ObmsDefinitionsGetByName(params *ObmsDefinitionsGetByNameParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsDefinitionsGetByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsDefinitionsGetByNameParams()
@@ -64,11 +65,12 @@ func (a *Client) ObmsDefinitionsGetByName(params *ObmsDefinitionsGetByNameParams
 		ID:                 "obmsDefinitionsGetByName",
 		Method:             "GET",
 		PathPattern:        "/obms/definitions/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsDefinitionsGetByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ ObmsDeleteByID deletes o b m settings
 
 Delete the OBM settings with the specified identifier.
 */
-func (a *Client) ObmsDeleteByID(params *ObmsDeleteByIDParams) (*ObmsDeleteByIDNoContent, error) {
+func (a *Client) ObmsDeleteByID(params *ObmsDeleteByIDParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsDeleteByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsDeleteByIDParams()
@@ -91,11 +93,12 @@ func (a *Client) ObmsDeleteByID(params *ObmsDeleteByIDParams) (*ObmsDeleteByIDNo
 		ID:                 "obmsDeleteById",
 		Method:             "DELETE",
 		PathPattern:        "/obms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsDeleteByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -109,7 +112,7 @@ ObmsGet gets list of all o b m service instances
 Get a list of all OBM settings that have been associated with nodes. OBM settings allow RackHD to communicate with the BMC of a node.
 
 */
-func (a *Client) ObmsGet(params *ObmsGetParams) (*ObmsGetOK, error) {
+func (a *Client) ObmsGet(params *ObmsGetParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsGetParams()
@@ -119,11 +122,12 @@ func (a *Client) ObmsGet(params *ObmsGetParams) (*ObmsGetOK, error) {
 		ID:                 "obmsGet",
 		Method:             "GET",
 		PathPattern:        "/obms",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ ObmsGetByID gets an o b m service
 
 Get the OBM settings associated with the specified identifier
 */
-func (a *Client) ObmsGetByID(params *ObmsGetByIDParams) (*ObmsGetByIDOK, error) {
+func (a *Client) ObmsGetByID(params *ObmsGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsGetByIDParams()
@@ -146,11 +150,12 @@ func (a *Client) ObmsGetByID(params *ObmsGetByIDParams) (*ObmsGetByIDOK, error) 
 		ID:                 "obmsGetById",
 		Method:             "GET",
 		PathPattern:        "/obms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -163,7 +168,7 @@ ObmsPatchByID patches o b m settings
 
 Update the properties of the OBM settings with the specified identifier.
 */
-func (a *Client) ObmsPatchByID(params *ObmsPatchByIDParams) (*ObmsPatchByIDOK, error) {
+func (a *Client) ObmsPatchByID(params *ObmsPatchByIDParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsPatchByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsPatchByIDParams()
@@ -173,11 +178,12 @@ func (a *Client) ObmsPatchByID(params *ObmsPatchByIDParams) (*ObmsPatchByIDOK, e
 		ID:                 "obmsPatchById",
 		Method:             "PATCH",
 		PathPattern:        "/obms/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsPatchByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -190,7 +196,7 @@ ObmsPostLed sets identify light status
 
 Enable or disable identify LED on node through OBM, if supported.
 */
-func (a *Client) ObmsPostLed(params *ObmsPostLedParams) (*ObmsPostLedCreated, error) {
+func (a *Client) ObmsPostLed(params *ObmsPostLedParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsPostLedCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsPostLedParams()
@@ -200,11 +206,12 @@ func (a *Client) ObmsPostLed(params *ObmsPostLedParams) (*ObmsPostLedCreated, er
 		ID:                 "obmsPostLed",
 		Method:             "POST",
 		PathPattern:        "/obms/led",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsPostLedReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -217,7 +224,7 @@ ObmsPut puts an o b m service
 
 Create or update the specified OBM service, and associate it with a node.
 */
-func (a *Client) ObmsPut(params *ObmsPutParams) (*ObmsPutCreated, error) {
+func (a *Client) ObmsPut(params *ObmsPutParams, authInfo runtime.ClientAuthInfoWriter) (*ObmsPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewObmsPutParams()
@@ -227,11 +234,12 @@ func (a *Client) ObmsPut(params *ObmsPutParams) (*ObmsPutCreated, error) {
 		ID:                 "obmsPut",
 		Method:             "PUT",
 		PathPattern:        "/obms",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ObmsPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

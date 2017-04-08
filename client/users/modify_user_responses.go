@@ -172,12 +172,6 @@ func (o *ModifyUserDefault) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*ModifyUserUnauthorizedBodyBody modify user unauthorized body body
-
-swagger:model ModifyUserUnauthorizedBodyBody
-*/
-type ModifyUserUnauthorizedBodyBody interface{}
-
 /*ModifyUserForbiddenBodyBody modify user forbidden body body
 
 swagger:model ModifyUserForbiddenBodyBody
@@ -189,3 +183,9 @@ type ModifyUserForbiddenBodyBody interface{}
 swagger:model ModifyUserOKBodyBody
 */
 type ModifyUserOKBodyBody interface{}
+
+/*ModifyUserUnauthorizedBodyBody modify user unauthorized body body
+
+swagger:model ModifyUserUnauthorizedBodyBody
+*/
+type ModifyUserUnauthorizedBodyBody interface{}

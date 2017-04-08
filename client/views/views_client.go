@@ -27,7 +27,7 @@ ViewsDelete deletes the specified view
 
 Delete a view with the specified name.
 */
-func (a *Client) ViewsDelete(params *ViewsDeleteParams) (*ViewsDeleteNoContent, error) {
+func (a *Client) ViewsDelete(params *ViewsDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*ViewsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewsDeleteParams()
@@ -37,11 +37,12 @@ func (a *Client) ViewsDelete(params *ViewsDeleteParams) (*ViewsDeleteNoContent, 
 		ID:                 "viewsDelete",
 		Method:             "DELETE",
 		PathPattern:        "/views/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ViewsDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -55,7 +56,7 @@ ViewsGet gets all views
 Retrieve a list of all views. Views are used to render the output of various system resources, such as nodes, pollers, and OBM settings.
 
 */
-func (a *Client) ViewsGet(params *ViewsGetParams) (*ViewsGetOK, error) {
+func (a *Client) ViewsGet(params *ViewsGetParams, authInfo runtime.ClientAuthInfoWriter) (*ViewsGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewsGetParams()
@@ -65,11 +66,12 @@ func (a *Client) ViewsGet(params *ViewsGetParams) (*ViewsGetOK, error) {
 		ID:                 "viewsGet",
 		Method:             "GET",
 		PathPattern:        "/views",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ViewsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -82,7 +84,7 @@ ViewsGetByID gets the specified view
 
 Get the view with the specified file name.
 */
-func (a *Client) ViewsGetByID(params *ViewsGetByIDParams) (*ViewsGetByIDOK, error) {
+func (a *Client) ViewsGetByID(params *ViewsGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*ViewsGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewsGetByIDParams()
@@ -92,11 +94,12 @@ func (a *Client) ViewsGetByID(params *ViewsGetByIDParams) (*ViewsGetByIDOK, erro
 		ID:                 "viewsGetById",
 		Method:             "GET",
 		PathPattern:        "/views/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ViewsGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -109,7 +112,7 @@ ViewsPut puts the specified view
 
 Create or update a view with the specified name.
 */
-func (a *Client) ViewsPut(params *ViewsPutParams) (*ViewsPutCreated, error) {
+func (a *Client) ViewsPut(params *ViewsPutParams, authInfo runtime.ClientAuthInfoWriter) (*ViewsPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewViewsPutParams()
@@ -119,11 +122,12 @@ func (a *Client) ViewsPut(params *ViewsPutParams) (*ViewsPutCreated, error) {
 		ID:                 "viewsPut",
 		Method:             "PUT",
 		PathPattern:        "/views/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/octet-stream", "text/plain"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ViewsPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

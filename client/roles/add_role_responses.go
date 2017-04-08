@@ -172,6 +172,12 @@ func (o *AddRoleDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
+/*AddRoleCreatedBodyBody add role created body body
+
+swagger:model AddRoleCreatedBodyBody
+*/
+type AddRoleCreatedBodyBody interface{}
+
 /*AddRoleUnauthorizedBodyBody add role unauthorized body body
 
 swagger:model AddRoleUnauthorizedBodyBody
@@ -183,9 +189,3 @@ type AddRoleUnauthorizedBodyBody interface{}
 swagger:model AddRoleForbiddenBodyBody
 */
 type AddRoleForbiddenBodyBody interface{}
-
-/*AddRoleCreatedBodyBody add role created body body
-
-swagger:model AddRoleCreatedBodyBody
-*/
-type AddRoleCreatedBodyBody interface{}

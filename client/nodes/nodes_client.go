@@ -27,7 +27,7 @@ NodesAddRelations adds relationships between nodes
 
 Edit the relations fields of a specifc node to add one more relationships.
 */
-func (a *Client) NodesAddRelations(params *NodesAddRelationsParams) (*NodesAddRelationsOK, error) {
+func (a *Client) NodesAddRelations(params *NodesAddRelationsParams, authInfo runtime.ClientAuthInfoWriter) (*NodesAddRelationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesAddRelationsParams()
@@ -37,11 +37,12 @@ func (a *Client) NodesAddRelations(params *NodesAddRelationsParams) (*NodesAddRe
 		ID:                 "nodesAddRelations",
 		Method:             "PUT",
 		PathPattern:        "/nodes/{identifier}/relations",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesAddRelationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ NodesDelByID deletes a node
 
 Delete the specified node.
 */
-func (a *Client) NodesDelByID(params *NodesDelByIDParams) (*NodesDelByIDNoContent, error) {
+func (a *Client) NodesDelByID(params *NodesDelByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesDelByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesDelByIDParams()
@@ -64,11 +65,12 @@ func (a *Client) NodesDelByID(params *NodesDelByIDParams) (*NodesDelByIDNoConten
 		ID:                 "nodesDelById",
 		Method:             "DELETE",
 		PathPattern:        "/nodes/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesDelByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ NodesDelRelations removes relations from a node
 
 Edit the relations fields of nodes to remove specific relationships
 */
-func (a *Client) NodesDelRelations(params *NodesDelRelationsParams) (*NodesDelRelationsNoContent, error) {
+func (a *Client) NodesDelRelations(params *NodesDelRelationsParams, authInfo runtime.ClientAuthInfoWriter) (*NodesDelRelationsNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesDelRelationsParams()
@@ -91,11 +93,12 @@ func (a *Client) NodesDelRelations(params *NodesDelRelationsParams) (*NodesDelRe
 		ID:                 "nodesDelRelations",
 		Method:             "DELETE",
 		PathPattern:        "/nodes/{identifier}/relations",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesDelRelationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ NodesDelTagByID deletes a tag from a node
 
 Delete the specified tag from the specified node.
 */
-func (a *Client) NodesDelTagByID(params *NodesDelTagByIDParams) (*NodesDelTagByIDNoContent, error) {
+func (a *Client) NodesDelTagByID(params *NodesDelTagByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesDelTagByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesDelTagByIDParams()
@@ -118,11 +121,12 @@ func (a *Client) NodesDelTagByID(params *NodesDelTagByIDParams) (*NodesDelTagByI
 		ID:                 "nodesDelTagById",
 		Method:             "DELETE",
 		PathPattern:        "/nodes/{identifier}/tags/{tagName}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesDelTagByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ NodesGetAll gets a list of nodes
 
 Get a list of all currently stored nodes.
 */
-func (a *Client) NodesGetAll(params *NodesGetAllParams) (*NodesGetAllOK, error) {
+func (a *Client) NodesGetAll(params *NodesGetAllParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetAllOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetAllParams()
@@ -145,11 +149,12 @@ func (a *Client) NodesGetAll(params *NodesGetAllParams) (*NodesGetAllOK, error) 
 		ID:                 "nodesGetAll",
 		Method:             "GET",
 		PathPattern:        "/nodes",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetAllReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -162,7 +167,7 @@ NodesGetByID gets a node
 
 Get all information on the specified node.
 */
-func (a *Client) NodesGetByID(params *NodesGetByIDParams) (*NodesGetByIDOK, error) {
+func (a *Client) NodesGetByID(params *NodesGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetByIDParams()
@@ -172,11 +177,12 @@ func (a *Client) NodesGetByID(params *NodesGetByIDParams) (*NodesGetByIDOK, erro
 		ID:                 "nodesGetById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -189,7 +195,7 @@ NodesGetCatalogByID gets the catalogs for a node
 
 Get a list of all of the catalogs for the specified node.
 */
-func (a *Client) NodesGetCatalogByID(params *NodesGetCatalogByIDParams) (*NodesGetCatalogByIDOK, error) {
+func (a *Client) NodesGetCatalogByID(params *NodesGetCatalogByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetCatalogByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetCatalogByIDParams()
@@ -199,11 +205,12 @@ func (a *Client) NodesGetCatalogByID(params *NodesGetCatalogByIDParams) (*NodesG
 		ID:                 "nodesGetCatalogById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/catalogs",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetCatalogByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -216,7 +223,7 @@ NodesGetCatalogSourceByID gets the catalogs for a node by source
 
 Get a list of all of the catalogs for the specified node, containing the specified value of the source catalog property.
 */
-func (a *Client) NodesGetCatalogSourceByID(params *NodesGetCatalogSourceByIDParams) (*NodesGetCatalogSourceByIDOK, error) {
+func (a *Client) NodesGetCatalogSourceByID(params *NodesGetCatalogSourceByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetCatalogSourceByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetCatalogSourceByIDParams()
@@ -226,11 +233,12 @@ func (a *Client) NodesGetCatalogSourceByID(params *NodesGetCatalogSourceByIDPara
 		ID:                 "nodesGetCatalogSourceById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/catalogs/{source}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetCatalogSourceByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -243,7 +251,7 @@ NodesGetObmsByNodeID gets all o b m services
 
 Get all the OBM settings for the specified node.
 */
-func (a *Client) NodesGetObmsByNodeID(params *NodesGetObmsByNodeIDParams) (*NodesGetObmsByNodeIDOK, error) {
+func (a *Client) NodesGetObmsByNodeID(params *NodesGetObmsByNodeIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetObmsByNodeIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetObmsByNodeIDParams()
@@ -253,11 +261,12 @@ func (a *Client) NodesGetObmsByNodeID(params *NodesGetObmsByNodeIDParams) (*Node
 		ID:                 "nodesGetObmsByNodeId",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/obm",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetObmsByNodeIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -270,7 +279,7 @@ NodesGetPollersByID gets the pollers for a node
 
 Get a list of all of the pollers for the specified node.
 */
-func (a *Client) NodesGetPollersByID(params *NodesGetPollersByIDParams) (*NodesGetPollersByIDOK, error) {
+func (a *Client) NodesGetPollersByID(params *NodesGetPollersByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetPollersByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetPollersByIDParams()
@@ -280,11 +289,12 @@ func (a *Client) NodesGetPollersByID(params *NodesGetPollersByIDParams) (*NodesG
 		ID:                 "nodesGetPollersById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/pollers",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetPollersByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -297,7 +307,7 @@ NodesGetRelations gets a nodes relations
 
 Get the relations field of the specified node
 */
-func (a *Client) NodesGetRelations(params *NodesGetRelationsParams) (*NodesGetRelationsOK, error) {
+func (a *Client) NodesGetRelations(params *NodesGetRelationsParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetRelationsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetRelationsParams()
@@ -307,11 +317,12 @@ func (a *Client) NodesGetRelations(params *NodesGetRelationsParams) (*NodesGetRe
 		ID:                 "nodesGetRelations",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/relations",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetRelationsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -324,7 +335,7 @@ NodesGetSSHByID gets the ssh settings for a node
 
 Get all of the ssh settings associated with the specified node.
 */
-func (a *Client) NodesGetSSHByID(params *NodesGetSSHByIDParams) (*NodesGetSSHByIDOK, error) {
+func (a *Client) NodesGetSSHByID(params *NodesGetSSHByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetSSHByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetSSHByIDParams()
@@ -334,11 +345,12 @@ func (a *Client) NodesGetSSHByID(params *NodesGetSSHByIDParams) (*NodesGetSSHByI
 		ID:                 "nodesGetSshById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/ssh",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetSSHByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -351,7 +363,7 @@ NodesGetTagsByID gets node tags
 
 Get a list of all tags associated with the specified node.
 */
-func (a *Client) NodesGetTagsByID(params *NodesGetTagsByIDParams) (*NodesGetTagsByIDOK, error) {
+func (a *Client) NodesGetTagsByID(params *NodesGetTagsByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetTagsByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetTagsByIDParams()
@@ -361,11 +373,12 @@ func (a *Client) NodesGetTagsByID(params *NodesGetTagsByIDParams) (*NodesGetTags
 		ID:                 "nodesGetTagsById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/tags",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetTagsByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -379,7 +392,7 @@ NodesGetWorkflowByID gets all workflows for a node
 Get a list of all workflows that have run against the specified node, or are currently running against the node.
 
 */
-func (a *Client) NodesGetWorkflowByID(params *NodesGetWorkflowByIDParams) (*NodesGetWorkflowByIDOK, error) {
+func (a *Client) NodesGetWorkflowByID(params *NodesGetWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesGetWorkflowByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesGetWorkflowByIDParams()
@@ -389,11 +402,12 @@ func (a *Client) NodesGetWorkflowByID(params *NodesGetWorkflowByIDParams) (*Node
 		ID:                 "nodesGetWorkflowById",
 		Method:             "GET",
 		PathPattern:        "/nodes/{identifier}/workflows",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesGetWorkflowByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -406,7 +420,7 @@ NodesMasterDelTagByID deletes nodes tag
 
 Delete specified tag from all nodes.
 */
-func (a *Client) NodesMasterDelTagByID(params *NodesMasterDelTagByIDParams) (*NodesMasterDelTagByIDNoContent, error) {
+func (a *Client) NodesMasterDelTagByID(params *NodesMasterDelTagByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesMasterDelTagByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesMasterDelTagByIDParams()
@@ -416,11 +430,12 @@ func (a *Client) NodesMasterDelTagByID(params *NodesMasterDelTagByIDParams) (*No
 		ID:                 "nodesMasterDelTagById",
 		Method:             "DELETE",
 		PathPattern:        "/nodes/tags/{tagName}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesMasterDelTagByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -433,7 +448,7 @@ NodesPatchByID patches a node
 
 Modify the properties of the specified node.
 */
-func (a *Client) NodesPatchByID(params *NodesPatchByIDParams) (*NodesPatchByIDOK, error) {
+func (a *Client) NodesPatchByID(params *NodesPatchByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPatchByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPatchByIDParams()
@@ -443,11 +458,12 @@ func (a *Client) NodesPatchByID(params *NodesPatchByIDParams) (*NodesPatchByIDOK
 		ID:                 "nodesPatchById",
 		Method:             "PATCH",
 		PathPattern:        "/nodes/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPatchByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -460,7 +476,7 @@ NodesPatchTagByID patches node tags
 
 Modify the tag(s) associated with the specified node.
 */
-func (a *Client) NodesPatchTagByID(params *NodesPatchTagByIDParams) (*NodesPatchTagByIDOK, error) {
+func (a *Client) NodesPatchTagByID(params *NodesPatchTagByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPatchTagByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPatchTagByIDParams()
@@ -470,11 +486,12 @@ func (a *Client) NodesPatchTagByID(params *NodesPatchTagByIDParams) (*NodesPatch
 		ID:                 "nodesPatchTagById",
 		Method:             "PATCH",
 		PathPattern:        "/nodes/{identifier}/tags",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPatchTagByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -487,7 +504,7 @@ NodesPost posts a node
 
 Create and store a new node manually.
 */
-func (a *Client) NodesPost(params *NodesPostParams) (*NodesPostCreated, error) {
+func (a *Client) NodesPost(params *NodesPostParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPostParams()
@@ -497,11 +514,12 @@ func (a *Client) NodesPost(params *NodesPostParams) (*NodesPostCreated, error) {
 		ID:                 "nodesPost",
 		Method:             "POST",
 		PathPattern:        "/nodes",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -514,7 +532,7 @@ NodesPostSSHByID posts ssh settings
 
 Create the ssh settings associated with the specified node.
 */
-func (a *Client) NodesPostSSHByID(params *NodesPostSSHByIDParams) (*NodesPostSSHByIDCreated, error) {
+func (a *Client) NodesPostSSHByID(params *NodesPostSSHByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPostSSHByIDCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPostSSHByIDParams()
@@ -524,11 +542,12 @@ func (a *Client) NodesPostSSHByID(params *NodesPostSSHByIDParams) (*NodesPostSSH
 		ID:                 "nodesPostSshById",
 		Method:             "POST",
 		PathPattern:        "/nodes/{identifier}/ssh",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPostSSHByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -541,7 +560,7 @@ NodesPostWorkflowByID posts workflow for the node
 
 Run a workflow against for the specified node.
 */
-func (a *Client) NodesPostWorkflowByID(params *NodesPostWorkflowByIDParams) (*NodesPostWorkflowByIDCreated, error) {
+func (a *Client) NodesPostWorkflowByID(params *NodesPostWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPostWorkflowByIDCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPostWorkflowByIDParams()
@@ -551,11 +570,12 @@ func (a *Client) NodesPostWorkflowByID(params *NodesPostWorkflowByIDParams) (*No
 		ID:                 "nodesPostWorkflowById",
 		Method:             "POST",
 		PathPattern:        "/nodes/{identifier}/workflows",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPostWorkflowByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -568,7 +588,7 @@ NodesPutObmsByNodeID puts an o b m service
 
 Create or update the specified OBM service with the associated Node ID
 */
-func (a *Client) NodesPutObmsByNodeID(params *NodesPutObmsByNodeIDParams) (*NodesPutObmsByNodeIDCreated, error) {
+func (a *Client) NodesPutObmsByNodeID(params *NodesPutObmsByNodeIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesPutObmsByNodeIDCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesPutObmsByNodeIDParams()
@@ -578,11 +598,12 @@ func (a *Client) NodesPutObmsByNodeID(params *NodesPutObmsByNodeIDParams) (*Node
 		ID:                 "nodesPutObmsByNodeId",
 		Method:             "PUT",
 		PathPattern:        "/nodes/{identifier}/obm",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesPutObmsByNodeIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -596,7 +617,7 @@ NodesWorkflowActionByID performs an action on a workflow
 Perform an action on a workflow associated with a node. Currently, the cancel action is supported.
 
 */
-func (a *Client) NodesWorkflowActionByID(params *NodesWorkflowActionByIDParams) (*NodesWorkflowActionByIDAccepted, error) {
+func (a *Client) NodesWorkflowActionByID(params *NodesWorkflowActionByIDParams, authInfo runtime.ClientAuthInfoWriter) (*NodesWorkflowActionByIDAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNodesWorkflowActionByIDParams()
@@ -606,11 +627,12 @@ func (a *Client) NodesWorkflowActionByID(params *NodesWorkflowActionByIDParams) 
 		ID:                 "nodesWorkflowActionById",
 		Method:             "PUT",
 		PathPattern:        "/nodes/{identifier}/workflows/action",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &NodesWorkflowActionByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

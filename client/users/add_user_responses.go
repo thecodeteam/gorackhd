@@ -172,6 +172,12 @@ func (o *AddUserDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
+/*AddUserForbiddenBodyBody add user forbidden body body
+
+swagger:model AddUserForbiddenBodyBody
+*/
+type AddUserForbiddenBodyBody interface{}
+
 /*AddUserCreatedBodyBody add user created body body
 
 swagger:model AddUserCreatedBodyBody
@@ -183,9 +189,3 @@ type AddUserCreatedBodyBody interface{}
 swagger:model AddUserUnauthorizedBodyBody
 */
 type AddUserUnauthorizedBodyBody interface{}
-
-/*AddUserForbiddenBodyBody add user forbidden body body
-
-swagger:model AddUserForbiddenBodyBody
-*/
-type AddUserForbiddenBodyBody interface{}

@@ -22,7 +22,7 @@ swagger_deps: $(GLIDE_LOCK) | $(GLIDE)
 	$(GIT) submodule update --init --recursive
 
 $(CLIENT_BINDINGS): swagger_deps
-	cd $(SPEC_DIR) && go run ../../$(VENDORED_SWAGGER_CMD) generate client -f $(SPEC_FILE) -t ../../
+	cd $(SPEC_DIR) && go run ../../$(VENDORED_SWAGGER_CMD) generate client -f $(SPEC_FILE) -t ../../ -A monorail
 
 install: $(CLIENT_BINDINGS)
 	go install -v $$($(GLIDE) nv)

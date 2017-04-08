@@ -27,7 +27,7 @@ GetBootstrap gets tasks bootstrap js
 
 Used internally by the system - get tasks bootstrap.js
 */
-func (a *Client) GetBootstrap(params *GetBootstrapParams) (*GetBootstrapOK, error) {
+func (a *Client) GetBootstrap(params *GetBootstrapParams, authInfo runtime.ClientAuthInfoWriter) (*GetBootstrapOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetBootstrapParams()
@@ -37,11 +37,12 @@ func (a *Client) GetBootstrap(params *GetBootstrapParams) (*GetBootstrapOK, erro
 		ID:                 "getBootstrap",
 		Method:             "GET",
 		PathPattern:        "/tasks/bootstrap.js",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetBootstrapReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ GetTasksByID gets the specified task
 
 Get the specified task.
 */
-func (a *Client) GetTasksByID(params *GetTasksByIDParams) (*GetTasksByIDOK, error) {
+func (a *Client) GetTasksByID(params *GetTasksByIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetTasksByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetTasksByIDParams()
@@ -64,11 +65,12 @@ func (a *Client) GetTasksByID(params *GetTasksByIDParams) (*GetTasksByIDOK, erro
 		ID:                 "getTasksById",
 		Method:             "GET",
 		PathPattern:        "/tasks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetTasksByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ PostTaskByID posts a task
 
 Start the specified task
 */
-func (a *Client) PostTaskByID(params *PostTaskByIDParams) (*PostTaskByIDCreated, error) {
+func (a *Client) PostTaskByID(params *PostTaskByIDParams, authInfo runtime.ClientAuthInfoWriter) (*PostTaskByIDCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostTaskByIDParams()
@@ -91,11 +93,12 @@ func (a *Client) PostTaskByID(params *PostTaskByIDParams) (*PostTaskByIDCreated,
 		ID:                 "postTaskById",
 		Method:             "POST",
 		PathPattern:        "/tasks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &PostTaskByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

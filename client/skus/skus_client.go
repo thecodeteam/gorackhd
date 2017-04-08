@@ -28,7 +28,7 @@ SkuPackPost posts a s k u pack
 Create a new SKU Pack, which is used to serve the specified set of files to a node during provisioning.
 
 */
-func (a *Client) SkuPackPost(params *SkuPackPostParams) (*SkuPackPostCreated, error) {
+func (a *Client) SkuPackPost(params *SkuPackPostParams, authInfo runtime.ClientAuthInfoWriter) (*SkuPackPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkuPackPostParams()
@@ -38,11 +38,12 @@ func (a *Client) SkuPackPost(params *SkuPackPostParams) (*SkuPackPostCreated, er
 		ID:                 "skuPackPost",
 		Method:             "POST",
 		PathPattern:        "/skus/pack",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded", "multipart/form-data"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkuPackPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -56,7 +57,7 @@ SkusGet gets list of s k us
 Get list of currently defined SKUs, which are used to group nodes based on matching a set of rules with information present in a nodes catalog.
 
 */
-func (a *Client) SkusGet(params *SkusGetParams) (*SkusGetOK, error) {
+func (a *Client) SkusGet(params *SkusGetParams, authInfo runtime.ClientAuthInfoWriter) (*SkusGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusGetParams()
@@ -66,11 +67,12 @@ func (a *Client) SkusGet(params *SkusGetParams) (*SkusGetOK, error) {
 		ID:                 "skusGet",
 		Method:             "GET",
 		PathPattern:        "/skus",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -83,7 +85,7 @@ SkusIDDelete deletes a s k u
 
 Delete the SKU with the specified identifier.
 */
-func (a *Client) SkusIDDelete(params *SkusIDDeleteParams) (*SkusIDDeleteNoContent, error) {
+func (a *Client) SkusIDDelete(params *SkusIDDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*SkusIDDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusIDDeleteParams()
@@ -93,11 +95,12 @@ func (a *Client) SkusIDDelete(params *SkusIDDeleteParams) (*SkusIDDeleteNoConten
 		ID:                 "skusIdDelete",
 		Method:             "DELETE",
 		PathPattern:        "/skus/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusIDDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -110,7 +113,7 @@ SkusIDDeletePack deletes a s k u pack
 
 Delete a SKU Pack associated with the specified SKU.
 */
-func (a *Client) SkusIDDeletePack(params *SkusIDDeletePackParams) (*SkusIDDeletePackNoContent, error) {
+func (a *Client) SkusIDDeletePack(params *SkusIDDeletePackParams, authInfo runtime.ClientAuthInfoWriter) (*SkusIDDeletePackNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusIDDeletePackParams()
@@ -120,11 +123,12 @@ func (a *Client) SkusIDDeletePack(params *SkusIDDeletePackParams) (*SkusIDDelete
 		ID:                 "skusIdDeletePack",
 		Method:             "DELETE",
 		PathPattern:        "/skus/{identifier}/pack",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusIDDeletePackReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ SkusIDGet gets the specified s k u
 
 Get the SKU with the specified identifier.
 */
-func (a *Client) SkusIDGet(params *SkusIDGetParams) (*SkusIDGetOK, error) {
+func (a *Client) SkusIDGet(params *SkusIDGetParams, authInfo runtime.ClientAuthInfoWriter) (*SkusIDGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusIDGetParams()
@@ -147,11 +151,12 @@ func (a *Client) SkusIDGet(params *SkusIDGetParams) (*SkusIDGetOK, error) {
 		ID:                 "skusIdGet",
 		Method:             "GET",
 		PathPattern:        "/skus/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusIDGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -164,7 +169,7 @@ SkusIDGetNodes gets nodes for specific s k u
 
 Get the nodes associated with the specified SKU definition.
 */
-func (a *Client) SkusIDGetNodes(params *SkusIDGetNodesParams) (*SkusIDGetNodesOK, error) {
+func (a *Client) SkusIDGetNodes(params *SkusIDGetNodesParams, authInfo runtime.ClientAuthInfoWriter) (*SkusIDGetNodesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusIDGetNodesParams()
@@ -174,11 +179,12 @@ func (a *Client) SkusIDGetNodes(params *SkusIDGetNodesParams) (*SkusIDGetNodesOK
 		ID:                 "skusIdGetNodes",
 		Method:             "GET",
 		PathPattern:        "/skus/{identifier}/nodes",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusIDGetNodesReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -191,7 +197,7 @@ SkusIDPutPack puts a s k u pack to the specified s k u
 
 Create or modify a SKU Pack, and associate the SKU Pack with the specified SKU.
 */
-func (a *Client) SkusIDPutPack(params *SkusIDPutPackParams) (*SkusIDPutPackCreated, error) {
+func (a *Client) SkusIDPutPack(params *SkusIDPutPackParams, authInfo runtime.ClientAuthInfoWriter) (*SkusIDPutPackCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusIDPutPackParams()
@@ -201,11 +207,12 @@ func (a *Client) SkusIDPutPack(params *SkusIDPutPackParams) (*SkusIDPutPackCreat
 		ID:                 "skusIdPutPack",
 		Method:             "PUT",
 		PathPattern:        "/skus/{identifier}/pack",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusIDPutPackReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -218,7 +225,7 @@ SkusPatch patches a s k u
 
 Modify the SKU with the specified identifier.
 */
-func (a *Client) SkusPatch(params *SkusPatchParams) (*SkusPatchOK, error) {
+func (a *Client) SkusPatch(params *SkusPatchParams, authInfo runtime.ClientAuthInfoWriter) (*SkusPatchOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusPatchParams()
@@ -228,11 +235,12 @@ func (a *Client) SkusPatch(params *SkusPatchParams) (*SkusPatchOK, error) {
 		ID:                 "skusPatch",
 		Method:             "PATCH",
 		PathPattern:        "/skus/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusPatchReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -245,7 +253,7 @@ SkusPost posts a s k u
 
 Create a new SKU.
 */
-func (a *Client) SkusPost(params *SkusPostParams) (*SkusPostCreated, error) {
+func (a *Client) SkusPost(params *SkusPostParams, authInfo runtime.ClientAuthInfoWriter) (*SkusPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusPostParams()
@@ -255,11 +263,12 @@ func (a *Client) SkusPost(params *SkusPostParams) (*SkusPostCreated, error) {
 		ID:                 "skusPost",
 		Method:             "POST",
 		PathPattern:        "/skus",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -272,7 +281,7 @@ SkusPut puts a s k u
 
 Create or modify a SKU.
 */
-func (a *Client) SkusPut(params *SkusPutParams) (*SkusPutCreated, error) {
+func (a *Client) SkusPut(params *SkusPutParams, authInfo runtime.ClientAuthInfoWriter) (*SkusPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSkusPutParams()
@@ -282,11 +291,12 @@ func (a *Client) SkusPut(params *SkusPutParams) (*SkusPutCreated, error) {
 		ID:                 "skusPut",
 		Method:             "PUT",
 		PathPattern:        "/skus",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SkusPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

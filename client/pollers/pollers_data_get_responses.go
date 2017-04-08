@@ -174,14 +174,14 @@ func (o *PollersDataGetDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*PollersDataGetOKBodyBody pollers data get o k body body
-
-swagger:model PollersDataGetOKBodyBody
-*/
-type PollersDataGetOKBodyBody interface{}
-
 /*PollersDataGetNoContentBodyBody pollers data get no content body body
 
 swagger:model PollersDataGetNoContentBodyBody
 */
 type PollersDataGetNoContentBodyBody interface{}
+
+/*PollersDataGetOKBodyBody pollers data get o k body body
+
+swagger:model PollersDataGetOKBodyBody
+*/
+type PollersDataGetOKBodyBody interface{}

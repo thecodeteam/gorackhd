@@ -27,7 +27,7 @@ SchemasGet gets all schemas
 
 Get a list of all schemas currently stored in the system.
 */
-func (a *Client) SchemasGet(params *SchemasGetParams) (*SchemasGetOK, error) {
+func (a *Client) SchemasGet(params *SchemasGetParams, authInfo runtime.ClientAuthInfoWriter) (*SchemasGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSchemasGetParams()
@@ -37,11 +37,12 @@ func (a *Client) SchemasGet(params *SchemasGetParams) (*SchemasGetOK, error) {
 		ID:                 "schemasGet",
 		Method:             "GET",
 		PathPattern:        "/schemas",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SchemasGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ SchemasIDGet gets a schema
 
 Get the specified schema.
 */
-func (a *Client) SchemasIDGet(params *SchemasIDGetParams) (*SchemasIDGetOK, error) {
+func (a *Client) SchemasIDGet(params *SchemasIDGetParams, authInfo runtime.ClientAuthInfoWriter) (*SchemasIDGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSchemasIDGetParams()
@@ -64,11 +65,12 @@ func (a *Client) SchemasIDGet(params *SchemasIDGetParams) (*SchemasIDGetOK, erro
 		ID:                 "schemasIdGet",
 		Method:             "GET",
 		PathPattern:        "/schemas/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &SchemasIDGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ TaskSchemasGet gets all task schemas names
 
 Get a list of all task schema names currently stored in the system.
 */
-func (a *Client) TaskSchemasGet(params *TaskSchemasGetParams) (*TaskSchemasGetOK, error) {
+func (a *Client) TaskSchemasGet(params *TaskSchemasGetParams, authInfo runtime.ClientAuthInfoWriter) (*TaskSchemasGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTaskSchemasGetParams()
@@ -91,11 +93,12 @@ func (a *Client) TaskSchemasGet(params *TaskSchemasGetParams) (*TaskSchemasGetOK
 		ID:                 "taskSchemasGet",
 		Method:             "GET",
 		PathPattern:        "/schemas/tasks",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TaskSchemasGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ TaskSchemasIDGet gets a task schema
 
 Get the specified task schema.
 */
-func (a *Client) TaskSchemasIDGet(params *TaskSchemasIDGetParams) (*TaskSchemasIDGetOK, error) {
+func (a *Client) TaskSchemasIDGet(params *TaskSchemasIDGetParams, authInfo runtime.ClientAuthInfoWriter) (*TaskSchemasIDGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTaskSchemasIDGetParams()
@@ -118,11 +121,12 @@ func (a *Client) TaskSchemasIDGet(params *TaskSchemasIDGetParams) (*TaskSchemasI
 		ID:                 "taskSchemasIdGet",
 		Method:             "GET",
 		PathPattern:        "/schemas/tasks/{identifier}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TaskSchemasIDGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

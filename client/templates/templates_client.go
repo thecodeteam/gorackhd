@@ -27,7 +27,7 @@ TemplatesGetByName gets the specified template
 
 Get the template with the specified name.
 */
-func (a *Client) TemplatesGetByName(params *TemplatesGetByNameParams) (*TemplatesGetByNameOK, error) {
+func (a *Client) TemplatesGetByName(params *TemplatesGetByNameParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesGetByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesGetByNameParams()
@@ -37,11 +37,12 @@ func (a *Client) TemplatesGetByName(params *TemplatesGetByNameParams) (*Template
 		ID:                 "templatesGetByName",
 		Method:             "GET",
 		PathPattern:        "/templates/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesGetByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ TemplatesHeadByName gets headers of the specified template
 
 Get the template headers with the specified name. Only gets headers and returns no body.
 */
-func (a *Client) TemplatesHeadByName(params *TemplatesHeadByNameParams) (*TemplatesHeadByNameOK, error) {
+func (a *Client) TemplatesHeadByName(params *TemplatesHeadByNameParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesHeadByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesHeadByNameParams()
@@ -64,11 +65,12 @@ func (a *Client) TemplatesHeadByName(params *TemplatesHeadByNameParams) (*Templa
 		ID:                 "templatesHeadByName",
 		Method:             "HEAD",
 		PathPattern:        "/templates/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesHeadByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ TemplatesLibDelete deletes the specified template
 
 Delete the template with the specified name.
 */
-func (a *Client) TemplatesLibDelete(params *TemplatesLibDeleteParams) (*TemplatesLibDeleteNoContent, error) {
+func (a *Client) TemplatesLibDelete(params *TemplatesLibDeleteParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesLibDeleteNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesLibDeleteParams()
@@ -91,11 +93,12 @@ func (a *Client) TemplatesLibDelete(params *TemplatesLibDeleteParams) (*Template
 		ID:                 "templatesLibDelete",
 		Method:             "DELETE",
 		PathPattern:        "/templates/library/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesLibDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ TemplatesLibGet gets the specified template
 
 Get the contents of the specified template file.
 */
-func (a *Client) TemplatesLibGet(params *TemplatesLibGetParams) (*TemplatesLibGetOK, error) {
+func (a *Client) TemplatesLibGet(params *TemplatesLibGetParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesLibGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesLibGetParams()
@@ -118,11 +121,12 @@ func (a *Client) TemplatesLibGet(params *TemplatesLibGetParams) (*TemplatesLibGe
 		ID:                 "templatesLibGet",
 		Method:             "GET",
 		PathPattern:        "/templates/library/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesLibGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ TemplatesLibPut creates or update the specified template
 
 Create or update the metadata and the content of the specified template.
 */
-func (a *Client) TemplatesLibPut(params *TemplatesLibPutParams) (*TemplatesLibPutCreated, error) {
+func (a *Client) TemplatesLibPut(params *TemplatesLibPutParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesLibPutCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesLibPutParams()
@@ -145,11 +149,12 @@ func (a *Client) TemplatesLibPut(params *TemplatesLibPutParams) (*TemplatesLibPu
 		ID:                 "templatesLibPut",
 		Method:             "PUT",
 		PathPattern:        "/templates/library/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/x-www-form-urlencoded", "text/plain"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesLibPutReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -163,7 +168,7 @@ TemplatesMetaGet gets a list of metadata for all templates
 Retrieves metadata for each defined template. The metadata includes the template name, and scope, not the actual contents of the template.
 
 */
-func (a *Client) TemplatesMetaGet(params *TemplatesMetaGetParams) (*TemplatesMetaGetOK, error) {
+func (a *Client) TemplatesMetaGet(params *TemplatesMetaGetParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesMetaGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesMetaGetParams()
@@ -173,11 +178,12 @@ func (a *Client) TemplatesMetaGet(params *TemplatesMetaGetParams) (*TemplatesMet
 		ID:                 "templatesMetaGet",
 		Method:             "GET",
 		PathPattern:        "/templates/metadata",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesMetaGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -190,7 +196,7 @@ TemplatesMetaGetByName gets the metadata for the specified template
 
 Get metadata for the template with the specified name.
 */
-func (a *Client) TemplatesMetaGetByName(params *TemplatesMetaGetByNameParams) (*TemplatesMetaGetByNameOK, error) {
+func (a *Client) TemplatesMetaGetByName(params *TemplatesMetaGetByNameParams, authInfo runtime.ClientAuthInfoWriter) (*TemplatesMetaGetByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTemplatesMetaGetByNameParams()
@@ -200,11 +206,12 @@ func (a *Client) TemplatesMetaGetByName(params *TemplatesMetaGetByNameParams) (*
 		ID:                 "templatesMetaGetByName",
 		Method:             "GET",
 		PathPattern:        "/templates/metadata/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &TemplatesMetaGetByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

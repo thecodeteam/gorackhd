@@ -174,14 +174,14 @@ func (o *PollersCurrentDataGetDefault) readResponse(response runtime.ClientRespo
 	return nil
 }
 
-/*PollersCurrentDataGetNoContentBodyBody pollers current data get no content body body
-
-swagger:model PollersCurrentDataGetNoContentBodyBody
-*/
-type PollersCurrentDataGetNoContentBodyBody interface{}
-
 /*PollersCurrentDataGetOKBodyBody pollers current data get o k body body
 
 swagger:model PollersCurrentDataGetOKBodyBody
 */
 type PollersCurrentDataGetOKBodyBody interface{}
+
+/*PollersCurrentDataGetNoContentBodyBody pollers current data get no content body body
+
+swagger:model PollersCurrentDataGetNoContentBodyBody
+*/
+type PollersCurrentDataGetNoContentBodyBody interface{}

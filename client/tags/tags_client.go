@@ -27,7 +27,7 @@ CreateTag posts a tag
 
 Create a new tag.
 */
-func (a *Client) CreateTag(params *CreateTagParams) (*CreateTagCreated, error) {
+func (a *Client) CreateTag(params *CreateTagParams, authInfo runtime.ClientAuthInfoWriter) (*CreateTagCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateTagParams()
@@ -37,11 +37,12 @@ func (a *Client) CreateTag(params *CreateTagParams) (*CreateTagCreated, error) {
 		ID:                 "createTag",
 		Method:             "POST",
 		PathPattern:        "/tags",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &CreateTagReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ DeleteTag deletes the specified tag
 
 Delete the specified tag.
 */
-func (a *Client) DeleteTag(params *DeleteTagParams) (*DeleteTagNoContent, error) {
+func (a *Client) DeleteTag(params *DeleteTagParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteTagNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteTagParams()
@@ -64,11 +65,12 @@ func (a *Client) DeleteTag(params *DeleteTagParams) (*DeleteTagNoContent, error)
 		ID:                 "deleteTag",
 		Method:             "DELETE",
 		PathPattern:        "/tags/{tagName}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &DeleteTagReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ GetAllTags gets all tags
 
 Get a list of all tags currently stored.
 */
-func (a *Client) GetAllTags(params *GetAllTagsParams) (*GetAllTagsOK, error) {
+func (a *Client) GetAllTags(params *GetAllTagsParams, authInfo runtime.ClientAuthInfoWriter) (*GetAllTagsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAllTagsParams()
@@ -91,11 +93,12 @@ func (a *Client) GetAllTags(params *GetAllTagsParams) (*GetAllTagsOK, error) {
 		ID:                 "getAllTags",
 		Method:             "GET",
 		PathPattern:        "/tags",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetAllTagsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ GetNodesByTag gets nodes with the specified tag
 
 Get a list of nodes with the specified tag.
 */
-func (a *Client) GetNodesByTag(params *GetNodesByTagParams) (*GetNodesByTagOK, error) {
+func (a *Client) GetNodesByTag(params *GetNodesByTagParams, authInfo runtime.ClientAuthInfoWriter) (*GetNodesByTagOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetNodesByTagParams()
@@ -118,11 +121,12 @@ func (a *Client) GetNodesByTag(params *GetNodesByTagParams) (*GetNodesByTagOK, e
 		ID:                 "getNodesByTag",
 		Method:             "GET",
 		PathPattern:        "/tags/{tagName}/nodes",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetNodesByTagReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ GetTag gets a tag
 
 Get the data associated with the specified tag.
 */
-func (a *Client) GetTag(params *GetTagParams) (*GetTagOK, error) {
+func (a *Client) GetTag(params *GetTagParams, authInfo runtime.ClientAuthInfoWriter) (*GetTagOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetTagParams()
@@ -145,11 +149,12 @@ func (a *Client) GetTag(params *GetTagParams) (*GetTagOK, error) {
 		ID:                 "getTag",
 		Method:             "GET",
 		PathPattern:        "/tags/{tagName}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &GetTagReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -162,7 +167,7 @@ PostWorkflowByID posts workflow to node by tag
 
 Start a workflow against all nodes with the specified tag.
 */
-func (a *Client) PostWorkflowByID(params *PostWorkflowByIDParams) (*PostWorkflowByIDAccepted, error) {
+func (a *Client) PostWorkflowByID(params *PostWorkflowByIDParams, authInfo runtime.ClientAuthInfoWriter) (*PostWorkflowByIDAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostWorkflowByIDParams()
@@ -172,11 +177,12 @@ func (a *Client) PostWorkflowByID(params *PostWorkflowByIDParams) (*PostWorkflow
 		ID:                 "postWorkflowById",
 		Method:             "POST",
 		PathPattern:        "/tags/{tagName}/nodes/workflows",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &PostWorkflowByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

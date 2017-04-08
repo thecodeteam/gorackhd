@@ -28,7 +28,7 @@ ProfilesGet gets list of profiles
 Get the list of currently defined profiles. Profiles are scripts used by RackHD to control how a node PXE boots.
 
 */
-func (a *Client) ProfilesGet(params *ProfilesGetParams) (*ProfilesGetOK, error) {
+func (a *Client) ProfilesGet(params *ProfilesGetParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesGetParams()
@@ -38,11 +38,12 @@ func (a *Client) ProfilesGet(params *ProfilesGetParams) (*ProfilesGetOK, error) 
 		ID:                 "profilesGet",
 		Method:             "GET",
 		PathPattern:        "/profiles",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -55,7 +56,7 @@ ProfilesGetLibByName gets contents of a profile
 
 Get the contents of a profile specified by its name.
 */
-func (a *Client) ProfilesGetLibByName(params *ProfilesGetLibByNameParams) (*ProfilesGetLibByNameOK, error) {
+func (a *Client) ProfilesGetLibByName(params *ProfilesGetLibByNameParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesGetLibByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesGetLibByNameParams()
@@ -65,11 +66,12 @@ func (a *Client) ProfilesGetLibByName(params *ProfilesGetLibByNameParams) (*Prof
 		ID:                 "profilesGetLibByName",
 		Method:             "GET",
 		PathPattern:        "/profiles/library/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesGetLibByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -82,7 +84,7 @@ ProfilesGetMetadata gets list of profile metadata
 
 Get the list of metadata associated with all known profiles.
 */
-func (a *Client) ProfilesGetMetadata(params *ProfilesGetMetadataParams) (*ProfilesGetMetadataOK, error) {
+func (a *Client) ProfilesGetMetadata(params *ProfilesGetMetadataParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesGetMetadataOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesGetMetadataParams()
@@ -92,11 +94,12 @@ func (a *Client) ProfilesGetMetadata(params *ProfilesGetMetadataParams) (*Profil
 		ID:                 "profilesGetMetadata",
 		Method:             "GET",
 		PathPattern:        "/profiles/metadata",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesGetMetadataReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -109,7 +112,7 @@ ProfilesGetMetadataByName gets the specified profiles metadata from database
 
 Get the metadata associated with the specified profile.
 */
-func (a *Client) ProfilesGetMetadataByName(params *ProfilesGetMetadataByNameParams) (*ProfilesGetMetadataByNameOK, error) {
+func (a *Client) ProfilesGetMetadataByName(params *ProfilesGetMetadataByNameParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesGetMetadataByNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesGetMetadataByNameParams()
@@ -119,11 +122,12 @@ func (a *Client) ProfilesGetMetadataByName(params *ProfilesGetMetadataByNamePara
 		ID:                 "profilesGetMetadataByName",
 		Method:             "GET",
 		PathPattern:        "/profiles/metadata/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesGetMetadataByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ ProfilesGetSwitchVendor gets a profile
 
 Get a profile rendered with the switch vendor name.
 */
-func (a *Client) ProfilesGetSwitchVendor(params *ProfilesGetSwitchVendorParams) (*ProfilesGetSwitchVendorOK, error) {
+func (a *Client) ProfilesGetSwitchVendor(params *ProfilesGetSwitchVendorParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesGetSwitchVendorOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesGetSwitchVendorParams()
@@ -146,11 +150,12 @@ func (a *Client) ProfilesGetSwitchVendor(params *ProfilesGetSwitchVendorParams) 
 		ID:                 "profilesGetSwitchVendor",
 		Method:             "GET",
 		PathPattern:        "/profiles/switch/{vendor}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesGetSwitchVendorReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -163,7 +168,7 @@ ProfilesPostSwitchError posts a switch error
 
 Manually send a switch error to the log, since most switches do not generate errors.
 */
-func (a *Client) ProfilesPostSwitchError(params *ProfilesPostSwitchErrorParams) (*ProfilesPostSwitchErrorCreated, error) {
+func (a *Client) ProfilesPostSwitchError(params *ProfilesPostSwitchErrorParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesPostSwitchErrorCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesPostSwitchErrorParams()
@@ -173,11 +178,12 @@ func (a *Client) ProfilesPostSwitchError(params *ProfilesPostSwitchErrorParams) 
 		ID:                 "profilesPostSwitchError",
 		Method:             "POST",
 		PathPattern:        "/profiles/switch/error",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesPostSwitchErrorReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -190,7 +196,7 @@ ProfilesPutLibByName puts a profile
 
 Create or modify the specified profile metadata and contents.
 */
-func (a *Client) ProfilesPutLibByName(params *ProfilesPutLibByNameParams) (*ProfilesPutLibByNameCreated, error) {
+func (a *Client) ProfilesPutLibByName(params *ProfilesPutLibByNameParams, authInfo runtime.ClientAuthInfoWriter) (*ProfilesPutLibByNameCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewProfilesPutLibByNameParams()
@@ -200,11 +206,12 @@ func (a *Client) ProfilesPutLibByName(params *ProfilesPutLibByNameParams) (*Prof
 		ID:                 "profilesPutLibByName",
 		Method:             "PUT",
 		PathPattern:        "/profiles/library/{name}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/octet-stream", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &ProfilesPutLibByNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err

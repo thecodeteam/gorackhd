@@ -27,7 +27,7 @@ LookupsDelByID deletes a lookup
 
 Delete the specified lookup.
 */
-func (a *Client) LookupsDelByID(params *LookupsDelByIDParams) (*LookupsDelByIDNoContent, error) {
+func (a *Client) LookupsDelByID(params *LookupsDelByIDParams, authInfo runtime.ClientAuthInfoWriter) (*LookupsDelByIDNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLookupsDelByIDParams()
@@ -37,11 +37,12 @@ func (a *Client) LookupsDelByID(params *LookupsDelByIDParams) (*LookupsDelByIDNo
 		ID:                 "lookupsDelById",
 		Method:             "DELETE",
 		PathPattern:        "/lookups/{id}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &LookupsDelByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -54,7 +55,7 @@ LookupsGet gets a list of lookups
 
 Get a list of all lookups currently stored. Lookups relate mac addresses to ip addresses.
 */
-func (a *Client) LookupsGet(params *LookupsGetParams) (*LookupsGetOK, error) {
+func (a *Client) LookupsGet(params *LookupsGetParams, authInfo runtime.ClientAuthInfoWriter) (*LookupsGetOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLookupsGetParams()
@@ -64,11 +65,12 @@ func (a *Client) LookupsGet(params *LookupsGetParams) (*LookupsGetOK, error) {
 		ID:                 "lookupsGet",
 		Method:             "GET",
 		PathPattern:        "/lookups",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &LookupsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -81,7 +83,7 @@ LookupsGetByID gets a lookup
 
 Get a lookup by specifying its identifier.
 */
-func (a *Client) LookupsGetByID(params *LookupsGetByIDParams) (*LookupsGetByIDOK, error) {
+func (a *Client) LookupsGetByID(params *LookupsGetByIDParams, authInfo runtime.ClientAuthInfoWriter) (*LookupsGetByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLookupsGetByIDParams()
@@ -91,11 +93,12 @@ func (a *Client) LookupsGetByID(params *LookupsGetByIDParams) (*LookupsGetByIDOK
 		ID:                 "lookupsGetById",
 		Method:             "GET",
 		PathPattern:        "/lookups/{id}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &LookupsGetByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ LookupsPatchByID patches a lookup
 
 Modify the properties of a lookup.
 */
-func (a *Client) LookupsPatchByID(params *LookupsPatchByIDParams) (*LookupsPatchByIDOK, error) {
+func (a *Client) LookupsPatchByID(params *LookupsPatchByIDParams, authInfo runtime.ClientAuthInfoWriter) (*LookupsPatchByIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLookupsPatchByIDParams()
@@ -118,11 +121,12 @@ func (a *Client) LookupsPatchByID(params *LookupsPatchByIDParams) (*LookupsPatch
 		ID:                 "lookupsPatchById",
 		Method:             "PATCH",
 		PathPattern:        "/lookups/{id}",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &LookupsPatchByIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ LookupsPost posts a lookup
 
 Create and store a new lookup.
 */
-func (a *Client) LookupsPost(params *LookupsPostParams) (*LookupsPostCreated, error) {
+func (a *Client) LookupsPost(params *LookupsPostParams, authInfo runtime.ClientAuthInfoWriter) (*LookupsPostCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLookupsPostParams()
@@ -145,11 +149,12 @@ func (a *Client) LookupsPost(params *LookupsPostParams) (*LookupsPostCreated, er
 		ID:                 "lookupsPost",
 		Method:             "POST",
 		PathPattern:        "/lookups",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &LookupsPostReader{formats: a.formats},
+		AuthInfo:           authInfo,
 	})
 	if err != nil {
 		return nil, err
