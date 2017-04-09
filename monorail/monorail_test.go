@@ -35,7 +35,13 @@ var _ = Describe("Monorail Client", func() {
 
 	Context("With valid user", func() {
 		username := "admin"
+		if os.Getenv("GORACKHD_USERNAME") != "" {
+			rackhdEndpoint = os.Getenv("GORACKHD_USERNAME")
+		}
 		password := "admin123"
+		if os.Getenv("GORACKHD_PASSWORD") != "" {
+			rackhdEndpoint = os.Getenv("GORACKHD_PASSWORD")
+		}
 
 		It("should log into RackHD", func() {
 			auth, err := client.Login(username, password)
