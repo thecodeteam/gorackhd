@@ -4,7 +4,10 @@ package ibms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewIbmsDeleteByIDParamsWithTimeout(timeout time.Duration) *IbmsDeleteByIDPa
 	}
 }
 
+// NewIbmsDeleteByIDParamsWithContext creates a new IbmsDeleteByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewIbmsDeleteByIDParamsWithContext(ctx context.Context) *IbmsDeleteByIDParams {
+	var ()
+	return &IbmsDeleteByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewIbmsDeleteByIDParamsWithHTTPClient creates a new IbmsDeleteByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewIbmsDeleteByIDParamsWithHTTPClient(client *http.Client) *IbmsDeleteByIDParams {
+	var ()
+	return &IbmsDeleteByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*IbmsDeleteByIDParams contains all the parameters to send to the API endpoint
 for the ibms delete by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type IbmsDeleteByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) WithTimeout(timeout time.Duration) *IbmsDeleteByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) WithContext(ctx context.Context) *IbmsDeleteByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) WithHTTPClient(client *http.Client) *IbmsDeleteByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the ibms delete by Id params
 func (o *IbmsDeleteByIDParams) WithIdentifier(identifier string) *IbmsDeleteByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the ibms delete by Id params
+func (o *IbmsDeleteByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *IbmsDeleteByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

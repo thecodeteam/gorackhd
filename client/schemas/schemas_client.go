@@ -43,11 +43,14 @@ func (a *Client) SchemasGet(params *SchemasGetParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &SchemasGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SchemasGetOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) SchemasIDGet(params *SchemasIDGetParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &SchemasIDGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SchemasIDGetOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) TaskSchemasGet(params *TaskSchemasGetParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &TaskSchemasGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TaskSchemasGetOK), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) TaskSchemasIDGet(params *TaskSchemasIDGetParams, authInfo runti
 		Params:             params,
 		Reader:             &TaskSchemasIDGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TaskSchemasIDGetOK), nil
+
 }
 
 // SetTransport changes the transport on the client

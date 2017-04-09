@@ -5,23 +5,19 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*PostWorkflow post workflow
-
-swagger:model post_workflow
-*/
+// PostWorkflow post workflow
+// swagger:model post_workflow
 type PostWorkflow struct {
 
-	/* name
-	 */
+	// name
 	Name string `json:"name,omitempty"`
 
-	/* options
-	 */
+	// options
 	Options *PostWorkflowOptions `json:"options,omitempty"`
 }
 
@@ -49,6 +45,9 @@ func (m *PostWorkflow) validateOptions(formats strfmt.Registry) error {
 	if m.Options != nil {
 
 		if err := m.Options.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("options")
+			}
 			return err
 		}
 	}
@@ -56,14 +55,11 @@ func (m *PostWorkflow) validateOptions(formats strfmt.Registry) error {
 	return nil
 }
 
-/*PostWorkflowOptions post workflow options
-
-swagger:model PostWorkflowOptions
-*/
+// PostWorkflowOptions post workflow options
+// swagger:model PostWorkflowOptions
 type PostWorkflowOptions struct {
 
-	/* defaults
-	 */
+	// defaults
 	Defaults *PostWorkflowOptionsDefaults `json:"defaults,omitempty"`
 }
 
@@ -91,6 +87,9 @@ func (m *PostWorkflowOptions) validateDefaults(formats strfmt.Registry) error {
 	if m.Defaults != nil {
 
 		if err := m.Defaults.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("options" + "." + "defaults")
+			}
 			return err
 		}
 	}
@@ -98,18 +97,14 @@ func (m *PostWorkflowOptions) validateDefaults(formats strfmt.Registry) error {
 	return nil
 }
 
-/*PostWorkflowOptionsDefaults post workflow options defaults
-
-swagger:model PostWorkflowOptionsDefaults
-*/
+// PostWorkflowOptionsDefaults post workflow options defaults
+// swagger:model PostWorkflowOptionsDefaults
 type PostWorkflowOptionsDefaults struct {
 
-	/* graph options
-	 */
+	// graph options
 	GraphOptions interface{} `json:"graphOptions,omitempty"`
 
-	/* node Id
-	 */
+	// node Id
 	NodeID string `json:"nodeId,omitempty"`
 }
 

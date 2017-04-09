@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -34,6 +37,25 @@ func NewWorkflowsGetParamsWithTimeout(timeout time.Duration) *WorkflowsGetParams
 	}
 }
 
+// NewWorkflowsGetParamsWithContext creates a new WorkflowsGetParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsGetParamsWithContext(ctx context.Context) *WorkflowsGetParams {
+	var ()
+	return &WorkflowsGetParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsGetParamsWithHTTPClient creates a new WorkflowsGetParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsGetParamsWithHTTPClient(client *http.Client) *WorkflowsGetParams {
+	var ()
+	return &WorkflowsGetParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsGetParams contains all the parameters to send to the API endpoint
 for the workflows get operation typically these are written to a http.Request
 */
@@ -60,37 +82,94 @@ type WorkflowsGetParams struct {
 	*/
 	Sort *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows get params
+func (o *WorkflowsGetParams) WithTimeout(timeout time.Duration) *WorkflowsGetParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows get params
+func (o *WorkflowsGetParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows get params
+func (o *WorkflowsGetParams) WithContext(ctx context.Context) *WorkflowsGetParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows get params
+func (o *WorkflowsGetParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows get params
+func (o *WorkflowsGetParams) WithHTTPClient(client *http.Client) *WorkflowsGetParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows get params
+func (o *WorkflowsGetParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithDollarSkip adds the dollarSkip to the workflows get params
 func (o *WorkflowsGetParams) WithDollarSkip(dollarSkip *int64) *WorkflowsGetParams {
-	o.DollarSkip = dollarSkip
+	o.SetDollarSkip(dollarSkip)
 	return o
+}
+
+// SetDollarSkip adds the dollarSkip to the workflows get params
+func (o *WorkflowsGetParams) SetDollarSkip(dollarSkip *int64) {
+	o.DollarSkip = dollarSkip
 }
 
 // WithDollarTop adds the dollarTop to the workflows get params
 func (o *WorkflowsGetParams) WithDollarTop(dollarTop *int64) *WorkflowsGetParams {
-	o.DollarTop = dollarTop
+	o.SetDollarTop(dollarTop)
 	return o
+}
+
+// SetDollarTop adds the dollarTop to the workflows get params
+func (o *WorkflowsGetParams) SetDollarTop(dollarTop *int64) {
+	o.DollarTop = dollarTop
 }
 
 // WithActive adds the active to the workflows get params
 func (o *WorkflowsGetParams) WithActive(active *bool) *WorkflowsGetParams {
-	o.Active = active
+	o.SetActive(active)
 	return o
+}
+
+// SetActive adds the active to the workflows get params
+func (o *WorkflowsGetParams) SetActive(active *bool) {
+	o.Active = active
 }
 
 // WithSort adds the sort to the workflows get params
 func (o *WorkflowsGetParams) WithSort(sort *string) *WorkflowsGetParams {
-	o.Sort = sort
+	o.SetSort(sort)
 	return o
+}
+
+// SetSort adds the sort to the workflows get params
+func (o *WorkflowsGetParams) SetSort(sort *string) {
+	o.Sort = sort
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.DollarSkip != nil {

@@ -19,7 +19,7 @@ type ObmsPatchByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsPatchByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ObmsPatchByIDReader) ReadResponse(response runtime.ClientResponse, cons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewObmsPatchByIDOK() *ObmsPatchByIDOK {
 Successfully patched the specified OBM settings
 */
 type ObmsPatchByIDOK struct {
-	Payload ObmsPatchByIDOKBodyBody
+	Payload ObmsPatchByIDOKBody
 }
 
 func (o *ObmsPatchByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *ObmsPatchByIDDefault) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-/*ObmsPatchByIDOKBodyBody obms patch by ID o k body body
-
-swagger:model ObmsPatchByIDOKBodyBody
+/*ObmsPatchByIDOKBody obms patch by ID o k body
+swagger:model ObmsPatchByIDOKBody
 */
-type ObmsPatchByIDOKBodyBody interface{}
+type ObmsPatchByIDOKBody interface{}

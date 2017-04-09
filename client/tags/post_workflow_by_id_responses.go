@@ -19,7 +19,7 @@ type PostWorkflowByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *PostWorkflowByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *PostWorkflowByIDReader) ReadResponse(response runtime.ClientResponse, c
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewPostWorkflowByIDAccepted() *PostWorkflowByIDAccepted {
 Successfully posted workflow to all nodes with specified tag
 */
 type PostWorkflowByIDAccepted struct {
-	Payload PostWorkflowByIDAcceptedBodyBody
+	Payload PostWorkflowByIDAcceptedBody
 }
 
 func (o *PostWorkflowByIDAccepted) Error() string {
@@ -140,8 +143,7 @@ func (o *PostWorkflowByIDDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*PostWorkflowByIDAcceptedBodyBody post workflow by ID accepted body body
-
-swagger:model PostWorkflowByIDAcceptedBodyBody
+/*PostWorkflowByIDAcceptedBody post workflow by ID accepted body
+swagger:model PostWorkflowByIDAcceptedBody
 */
-type PostWorkflowByIDAcceptedBodyBody interface{}
+type PostWorkflowByIDAcceptedBody interface{}

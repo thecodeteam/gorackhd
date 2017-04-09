@@ -19,7 +19,7 @@ type SkusIDDeletePackReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *SkusIDDeletePackReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *SkusIDDeletePackReader) ReadResponse(response runtime.ClientResponse, c
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewSkusIDDeletePackNoContent() *SkusIDDeletePackNoContent {
 Successfully deleted the specified SKU Pack
 */
 type SkusIDDeletePackNoContent struct {
-	Payload SkusIDDeletePackNoContentBodyBody
+	Payload SkusIDDeletePackNoContentBody
 }
 
 func (o *SkusIDDeletePackNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *SkusIDDeletePackDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*SkusIDDeletePackNoContentBodyBody skus ID delete pack no content body body
-
-swagger:model SkusIDDeletePackNoContentBodyBody
+/*SkusIDDeletePackNoContentBody skus ID delete pack no content body
+swagger:model SkusIDDeletePackNoContentBody
 */
-type SkusIDDeletePackNoContentBodyBody interface{}
+type SkusIDDeletePackNoContentBody interface{}

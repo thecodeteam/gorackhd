@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewWorkflowsPostParamsWithTimeout(timeout time.Duration) *WorkflowsPostPara
 	}
 }
 
+// NewWorkflowsPostParamsWithContext creates a new WorkflowsPostParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsPostParamsWithContext(ctx context.Context) *WorkflowsPostParams {
+	var ()
+	return &WorkflowsPostParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsPostParamsWithHTTPClient creates a new WorkflowsPostParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsPostParamsWithHTTPClient(client *http.Client) *WorkflowsPostParams {
+	var ()
+	return &WorkflowsPostParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsPostParams contains all the parameters to send to the API endpoint
 for the workflows post operation typically these are written to a http.Request
 */
@@ -52,25 +74,72 @@ type WorkflowsPostParams struct {
 	*/
 	Name *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows post params
+func (o *WorkflowsPostParams) WithTimeout(timeout time.Duration) *WorkflowsPostParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows post params
+func (o *WorkflowsPostParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows post params
+func (o *WorkflowsPostParams) WithContext(ctx context.Context) *WorkflowsPostParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows post params
+func (o *WorkflowsPostParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows post params
+func (o *WorkflowsPostParams) WithHTTPClient(client *http.Client) *WorkflowsPostParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows post params
+func (o *WorkflowsPostParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the workflows post params
 func (o *WorkflowsPostParams) WithBody(body *models.PostWorkflow) *WorkflowsPostParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the workflows post params
+func (o *WorkflowsPostParams) SetBody(body *models.PostWorkflow) {
+	o.Body = body
 }
 
 // WithName adds the name to the workflows post params
 func (o *WorkflowsPostParams) WithName(name *string) *WorkflowsPostParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the workflows post params
+func (o *WorkflowsPostParams) SetName(name *string) {
+	o.Name = name
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsPostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

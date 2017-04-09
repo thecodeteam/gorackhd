@@ -4,7 +4,10 @@ package ibms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewIbmsGetByIDParamsWithTimeout(timeout time.Duration) *IbmsGetByIDParams {
 	}
 }
 
+// NewIbmsGetByIDParamsWithContext creates a new IbmsGetByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewIbmsGetByIDParamsWithContext(ctx context.Context) *IbmsGetByIDParams {
+	var ()
+	return &IbmsGetByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewIbmsGetByIDParamsWithHTTPClient creates a new IbmsGetByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewIbmsGetByIDParamsWithHTTPClient(client *http.Client) *IbmsGetByIDParams {
+	var ()
+	return &IbmsGetByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*IbmsGetByIDParams contains all the parameters to send to the API endpoint
 for the ibms get by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type IbmsGetByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the ibms get by Id params
+func (o *IbmsGetByIDParams) WithTimeout(timeout time.Duration) *IbmsGetByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the ibms get by Id params
+func (o *IbmsGetByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the ibms get by Id params
+func (o *IbmsGetByIDParams) WithContext(ctx context.Context) *IbmsGetByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the ibms get by Id params
+func (o *IbmsGetByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the ibms get by Id params
+func (o *IbmsGetByIDParams) WithHTTPClient(client *http.Client) *IbmsGetByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the ibms get by Id params
+func (o *IbmsGetByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the ibms get by Id params
 func (o *IbmsGetByIDParams) WithIdentifier(identifier string) *IbmsGetByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the ibms get by Id params
+func (o *IbmsGetByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *IbmsGetByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

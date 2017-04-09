@@ -4,7 +4,10 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -30,12 +33,37 @@ func NewTemplatesLibGetParams() *TemplatesLibGetParams {
 // with the default values initialized, and the ability to set a timeout on a request
 func NewTemplatesLibGetParamsWithTimeout(timeout time.Duration) *TemplatesLibGetParams {
 	var (
-		scopeDefault string = string("global")
+		scopeDefault = string("global")
 	)
 	return &TemplatesLibGetParams{
 		Scope: &scopeDefault,
 
 		timeout: timeout,
+	}
+}
+
+// NewTemplatesLibGetParamsWithContext creates a new TemplatesLibGetParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewTemplatesLibGetParamsWithContext(ctx context.Context) *TemplatesLibGetParams {
+	var (
+		scopeDefault = string("global")
+	)
+	return &TemplatesLibGetParams{
+		Scope: &scopeDefault,
+
+		Context: ctx,
+	}
+}
+
+// NewTemplatesLibGetParamsWithHTTPClient creates a new TemplatesLibGetParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewTemplatesLibGetParamsWithHTTPClient(client *http.Client) *TemplatesLibGetParams {
+	var (
+		scopeDefault = string("global")
+	)
+	return &TemplatesLibGetParams{
+		Scope:      &scopeDefault,
+		HTTPClient: client,
 	}
 }
 
@@ -55,25 +83,72 @@ type TemplatesLibGetParams struct {
 	*/
 	Scope *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the templates lib get params
+func (o *TemplatesLibGetParams) WithTimeout(timeout time.Duration) *TemplatesLibGetParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the templates lib get params
+func (o *TemplatesLibGetParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the templates lib get params
+func (o *TemplatesLibGetParams) WithContext(ctx context.Context) *TemplatesLibGetParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the templates lib get params
+func (o *TemplatesLibGetParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the templates lib get params
+func (o *TemplatesLibGetParams) WithHTTPClient(client *http.Client) *TemplatesLibGetParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the templates lib get params
+func (o *TemplatesLibGetParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithName adds the name to the templates lib get params
 func (o *TemplatesLibGetParams) WithName(name string) *TemplatesLibGetParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the templates lib get params
+func (o *TemplatesLibGetParams) SetName(name string) {
+	o.Name = name
 }
 
 // WithScope adds the scope to the templates lib get params
 func (o *TemplatesLibGetParams) WithScope(scope *string) *TemplatesLibGetParams {
-	o.Scope = scope
+	o.SetScope(scope)
 	return o
+}
+
+// SetScope adds the scope to the templates lib get params
+func (o *TemplatesLibGetParams) SetScope(scope *string) {
+	o.Scope = scope
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *TemplatesLibGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param name

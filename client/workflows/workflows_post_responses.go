@@ -19,7 +19,7 @@ type WorkflowsPostReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsPostReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *WorkflowsPostReader) ReadResponse(response runtime.ClientResponse, cons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewWorkflowsPostCreated() *WorkflowsPostCreated {
 Successfully started the specified workflow
 */
 type WorkflowsPostCreated struct {
-	Payload WorkflowsPostCreatedBodyBody
+	Payload WorkflowsPostCreatedBody
 }
 
 func (o *WorkflowsPostCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *WorkflowsPostDefault) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-/*WorkflowsPostCreatedBodyBody workflows post created body body
-
-swagger:model WorkflowsPostCreatedBodyBody
+/*WorkflowsPostCreatedBody workflows post created body
+swagger:model WorkflowsPostCreatedBody
 */
-type WorkflowsPostCreatedBodyBody interface{}
+type WorkflowsPostCreatedBody interface{}

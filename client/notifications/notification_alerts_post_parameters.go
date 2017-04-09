@@ -4,7 +4,10 @@ package notifications
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,17 +36,73 @@ func NewNotificationAlertsPostParamsWithTimeout(timeout time.Duration) *Notifica
 	}
 }
 
+// NewNotificationAlertsPostParamsWithContext creates a new NotificationAlertsPostParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNotificationAlertsPostParamsWithContext(ctx context.Context) *NotificationAlertsPostParams {
+
+	return &NotificationAlertsPostParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNotificationAlertsPostParamsWithHTTPClient creates a new NotificationAlertsPostParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNotificationAlertsPostParamsWithHTTPClient(client *http.Client) *NotificationAlertsPostParams {
+
+	return &NotificationAlertsPostParams{
+		HTTPClient: client,
+	}
+}
+
 /*NotificationAlertsPostParams contains all the parameters to send to the API endpoint
 for the notification alerts post operation typically these are written to a http.Request
 */
 type NotificationAlertsPostParams struct {
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the notification alerts post params
+func (o *NotificationAlertsPostParams) WithTimeout(timeout time.Duration) *NotificationAlertsPostParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the notification alerts post params
+func (o *NotificationAlertsPostParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the notification alerts post params
+func (o *NotificationAlertsPostParams) WithContext(ctx context.Context) *NotificationAlertsPostParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the notification alerts post params
+func (o *NotificationAlertsPostParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the notification alerts post params
+func (o *NotificationAlertsPostParams) WithHTTPClient(client *http.Client) *NotificationAlertsPostParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the notification alerts post params
+func (o *NotificationAlertsPostParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NotificationAlertsPostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if len(res) > 0 {

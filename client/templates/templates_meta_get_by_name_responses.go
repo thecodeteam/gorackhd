@@ -19,7 +19,7 @@ type TemplatesMetaGetByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TemplatesMetaGetByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *TemplatesMetaGetByNameReader) ReadResponse(response runtime.ClientRespo
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewTemplatesMetaGetByNameOK() *TemplatesMetaGetByNameOK {
 Successfully retrieved the metadata of the specified template.
 */
 type TemplatesMetaGetByNameOK struct {
-	Payload TemplatesMetaGetByNameOKBodyBody
+	Payload TemplatesMetaGetByNameOKBody
 }
 
 func (o *TemplatesMetaGetByNameOK) Error() string {
@@ -140,8 +143,7 @@ func (o *TemplatesMetaGetByNameDefault) readResponse(response runtime.ClientResp
 	return nil
 }
 
-/*TemplatesMetaGetByNameOKBodyBody templates meta get by name o k body body
-
-swagger:model TemplatesMetaGetByNameOKBodyBody
+/*TemplatesMetaGetByNameOKBody templates meta get by name o k body
+swagger:model TemplatesMetaGetByNameOKBody
 */
-type TemplatesMetaGetByNameOKBodyBody interface{}
+type TemplatesMetaGetByNameOKBody interface{}

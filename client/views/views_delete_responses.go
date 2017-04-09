@@ -19,7 +19,7 @@ type ViewsDeleteReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ViewsDeleteReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ViewsDeleteReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewViewsDeleteNoContent() *ViewsDeleteNoContent {
 Successfully deleted the specified view
 */
 type ViewsDeleteNoContent struct {
-	Payload ViewsDeleteNoContentBodyBody
+	Payload ViewsDeleteNoContentBody
 }
 
 func (o *ViewsDeleteNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *ViewsDeleteDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*ViewsDeleteNoContentBodyBody views delete no content body body
-
-swagger:model ViewsDeleteNoContentBodyBody
+/*ViewsDeleteNoContentBody views delete no content body
+swagger:model ViewsDeleteNoContentBody
 */
-type ViewsDeleteNoContentBodyBody interface{}
+type ViewsDeleteNoContentBody interface{}

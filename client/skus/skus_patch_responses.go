@@ -19,7 +19,7 @@ type SkusPatchReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *SkusPatchReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *SkusPatchReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewSkusPatchOK() *SkusPatchOK {
 Successfully modified the specified SKU
 */
 type SkusPatchOK struct {
-	Payload SkusPatchOKBodyBody
+	Payload SkusPatchOKBody
 }
 
 func (o *SkusPatchOK) Error() string {
@@ -176,8 +179,7 @@ func (o *SkusPatchDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*SkusPatchOKBodyBody skus patch o k body body
-
-swagger:model SkusPatchOKBodyBody
+/*SkusPatchOKBody skus patch o k body
+swagger:model SkusPatchOKBody
 */
-type SkusPatchOKBodyBody interface{}
+type SkusPatchOKBody interface{}

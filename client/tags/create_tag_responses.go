@@ -19,7 +19,7 @@ type CreateTagReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *CreateTagReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *CreateTagReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewCreateTagCreated() *CreateTagCreated {
 Successfully created the tag
 */
 type CreateTagCreated struct {
-	Payload CreateTagCreatedBodyBody
+	Payload CreateTagCreatedBody
 }
 
 func (o *CreateTagCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *CreateTagDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*CreateTagCreatedBodyBody create tag created body body
-
-swagger:model CreateTagCreatedBodyBody
+/*CreateTagCreatedBody create tag created body
+swagger:model CreateTagCreatedBody
 */
-type CreateTagCreatedBodyBody interface{}
+type CreateTagCreatedBody interface{}

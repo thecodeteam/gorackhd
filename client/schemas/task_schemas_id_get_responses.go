@@ -19,7 +19,7 @@ type TaskSchemasIDGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TaskSchemasIDGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *TaskSchemasIDGetReader) ReadResponse(response runtime.ClientResponse, c
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewTaskSchemasIDGetOK() *TaskSchemasIDGetOK {
 Successfully retrieved the task schema
 */
 type TaskSchemasIDGetOK struct {
-	Payload TaskSchemasIDGetOKBodyBody
+	Payload TaskSchemasIDGetOKBody
 }
 
 func (o *TaskSchemasIDGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *TaskSchemasIDGetDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*TaskSchemasIDGetOKBodyBody task schemas ID get o k body body
-
-swagger:model TaskSchemasIDGetOKBodyBody
+/*TaskSchemasIDGetOKBody task schemas ID get o k body
+swagger:model TaskSchemasIDGetOKBody
 */
-type TaskSchemasIDGetOKBodyBody interface{}
+type TaskSchemasIDGetOKBody interface{}

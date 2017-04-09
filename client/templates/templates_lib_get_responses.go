@@ -19,7 +19,7 @@ type TemplatesLibGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TemplatesLibGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *TemplatesLibGetReader) ReadResponse(response runtime.ClientResponse, co
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewTemplatesLibGetOK() *TemplatesLibGetOK {
 Successfully retrieved the contents of the specified template
 */
 type TemplatesLibGetOK struct {
-	Payload TemplatesLibGetOKBodyBody
+	Payload TemplatesLibGetOKBody
 }
 
 func (o *TemplatesLibGetOK) Error() string {
@@ -140,8 +143,7 @@ func (o *TemplatesLibGetDefault) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*TemplatesLibGetOKBodyBody templates lib get o k body body
-
-swagger:model TemplatesLibGetOKBodyBody
+/*TemplatesLibGetOKBody templates lib get o k body
+swagger:model TemplatesLibGetOKBody
 */
-type TemplatesLibGetOKBodyBody interface{}
+type TemplatesLibGetOKBody interface{}

@@ -19,7 +19,7 @@ type ConfigGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ConfigGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ConfigGetReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewConfigGetOK() *ConfigGetOK {
 Successfully retrieved the configuration
 */
 type ConfigGetOK struct {
-	Payload ConfigGetOKBodyBody
+	Payload ConfigGetOKBody
 }
 
 func (o *ConfigGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ConfigGetDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*ConfigGetOKBodyBody config get o k body body
-
-swagger:model ConfigGetOKBodyBody
+/*ConfigGetOKBody config get o k body
+swagger:model ConfigGetOKBody
 */
-type ConfigGetOKBodyBody interface{}
+type ConfigGetOKBody interface{}

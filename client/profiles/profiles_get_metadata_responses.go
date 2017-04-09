@@ -19,7 +19,7 @@ type ProfilesGetMetadataReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ProfilesGetMetadataReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ProfilesGetMetadataReader) ReadResponse(response runtime.ClientResponse
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewProfilesGetMetadataOK() *ProfilesGetMetadataOK {
 Successfully retrieved the list of profile metadata
 */
 type ProfilesGetMetadataOK struct {
-	Payload ProfilesGetMetadataOKBodyBody
+	Payload ProfilesGetMetadataOKBody
 }
 
 func (o *ProfilesGetMetadataOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ProfilesGetMetadataDefault) readResponse(response runtime.ClientRespons
 	return nil
 }
 
-/*ProfilesGetMetadataOKBodyBody profiles get metadata o k body body
-
-swagger:model ProfilesGetMetadataOKBodyBody
+/*ProfilesGetMetadataOKBody profiles get metadata o k body
+swagger:model ProfilesGetMetadataOKBody
 */
-type ProfilesGetMetadataOKBodyBody interface{}
+type ProfilesGetMetadataOKBody interface{}

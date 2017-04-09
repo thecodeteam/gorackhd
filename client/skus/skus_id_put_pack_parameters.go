@@ -4,7 +4,10 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewSkusIDPutPackParamsWithTimeout(timeout time.Duration) *SkusIDPutPackPara
 	}
 }
 
+// NewSkusIDPutPackParamsWithContext creates a new SkusIDPutPackParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewSkusIDPutPackParamsWithContext(ctx context.Context) *SkusIDPutPackParams {
+	var ()
+	return &SkusIDPutPackParams{
+
+		Context: ctx,
+	}
+}
+
+// NewSkusIDPutPackParamsWithHTTPClient creates a new SkusIDPutPackParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewSkusIDPutPackParamsWithHTTPClient(client *http.Client) *SkusIDPutPackParams {
+	var ()
+	return &SkusIDPutPackParams{
+		HTTPClient: client,
+	}
+}
+
 /*SkusIDPutPackParams contains all the parameters to send to the API endpoint
 for the skus Id put pack operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type SkusIDPutPackParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the skus Id put pack params
+func (o *SkusIDPutPackParams) WithTimeout(timeout time.Duration) *SkusIDPutPackParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the skus Id put pack params
+func (o *SkusIDPutPackParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the skus Id put pack params
+func (o *SkusIDPutPackParams) WithContext(ctx context.Context) *SkusIDPutPackParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the skus Id put pack params
+func (o *SkusIDPutPackParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the skus Id put pack params
+func (o *SkusIDPutPackParams) WithHTTPClient(client *http.Client) *SkusIDPutPackParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the skus Id put pack params
+func (o *SkusIDPutPackParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the skus Id put pack params
 func (o *SkusIDPutPackParams) WithIdentifier(identifier string) *SkusIDPutPackParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the skus Id put pack params
+func (o *SkusIDPutPackParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *SkusIDPutPackParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

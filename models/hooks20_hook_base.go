@@ -5,27 +5,22 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*Hooks20HookBase Hook base schema
-
-swagger:model hooks.2.0_HookBase
-*/
+// Hooks20HookBase Hook base schema
+// swagger:model hooks.2.0_HookBase
 type Hooks20HookBase struct {
 
-	/* filters
-	 */
-	Filters []interface{} `json:"filters,omitempty"`
+	// filters
+	Filters []interface{} `json:"filters"`
 
-	/* name
-	 */
+	// name
 	Name string `json:"name,omitempty"`
 
-	/* url
-	 */
+	// url
 	URL strfmt.URI `json:"url,omitempty"`
 }
 
@@ -48,6 +43,10 @@ func (m *Hooks20HookBase) validateFilters(formats strfmt.Registry) error {
 
 	if swag.IsZero(m.Filters) { // not required
 		return nil
+	}
+
+	for i := 0; i < len(m.Filters); i++ {
+
 	}
 
 	return nil

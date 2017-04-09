@@ -19,7 +19,7 @@ type ProfilesPostSwitchErrorReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ProfilesPostSwitchErrorReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ProfilesPostSwitchErrorReader) ReadResponse(response runtime.ClientResp
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewProfilesPostSwitchErrorCreated() *ProfilesPostSwitchErrorCreated {
 Successfully posted the switch error
 */
 type ProfilesPostSwitchErrorCreated struct {
-	Payload ProfilesPostSwitchErrorCreatedBodyBody
+	Payload ProfilesPostSwitchErrorCreatedBody
 }
 
 func (o *ProfilesPostSwitchErrorCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *ProfilesPostSwitchErrorDefault) readResponse(response runtime.ClientRes
 	return nil
 }
 
-/*ProfilesPostSwitchErrorCreatedBodyBody profiles post switch error created body body
-
-swagger:model ProfilesPostSwitchErrorCreatedBodyBody
+/*ProfilesPostSwitchErrorCreatedBody profiles post switch error created body
+swagger:model ProfilesPostSwitchErrorCreatedBody
 */
-type ProfilesPostSwitchErrorCreatedBodyBody interface{}
+type ProfilesPostSwitchErrorCreatedBody interface{}

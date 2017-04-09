@@ -4,7 +4,10 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -30,12 +33,37 @@ func NewTemplatesLibDeleteParams() *TemplatesLibDeleteParams {
 // with the default values initialized, and the ability to set a timeout on a request
 func NewTemplatesLibDeleteParamsWithTimeout(timeout time.Duration) *TemplatesLibDeleteParams {
 	var (
-		scopeDefault string = string("global")
+		scopeDefault = string("global")
 	)
 	return &TemplatesLibDeleteParams{
 		Scope: &scopeDefault,
 
 		timeout: timeout,
+	}
+}
+
+// NewTemplatesLibDeleteParamsWithContext creates a new TemplatesLibDeleteParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewTemplatesLibDeleteParamsWithContext(ctx context.Context) *TemplatesLibDeleteParams {
+	var (
+		scopeDefault = string("global")
+	)
+	return &TemplatesLibDeleteParams{
+		Scope: &scopeDefault,
+
+		Context: ctx,
+	}
+}
+
+// NewTemplatesLibDeleteParamsWithHTTPClient creates a new TemplatesLibDeleteParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewTemplatesLibDeleteParamsWithHTTPClient(client *http.Client) *TemplatesLibDeleteParams {
+	var (
+		scopeDefault = string("global")
+	)
+	return &TemplatesLibDeleteParams{
+		Scope:      &scopeDefault,
+		HTTPClient: client,
 	}
 }
 
@@ -55,25 +83,72 @@ type TemplatesLibDeleteParams struct {
 	*/
 	Scope *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the templates lib delete params
+func (o *TemplatesLibDeleteParams) WithTimeout(timeout time.Duration) *TemplatesLibDeleteParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the templates lib delete params
+func (o *TemplatesLibDeleteParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the templates lib delete params
+func (o *TemplatesLibDeleteParams) WithContext(ctx context.Context) *TemplatesLibDeleteParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the templates lib delete params
+func (o *TemplatesLibDeleteParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the templates lib delete params
+func (o *TemplatesLibDeleteParams) WithHTTPClient(client *http.Client) *TemplatesLibDeleteParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the templates lib delete params
+func (o *TemplatesLibDeleteParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithName adds the name to the templates lib delete params
 func (o *TemplatesLibDeleteParams) WithName(name string) *TemplatesLibDeleteParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the templates lib delete params
+func (o *TemplatesLibDeleteParams) SetName(name string) {
+	o.Name = name
 }
 
 // WithScope adds the scope to the templates lib delete params
 func (o *TemplatesLibDeleteParams) WithScope(scope *string) *TemplatesLibDeleteParams {
-	o.Scope = scope
+	o.SetScope(scope)
 	return o
+}
+
+// SetScope adds the scope to the templates lib delete params
+func (o *TemplatesLibDeleteParams) SetScope(scope *string) {
+	o.Scope = scope
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *TemplatesLibDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param name

@@ -43,11 +43,14 @@ func (a *Client) HooksDelByID(params *HooksDelByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &HooksDelByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*HooksDelByIDNoContent), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) HooksGetAll(params *HooksGetAllParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &HooksGetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*HooksGetAllOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) HooksGetByID(params *HooksGetByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &HooksGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*HooksGetByIDOK), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) HooksPatchByID(params *HooksPatchByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &HooksPatchByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*HooksPatchByIDOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) HooksPost(params *HooksPostParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &HooksPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*HooksPostCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

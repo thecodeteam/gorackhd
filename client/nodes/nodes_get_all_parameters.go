@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -34,6 +37,25 @@ func NewNodesGetAllParamsWithTimeout(timeout time.Duration) *NodesGetAllParams {
 	}
 }
 
+// NewNodesGetAllParamsWithContext creates a new NodesGetAllParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesGetAllParamsWithContext(ctx context.Context) *NodesGetAllParams {
+	var ()
+	return &NodesGetAllParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesGetAllParamsWithHTTPClient creates a new NodesGetAllParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesGetAllParamsWithHTTPClient(client *http.Client) *NodesGetAllParams {
+	var ()
+	return &NodesGetAllParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesGetAllParams contains all the parameters to send to the API endpoint
 for the nodes get all operation typically these are written to a http.Request
 */
@@ -55,31 +77,83 @@ type NodesGetAllParams struct {
 	*/
 	Sort *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes get all params
+func (o *NodesGetAllParams) WithTimeout(timeout time.Duration) *NodesGetAllParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes get all params
+func (o *NodesGetAllParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes get all params
+func (o *NodesGetAllParams) WithContext(ctx context.Context) *NodesGetAllParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes get all params
+func (o *NodesGetAllParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes get all params
+func (o *NodesGetAllParams) WithHTTPClient(client *http.Client) *NodesGetAllParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes get all params
+func (o *NodesGetAllParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithDollarSkip adds the dollarSkip to the nodes get all params
 func (o *NodesGetAllParams) WithDollarSkip(dollarSkip *int64) *NodesGetAllParams {
-	o.DollarSkip = dollarSkip
+	o.SetDollarSkip(dollarSkip)
 	return o
+}
+
+// SetDollarSkip adds the dollarSkip to the nodes get all params
+func (o *NodesGetAllParams) SetDollarSkip(dollarSkip *int64) {
+	o.DollarSkip = dollarSkip
 }
 
 // WithDollarTop adds the dollarTop to the nodes get all params
 func (o *NodesGetAllParams) WithDollarTop(dollarTop *int64) *NodesGetAllParams {
-	o.DollarTop = dollarTop
+	o.SetDollarTop(dollarTop)
 	return o
+}
+
+// SetDollarTop adds the dollarTop to the nodes get all params
+func (o *NodesGetAllParams) SetDollarTop(dollarTop *int64) {
+	o.DollarTop = dollarTop
 }
 
 // WithSort adds the sort to the nodes get all params
 func (o *NodesGetAllParams) WithSort(sort *string) *NodesGetAllParams {
-	o.Sort = sort
+	o.SetSort(sort)
 	return o
+}
+
+// SetSort adds the sort to the nodes get all params
+func (o *NodesGetAllParams) SetSort(sort *string) {
+	o.Sort = sort
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesGetAllParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.DollarSkip != nil {

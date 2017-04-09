@@ -19,7 +19,7 @@ type WorkflowsGetGraphsReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsGetGraphsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *WorkflowsGetGraphsReader) ReadResponse(response runtime.ClientResponse,
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewWorkflowsGetGraphsOK() *WorkflowsGetGraphsOK {
 Successfully retrieved all workflow graphs
 */
 type WorkflowsGetGraphsOK struct {
-	Payload WorkflowsGetGraphsOKBodyBody
+	Payload WorkflowsGetGraphsOKBody
 }
 
 func (o *WorkflowsGetGraphsOK) Error() string {
@@ -104,8 +107,7 @@ func (o *WorkflowsGetGraphsDefault) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-/*WorkflowsGetGraphsOKBodyBody workflows get graphs o k body body
-
-swagger:model WorkflowsGetGraphsOKBodyBody
+/*WorkflowsGetGraphsOKBody workflows get graphs o k body
+swagger:model WorkflowsGetGraphsOKBody
 */
-type WorkflowsGetGraphsOKBodyBody interface{}
+type WorkflowsGetGraphsOKBody interface{}

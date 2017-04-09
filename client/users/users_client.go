@@ -43,11 +43,14 @@ func (a *Client) AddUser(params *AddUserParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &AddUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*AddUserCreated), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &GetUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetUserOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) ListUsers(params *ListUsersParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &ListUsersReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ListUsersOK), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) ModifyUser(params *ModifyUserParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &ModifyUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ModifyUserOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) RemoveUser(params *RemoveUserParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &RemoveUserReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*RemoveUserNoContent), nil
+
 }
 
 // SetTransport changes the transport on the client

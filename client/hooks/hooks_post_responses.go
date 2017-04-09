@@ -19,7 +19,7 @@ type HooksPostReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *HooksPostReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *HooksPostReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewHooksPostCreated() *HooksPostCreated {
 Successfully created new hook
 */
 type HooksPostCreated struct {
-	Payload HooksPostCreatedBodyBody
+	Payload HooksPostCreatedBody
 }
 
 func (o *HooksPostCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *HooksPostDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*HooksPostCreatedBodyBody hooks post created body body
-
-swagger:model HooksPostCreatedBodyBody
+/*HooksPostCreatedBody hooks post created body
+swagger:model HooksPostCreatedBody
 */
-type HooksPostCreatedBodyBody interface{}
+type HooksPostCreatedBody interface{}

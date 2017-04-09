@@ -19,7 +19,7 @@ type ObmsDefinitionsGetByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsDefinitionsGetByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ObmsDefinitionsGetByNameReader) ReadResponse(response runtime.ClientRes
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewObmsDefinitionsGetByNameOK() *ObmsDefinitionsGetByNameOK {
 Successfully retrieved the specified OBM schema
 */
 type ObmsDefinitionsGetByNameOK struct {
-	Payload ObmsDefinitionsGetByNameOKBodyBody
+	Payload ObmsDefinitionsGetByNameOKBody
 }
 
 func (o *ObmsDefinitionsGetByNameOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ObmsDefinitionsGetByNameDefault) readResponse(response runtime.ClientRe
 	return nil
 }
 
-/*ObmsDefinitionsGetByNameOKBodyBody obms definitions get by name o k body body
-
-swagger:model ObmsDefinitionsGetByNameOKBodyBody
+/*ObmsDefinitionsGetByNameOKBody obms definitions get by name o k body
+swagger:model ObmsDefinitionsGetByNameOKBody
 */
-type ObmsDefinitionsGetByNameOKBodyBody interface{}
+type ObmsDefinitionsGetByNameOKBody interface{}

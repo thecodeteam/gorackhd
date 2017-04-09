@@ -17,7 +17,7 @@ type ViewsPutReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ViewsPutReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -43,7 +43,7 @@ func NewViewsPutCreated() *ViewsPutCreated {
 Successfully created or modified the specified view.
 */
 type ViewsPutCreated struct {
-	Payload ViewsPutCreatedBodyBody
+	Payload ViewsPutCreatedBody
 }
 
 func (o *ViewsPutCreated) Error() string {
@@ -60,8 +60,7 @@ func (o *ViewsPutCreated) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-/*ViewsPutCreatedBodyBody views put created body body
-
-swagger:model ViewsPutCreatedBodyBody
+/*ViewsPutCreatedBody views put created body
+swagger:model ViewsPutCreatedBody
 */
-type ViewsPutCreatedBodyBody interface{}
+type ViewsPutCreatedBody interface{}

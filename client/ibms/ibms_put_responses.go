@@ -19,7 +19,7 @@ type IbmsPutReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsPutReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *IbmsPutReader) ReadResponse(response runtime.ClientResponse, consumer r
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewIbmsPutCreated() *IbmsPutCreated {
 Successfully put the IBM service
 */
 type IbmsPutCreated struct {
-	Payload IbmsPutCreatedBodyBody
+	Payload IbmsPutCreatedBody
 }
 
 func (o *IbmsPutCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *IbmsPutDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*IbmsPutCreatedBodyBody ibms put created body body
-
-swagger:model IbmsPutCreatedBodyBody
+/*IbmsPutCreatedBody ibms put created body
+swagger:model IbmsPutCreatedBody
 */
-type IbmsPutCreatedBodyBody interface{}
+type IbmsPutCreatedBody interface{}

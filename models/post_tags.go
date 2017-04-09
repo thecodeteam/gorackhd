@@ -4,28 +4,25 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*PostTags post tags
-
-swagger:model post_tags
-*/
+// PostTags post tags
+// swagger:model post_tags
 type PostTags struct {
 
-	/* name
-
-	Min Length: 1
-	*/
+	// name
+	// Min Length: 1
 	Name string `json:"name,omitempty"`
 
-	/* rules
-	 */
-	Rules []*TagRule `json:"rules,omitempty"`
+	// rules
+	Rules []*TagRule `json:"rules"`
 }
 
 // Validate validates this post tags
@@ -76,6 +73,9 @@ func (m *PostTags) validateRules(formats strfmt.Registry) error {
 		if m.Rules[i] != nil {
 
 			if err := m.Rules[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("rules" + "." + strconv.Itoa(i))
+				}
 				return err
 			}
 		}

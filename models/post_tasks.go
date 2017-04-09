@@ -4,25 +4,23 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"strconv"
+
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*PostTasks post tasks
-
-swagger:model post_tasks
-*/
+// PostTasks post tasks
+// swagger:model post_tasks
 type PostTasks struct {
 
-	/* identifier
-	 */
+	// identifier
 	Identifier string `json:"identifier,omitempty"`
 
-	/* tasks
-	 */
-	Tasks []*WorkflowTask `json:"tasks,omitempty"`
+	// tasks
+	Tasks []*WorkflowTask `json:"tasks"`
 }
 
 // Validate validates this post tasks
@@ -55,6 +53,9 @@ func (m *PostTasks) validateTasks(formats strfmt.Registry) error {
 		if m.Tasks[i] != nil {
 
 			if err := m.Tasks[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("tasks" + "." + strconv.Itoa(i))
+				}
 				return err
 			}
 		}

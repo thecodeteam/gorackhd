@@ -10,16 +10,12 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-/*VersionsResponse versions response
-
-swagger:model VersionsResponse
-*/
+// VersionsResponse versions response
+// swagger:model VersionsResponse
 type VersionsResponse struct {
 
-	/* message
-
-	Required: true
-	*/
+	// message
+	// Required: true
 	Message *string `json:"message"`
 }
 

@@ -19,7 +19,7 @@ type AddUserReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *AddUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *AddUserReader) ReadResponse(response runtime.ClientResponse, consumer r
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewAddUserCreated() *AddUserCreated {
 Successfully created the user
 */
 type AddUserCreated struct {
-	Payload AddUserCreatedBodyBody
+	Payload AddUserCreatedBody
 }
 
 func (o *AddUserCreated) Error() string {
@@ -90,7 +93,7 @@ func NewAddUserUnauthorized() *AddUserUnauthorized {
 Unauthorized
 */
 type AddUserUnauthorized struct {
-	Payload AddUserUnauthorizedBodyBody
+	Payload AddUserUnauthorizedBody
 }
 
 func (o *AddUserUnauthorized) Error() string {
@@ -117,7 +120,7 @@ func NewAddUserForbidden() *AddUserForbidden {
 Forbidden
 */
 type AddUserForbidden struct {
-	Payload AddUserForbiddenBodyBody
+	Payload AddUserForbiddenBody
 }
 
 func (o *AddUserForbidden) Error() string {
@@ -172,20 +175,17 @@ func (o *AddUserDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*AddUserForbiddenBodyBody add user forbidden body body
-
-swagger:model AddUserForbiddenBodyBody
+/*AddUserCreatedBody add user created body
+swagger:model AddUserCreatedBody
 */
-type AddUserForbiddenBodyBody interface{}
+type AddUserCreatedBody interface{}
 
-/*AddUserCreatedBodyBody add user created body body
-
-swagger:model AddUserCreatedBodyBody
+/*AddUserForbiddenBody add user forbidden body
+swagger:model AddUserForbiddenBody
 */
-type AddUserCreatedBodyBody interface{}
+type AddUserForbiddenBody interface{}
 
-/*AddUserUnauthorizedBodyBody add user unauthorized body body
-
-swagger:model AddUserUnauthorizedBodyBody
+/*AddUserUnauthorizedBody add user unauthorized body
+swagger:model AddUserUnauthorizedBody
 */
-type AddUserUnauthorizedBodyBody interface{}
+type AddUserUnauthorizedBody interface{}

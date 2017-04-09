@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewNodesDelTagByIDParamsWithTimeout(timeout time.Duration) *NodesDelTagByID
 	}
 }
 
+// NewNodesDelTagByIDParamsWithContext creates a new NodesDelTagByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesDelTagByIDParamsWithContext(ctx context.Context) *NodesDelTagByIDParams {
+	var ()
+	return &NodesDelTagByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesDelTagByIDParamsWithHTTPClient creates a new NodesDelTagByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesDelTagByIDParamsWithHTTPClient(client *http.Client) *NodesDelTagByIDParams {
+	var ()
+	return &NodesDelTagByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesDelTagByIDParams contains all the parameters to send to the API endpoint
 for the nodes del tag by Id operation typically these are written to a http.Request
 */
@@ -49,25 +71,72 @@ type NodesDelTagByIDParams struct {
 	*/
 	TagName string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) WithTimeout(timeout time.Duration) *NodesDelTagByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) WithContext(ctx context.Context) *NodesDelTagByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) WithHTTPClient(client *http.Client) *NodesDelTagByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the nodes del tag by Id params
 func (o *NodesDelTagByIDParams) WithIdentifier(identifier string) *NodesDelTagByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WithTagName adds the tagName to the nodes del tag by Id params
 func (o *NodesDelTagByIDParams) WithTagName(tagName string) *NodesDelTagByIDParams {
-	o.TagName = tagName
+	o.SetTagName(tagName)
 	return o
+}
+
+// SetTagName adds the tagName to the nodes del tag by Id params
+func (o *NodesDelTagByIDParams) SetTagName(tagName string) {
+	o.TagName = tagName
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesDelTagByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

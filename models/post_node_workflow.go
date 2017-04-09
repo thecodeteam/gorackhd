@@ -5,23 +5,19 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*PostNodeWorkflow post node workflow
-
-swagger:model post_node_workflow
-*/
+// PostNodeWorkflow post node workflow
+// swagger:model post_node_workflow
 type PostNodeWorkflow struct {
 
-	/* name
-	 */
+	// name
 	Name string `json:"name,omitempty"`
 
-	/* options
-	 */
+	// options
 	Options *PostNodeWorkflowOptions `json:"options,omitempty"`
 }
 
@@ -49,6 +45,9 @@ func (m *PostNodeWorkflow) validateOptions(formats strfmt.Registry) error {
 	if m.Options != nil {
 
 		if err := m.Options.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("options")
+			}
 			return err
 		}
 	}
@@ -56,14 +55,11 @@ func (m *PostNodeWorkflow) validateOptions(formats strfmt.Registry) error {
 	return nil
 }
 
-/*PostNodeWorkflowOptions post node workflow options
-
-swagger:model PostNodeWorkflowOptions
-*/
+// PostNodeWorkflowOptions post node workflow options
+// swagger:model PostNodeWorkflowOptions
 type PostNodeWorkflowOptions struct {
 
-	/* defaults
-	 */
+	// defaults
 	Defaults interface{} `json:"defaults,omitempty"`
 }
 

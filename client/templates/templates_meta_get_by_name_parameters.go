@@ -4,7 +4,10 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewTemplatesMetaGetByNameParamsWithTimeout(timeout time.Duration) *Template
 	}
 }
 
+// NewTemplatesMetaGetByNameParamsWithContext creates a new TemplatesMetaGetByNameParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewTemplatesMetaGetByNameParamsWithContext(ctx context.Context) *TemplatesMetaGetByNameParams {
+	var ()
+	return &TemplatesMetaGetByNameParams{
+
+		Context: ctx,
+	}
+}
+
+// NewTemplatesMetaGetByNameParamsWithHTTPClient creates a new TemplatesMetaGetByNameParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewTemplatesMetaGetByNameParamsWithHTTPClient(client *http.Client) *TemplatesMetaGetByNameParams {
+	var ()
+	return &TemplatesMetaGetByNameParams{
+		HTTPClient: client,
+	}
+}
+
 /*TemplatesMetaGetByNameParams contains all the parameters to send to the API endpoint
 for the templates meta get by name operation typically these are written to a http.Request
 */
@@ -49,25 +71,72 @@ type TemplatesMetaGetByNameParams struct {
 	*/
 	Scope *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) WithTimeout(timeout time.Duration) *TemplatesMetaGetByNameParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) WithContext(ctx context.Context) *TemplatesMetaGetByNameParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) WithHTTPClient(client *http.Client) *TemplatesMetaGetByNameParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithName adds the name to the templates meta get by name params
 func (o *TemplatesMetaGetByNameParams) WithName(name string) *TemplatesMetaGetByNameParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) SetName(name string) {
+	o.Name = name
 }
 
 // WithScope adds the scope to the templates meta get by name params
 func (o *TemplatesMetaGetByNameParams) WithScope(scope *string) *TemplatesMetaGetByNameParams {
-	o.Scope = scope
+	o.SetScope(scope)
 	return o
+}
+
+// SetScope adds the scope to the templates meta get by name params
+func (o *TemplatesMetaGetByNameParams) SetScope(scope *string) {
+	o.Scope = scope
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *TemplatesMetaGetByNameParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param name

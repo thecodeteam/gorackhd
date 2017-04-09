@@ -9,18 +9,14 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*GetUserObj get user obj
-
-swagger:model get_user_obj
-*/
+// GetUserObj get user obj
+// swagger:model get_user_obj
 type GetUserObj struct {
 
-	/* role
-	 */
+	// role
 	Role string `json:"role,omitempty"`
 
-	/* username
-	 */
+	// username
 	Username string `json:"username,omitempty"`
 }
 

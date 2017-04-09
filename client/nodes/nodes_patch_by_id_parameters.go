@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewNodesPatchByIDParamsWithTimeout(timeout time.Duration) *NodesPatchByIDPa
 	}
 }
 
+// NewNodesPatchByIDParamsWithContext creates a new NodesPatchByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesPatchByIDParamsWithContext(ctx context.Context) *NodesPatchByIDParams {
+	var ()
+	return &NodesPatchByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesPatchByIDParamsWithHTTPClient creates a new NodesPatchByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesPatchByIDParamsWithHTTPClient(client *http.Client) *NodesPatchByIDParams {
+	var ()
+	return &NodesPatchByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesPatchByIDParams contains all the parameters to send to the API endpoint
 for the nodes patch by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type NodesPatchByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes patch by Id params
+func (o *NodesPatchByIDParams) WithTimeout(timeout time.Duration) *NodesPatchByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes patch by Id params
+func (o *NodesPatchByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes patch by Id params
+func (o *NodesPatchByIDParams) WithContext(ctx context.Context) *NodesPatchByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes patch by Id params
+func (o *NodesPatchByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes patch by Id params
+func (o *NodesPatchByIDParams) WithHTTPClient(client *http.Client) *NodesPatchByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes patch by Id params
+func (o *NodesPatchByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the nodes patch by Id params
 func (o *NodesPatchByIDParams) WithBody(body *models.Node20PartialNode) *NodesPatchByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the nodes patch by Id params
+func (o *NodesPatchByIDParams) SetBody(body *models.Node20PartialNode) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the nodes patch by Id params
 func (o *NodesPatchByIDParams) WithIdentifier(identifier string) *NodesPatchByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes patch by Id params
+func (o *NodesPatchByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesPatchByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

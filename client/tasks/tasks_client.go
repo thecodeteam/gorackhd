@@ -43,11 +43,14 @@ func (a *Client) GetBootstrap(params *GetBootstrapParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &GetBootstrapReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetBootstrapOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) GetTasksByID(params *GetTasksByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &GetTasksByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetTasksByIDOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) PostTaskByID(params *PostTaskByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &PostTaskByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*PostTaskByIDCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

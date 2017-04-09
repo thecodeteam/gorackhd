@@ -4,7 +4,10 @@ package pollers
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewPollersPatchParamsWithTimeout(timeout time.Duration) *PollersPatchParams
 	}
 }
 
+// NewPollersPatchParamsWithContext creates a new PollersPatchParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewPollersPatchParamsWithContext(ctx context.Context) *PollersPatchParams {
+	var ()
+	return &PollersPatchParams{
+
+		Context: ctx,
+	}
+}
+
+// NewPollersPatchParamsWithHTTPClient creates a new PollersPatchParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewPollersPatchParamsWithHTTPClient(client *http.Client) *PollersPatchParams {
+	var ()
+	return &PollersPatchParams{
+		HTTPClient: client,
+	}
+}
+
 /*PollersPatchParams contains all the parameters to send to the API endpoint
 for the pollers patch operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type PollersPatchParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the pollers patch params
+func (o *PollersPatchParams) WithTimeout(timeout time.Duration) *PollersPatchParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the pollers patch params
+func (o *PollersPatchParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the pollers patch params
+func (o *PollersPatchParams) WithContext(ctx context.Context) *PollersPatchParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the pollers patch params
+func (o *PollersPatchParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the pollers patch params
+func (o *PollersPatchParams) WithHTTPClient(client *http.Client) *PollersPatchParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the pollers patch params
+func (o *PollersPatchParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithContent adds the content to the pollers patch params
 func (o *PollersPatchParams) WithContent(content *models.Poller20PartialPoller) *PollersPatchParams {
-	o.Content = content
+	o.SetContent(content)
 	return o
+}
+
+// SetContent adds the content to the pollers patch params
+func (o *PollersPatchParams) SetContent(content *models.Poller20PartialPoller) {
+	o.Content = content
 }
 
 // WithIdentifier adds the identifier to the pollers patch params
 func (o *PollersPatchParams) WithIdentifier(identifier string) *PollersPatchParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the pollers patch params
+func (o *PollersPatchParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *PollersPatchParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Content == nil {

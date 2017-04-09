@@ -4,7 +4,10 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewSkusIDDeletePackParamsWithTimeout(timeout time.Duration) *SkusIDDeletePa
 	}
 }
 
+// NewSkusIDDeletePackParamsWithContext creates a new SkusIDDeletePackParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewSkusIDDeletePackParamsWithContext(ctx context.Context) *SkusIDDeletePackParams {
+	var ()
+	return &SkusIDDeletePackParams{
+
+		Context: ctx,
+	}
+}
+
+// NewSkusIDDeletePackParamsWithHTTPClient creates a new SkusIDDeletePackParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewSkusIDDeletePackParamsWithHTTPClient(client *http.Client) *SkusIDDeletePackParams {
+	var ()
+	return &SkusIDDeletePackParams{
+		HTTPClient: client,
+	}
+}
+
 /*SkusIDDeletePackParams contains all the parameters to send to the API endpoint
 for the skus Id delete pack operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type SkusIDDeletePackParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) WithTimeout(timeout time.Duration) *SkusIDDeletePackParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) WithContext(ctx context.Context) *SkusIDDeletePackParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) WithHTTPClient(client *http.Client) *SkusIDDeletePackParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the skus Id delete pack params
 func (o *SkusIDDeletePackParams) WithIdentifier(identifier string) *SkusIDDeletePackParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the skus Id delete pack params
+func (o *SkusIDDeletePackParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *SkusIDDeletePackParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewWorkflowsDeleteByInstanceIDParamsWithTimeout(timeout time.Duration) *Wor
 	}
 }
 
+// NewWorkflowsDeleteByInstanceIDParamsWithContext creates a new WorkflowsDeleteByInstanceIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsDeleteByInstanceIDParamsWithContext(ctx context.Context) *WorkflowsDeleteByInstanceIDParams {
+	var ()
+	return &WorkflowsDeleteByInstanceIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsDeleteByInstanceIDParamsWithHTTPClient creates a new WorkflowsDeleteByInstanceIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsDeleteByInstanceIDParamsWithHTTPClient(client *http.Client) *WorkflowsDeleteByInstanceIDParams {
+	var ()
+	return &WorkflowsDeleteByInstanceIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsDeleteByInstanceIDParams contains all the parameters to send to the API endpoint
 for the workflows delete by instance Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type WorkflowsDeleteByInstanceIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) WithTimeout(timeout time.Duration) *WorkflowsDeleteByInstanceIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) WithContext(ctx context.Context) *WorkflowsDeleteByInstanceIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) WithHTTPClient(client *http.Client) *WorkflowsDeleteByInstanceIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the workflows delete by instance Id params
 func (o *WorkflowsDeleteByInstanceIDParams) WithIdentifier(identifier string) *WorkflowsDeleteByInstanceIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the workflows delete by instance Id params
+func (o *WorkflowsDeleteByInstanceIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsDeleteByInstanceIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

@@ -43,11 +43,14 @@ func (a *Client) NodesAddRelations(params *NodesAddRelationsParams, authInfo run
 		Params:             params,
 		Reader:             &NodesAddRelationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesAddRelationsOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) NodesDelByID(params *NodesDelByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &NodesDelByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesDelByIDNoContent), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) NodesDelRelations(params *NodesDelRelationsParams, authInfo run
 		Params:             params,
 		Reader:             &NodesDelRelationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesDelRelationsNoContent), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) NodesDelTagByID(params *NodesDelTagByIDParams, authInfo runtime
 		Params:             params,
 		Reader:             &NodesDelTagByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesDelTagByIDNoContent), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) NodesGetAll(params *NodesGetAllParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &NodesGetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetAllOK), nil
+
 }
 
 /*
@@ -183,11 +198,14 @@ func (a *Client) NodesGetByID(params *NodesGetByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &NodesGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetByIDOK), nil
+
 }
 
 /*
@@ -211,11 +229,14 @@ func (a *Client) NodesGetCatalogByID(params *NodesGetCatalogByIDParams, authInfo
 		Params:             params,
 		Reader:             &NodesGetCatalogByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetCatalogByIDOK), nil
+
 }
 
 /*
@@ -239,11 +260,14 @@ func (a *Client) NodesGetCatalogSourceByID(params *NodesGetCatalogSourceByIDPara
 		Params:             params,
 		Reader:             &NodesGetCatalogSourceByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetCatalogSourceByIDOK), nil
+
 }
 
 /*
@@ -267,11 +291,14 @@ func (a *Client) NodesGetObmsByNodeID(params *NodesGetObmsByNodeIDParams, authIn
 		Params:             params,
 		Reader:             &NodesGetObmsByNodeIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetObmsByNodeIDOK), nil
+
 }
 
 /*
@@ -295,11 +322,14 @@ func (a *Client) NodesGetPollersByID(params *NodesGetPollersByIDParams, authInfo
 		Params:             params,
 		Reader:             &NodesGetPollersByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetPollersByIDOK), nil
+
 }
 
 /*
@@ -323,11 +353,14 @@ func (a *Client) NodesGetRelations(params *NodesGetRelationsParams, authInfo run
 		Params:             params,
 		Reader:             &NodesGetRelationsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetRelationsOK), nil
+
 }
 
 /*
@@ -351,11 +384,14 @@ func (a *Client) NodesGetSSHByID(params *NodesGetSSHByIDParams, authInfo runtime
 		Params:             params,
 		Reader:             &NodesGetSSHByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetSSHByIDOK), nil
+
 }
 
 /*
@@ -379,11 +415,14 @@ func (a *Client) NodesGetTagsByID(params *NodesGetTagsByIDParams, authInfo runti
 		Params:             params,
 		Reader:             &NodesGetTagsByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetTagsByIDOK), nil
+
 }
 
 /*
@@ -408,11 +447,14 @@ func (a *Client) NodesGetWorkflowByID(params *NodesGetWorkflowByIDParams, authIn
 		Params:             params,
 		Reader:             &NodesGetWorkflowByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesGetWorkflowByIDOK), nil
+
 }
 
 /*
@@ -436,11 +478,14 @@ func (a *Client) NodesMasterDelTagByID(params *NodesMasterDelTagByIDParams, auth
 		Params:             params,
 		Reader:             &NodesMasterDelTagByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesMasterDelTagByIDNoContent), nil
+
 }
 
 /*
@@ -464,11 +509,14 @@ func (a *Client) NodesPatchByID(params *NodesPatchByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &NodesPatchByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPatchByIDOK), nil
+
 }
 
 /*
@@ -492,11 +540,14 @@ func (a *Client) NodesPatchTagByID(params *NodesPatchTagByIDParams, authInfo run
 		Params:             params,
 		Reader:             &NodesPatchTagByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPatchTagByIDOK), nil
+
 }
 
 /*
@@ -520,11 +571,14 @@ func (a *Client) NodesPost(params *NodesPostParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &NodesPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPostCreated), nil
+
 }
 
 /*
@@ -548,11 +602,14 @@ func (a *Client) NodesPostSSHByID(params *NodesPostSSHByIDParams, authInfo runti
 		Params:             params,
 		Reader:             &NodesPostSSHByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPostSSHByIDCreated), nil
+
 }
 
 /*
@@ -576,11 +633,14 @@ func (a *Client) NodesPostWorkflowByID(params *NodesPostWorkflowByIDParams, auth
 		Params:             params,
 		Reader:             &NodesPostWorkflowByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPostWorkflowByIDCreated), nil
+
 }
 
 /*
@@ -604,11 +664,14 @@ func (a *Client) NodesPutObmsByNodeID(params *NodesPutObmsByNodeIDParams, authIn
 		Params:             params,
 		Reader:             &NodesPutObmsByNodeIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesPutObmsByNodeIDCreated), nil
+
 }
 
 /*
@@ -633,11 +696,14 @@ func (a *Client) NodesWorkflowActionByID(params *NodesWorkflowActionByIDParams, 
 		Params:             params,
 		Reader:             &NodesWorkflowActionByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NodesWorkflowActionByIDAccepted), nil
+
 }
 
 // SetTransport changes the transport on the client

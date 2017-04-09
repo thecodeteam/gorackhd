@@ -9,26 +9,20 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*WorkflowGraphTask workflow graph task
-
-swagger:model workflow_graph_task
-*/
+// WorkflowGraphTask workflow graph task
+// swagger:model workflow_graph_task
 type WorkflowGraphTask struct {
 
-	/* ignore failure
-	 */
+	// ignore failure
 	IgnoreFailure bool `json:"ignoreFailure,omitempty"`
 
-	/* label
-	 */
+	// label
 	Label string `json:"label,omitempty"`
 
-	/* task name
-	 */
+	// task name
 	TaskName string `json:"taskName,omitempty"`
 
-	/* wait on
-	 */
+	// wait on
 	WaitOn interface{} `json:"waitOn,omitempty"`
 }
 

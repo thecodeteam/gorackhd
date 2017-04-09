@@ -43,11 +43,14 @@ func (a *Client) FilesDelete(params *FilesDeleteParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &FilesDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesDeleteNoContent), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) FilesGet(params *FilesGetParams, authInfo runtime.ClientAuthInf
 		Params:             params,
 		Reader:             &FilesGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesGetOK), nil
+
 }
 
 /*
@@ -99,11 +105,46 @@ func (a *Client) FilesGetAll(params *FilesGetAllParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &FilesGetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesGetAllOK), nil
+
+}
+
+/*
+FilesGetAllStatic lists all static files
+
+List all static files
+
+*/
+func (a *Client) FilesGetAllStatic(params *FilesGetAllStaticParams, authInfo runtime.ClientAuthInfoWriter) (*FilesGetAllStaticOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewFilesGetAllStaticParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "filesGetAllStatic",
+		Method:             "GET",
+		PathPattern:        "/files/static/list",
+		ProducesMediaTypes: []string{"application/json", "application/x-gzip"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &FilesGetAllStaticReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*FilesGetAllStaticOK), nil
+
 }
 
 /*
@@ -127,11 +168,14 @@ func (a *Client) FilesMd5Get(params *FilesMd5GetParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &FilesMd5GetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesMd5GetOK), nil
+
 }
 
 /*
@@ -155,11 +199,14 @@ func (a *Client) FilesMetadataGet(params *FilesMetadataGetParams, authInfo runti
 		Params:             params,
 		Reader:             &FilesMetadataGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesMetadataGetOK), nil
+
 }
 
 /*
@@ -183,11 +230,14 @@ func (a *Client) FilesPut(params *FilesPutParams, authInfo runtime.ClientAuthInf
 		Params:             params,
 		Reader:             &FilesPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*FilesPutCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

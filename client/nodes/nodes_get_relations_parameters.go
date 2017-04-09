@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewNodesGetRelationsParamsWithTimeout(timeout time.Duration) *NodesGetRelat
 	}
 }
 
+// NewNodesGetRelationsParamsWithContext creates a new NodesGetRelationsParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesGetRelationsParamsWithContext(ctx context.Context) *NodesGetRelationsParams {
+	var ()
+	return &NodesGetRelationsParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesGetRelationsParamsWithHTTPClient creates a new NodesGetRelationsParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesGetRelationsParamsWithHTTPClient(client *http.Client) *NodesGetRelationsParams {
+	var ()
+	return &NodesGetRelationsParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesGetRelationsParams contains all the parameters to send to the API endpoint
 for the nodes get relations operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type NodesGetRelationsParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes get relations params
+func (o *NodesGetRelationsParams) WithTimeout(timeout time.Duration) *NodesGetRelationsParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes get relations params
+func (o *NodesGetRelationsParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes get relations params
+func (o *NodesGetRelationsParams) WithContext(ctx context.Context) *NodesGetRelationsParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes get relations params
+func (o *NodesGetRelationsParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes get relations params
+func (o *NodesGetRelationsParams) WithHTTPClient(client *http.Client) *NodesGetRelationsParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes get relations params
+func (o *NodesGetRelationsParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the nodes get relations params
 func (o *NodesGetRelationsParams) WithIdentifier(identifier string) *NodesGetRelationsParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes get relations params
+func (o *NodesGetRelationsParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesGetRelationsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

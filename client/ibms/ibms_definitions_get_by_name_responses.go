@@ -19,7 +19,7 @@ type IbmsDefinitionsGetByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsDefinitionsGetByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *IbmsDefinitionsGetByNameReader) ReadResponse(response runtime.ClientRes
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewIbmsDefinitionsGetByNameOK() *IbmsDefinitionsGetByNameOK {
 Successfully retrieved the specified IBMS shcema
 */
 type IbmsDefinitionsGetByNameOK struct {
-	Payload IbmsDefinitionsGetByNameOKBodyBody
+	Payload IbmsDefinitionsGetByNameOKBody
 }
 
 func (o *IbmsDefinitionsGetByNameOK) Error() string {
@@ -104,8 +107,7 @@ func (o *IbmsDefinitionsGetByNameDefault) readResponse(response runtime.ClientRe
 	return nil
 }
 
-/*IbmsDefinitionsGetByNameOKBodyBody ibms definitions get by name o k body body
-
-swagger:model IbmsDefinitionsGetByNameOKBodyBody
+/*IbmsDefinitionsGetByNameOKBody ibms definitions get by name o k body
+swagger:model IbmsDefinitionsGetByNameOKBody
 */
-type IbmsDefinitionsGetByNameOKBodyBody interface{}
+type IbmsDefinitionsGetByNameOKBody interface{}

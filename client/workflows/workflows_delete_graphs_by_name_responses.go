@@ -19,7 +19,7 @@ type WorkflowsDeleteGraphsByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsDeleteGraphsByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *WorkflowsDeleteGraphsByNameReader) ReadResponse(response runtime.Client
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewWorkflowsDeleteGraphsByNameNoContent() *WorkflowsDeleteGraphsByNameNoCon
 Successfully deleted the specified workflow graph
 */
 type WorkflowsDeleteGraphsByNameNoContent struct {
-	Payload WorkflowsDeleteGraphsByNameNoContentBodyBody
+	Payload WorkflowsDeleteGraphsByNameNoContentBody
 }
 
 func (o *WorkflowsDeleteGraphsByNameNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *WorkflowsDeleteGraphsByNameDefault) readResponse(response runtime.Clien
 	return nil
 }
 
-/*WorkflowsDeleteGraphsByNameNoContentBodyBody workflows delete graphs by name no content body body
-
-swagger:model WorkflowsDeleteGraphsByNameNoContentBodyBody
+/*WorkflowsDeleteGraphsByNameNoContentBody workflows delete graphs by name no content body
+swagger:model WorkflowsDeleteGraphsByNameNoContentBody
 */
-type WorkflowsDeleteGraphsByNameNoContentBodyBody interface{}
+type WorkflowsDeleteGraphsByNameNoContentBody interface{}

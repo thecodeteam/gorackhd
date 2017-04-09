@@ -19,7 +19,7 @@ type FilesMd5GetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *FilesMd5GetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *FilesMd5GetReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewFilesMd5GetOK() *FilesMd5GetOK {
 Successfully retrieved the md5sum of the specified file
 */
 type FilesMd5GetOK struct {
-	Payload FilesMd5GetOKBodyBody
+	Payload FilesMd5GetOKBody
 }
 
 func (o *FilesMd5GetOK) Error() string {
@@ -176,8 +179,7 @@ func (o *FilesMd5GetDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*FilesMd5GetOKBodyBody files md5 get o k body body
-
-swagger:model FilesMd5GetOKBodyBody
+/*FilesMd5GetOKBody files md5 get o k body
+swagger:model FilesMd5GetOKBody
 */
-type FilesMd5GetOKBodyBody interface{}
+type FilesMd5GetOKBody interface{}

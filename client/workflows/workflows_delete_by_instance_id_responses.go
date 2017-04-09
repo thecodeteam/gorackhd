@@ -19,7 +19,7 @@ type WorkflowsDeleteByInstanceIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsDeleteByInstanceIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *WorkflowsDeleteByInstanceIDReader) ReadResponse(response runtime.Client
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewWorkflowsDeleteByInstanceIDNoContent() *WorkflowsDeleteByInstanceIDNoCon
 Successfully deleted the specified workflow
 */
 type WorkflowsDeleteByInstanceIDNoContent struct {
-	Payload WorkflowsDeleteByInstanceIDNoContentBodyBody
+	Payload WorkflowsDeleteByInstanceIDNoContentBody
 }
 
 func (o *WorkflowsDeleteByInstanceIDNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *WorkflowsDeleteByInstanceIDDefault) readResponse(response runtime.Clien
 	return nil
 }
 
-/*WorkflowsDeleteByInstanceIDNoContentBodyBody workflows delete by instance ID no content body body
-
-swagger:model WorkflowsDeleteByInstanceIDNoContentBodyBody
+/*WorkflowsDeleteByInstanceIDNoContentBody workflows delete by instance ID no content body
+swagger:model WorkflowsDeleteByInstanceIDNoContentBody
 */
-type WorkflowsDeleteByInstanceIDNoContentBodyBody interface{}
+type WorkflowsDeleteByInstanceIDNoContentBody interface{}

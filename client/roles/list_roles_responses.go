@@ -19,7 +19,7 @@ type ListRolesReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ListRolesReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -48,6 +48,9 @@ func (o *ListRolesReader) ReadResponse(response runtime.ClientResponse, consumer
 		result := NewListRolesDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
 		}
 		return nil, result
 	}
@@ -84,7 +87,7 @@ func NewListRolesUnauthorized() *ListRolesUnauthorized {
 Unauthorized
 */
 type ListRolesUnauthorized struct {
-	Payload ListRolesUnauthorizedBodyBody
+	Payload ListRolesUnauthorizedBody
 }
 
 func (o *ListRolesUnauthorized) Error() string {
@@ -111,7 +114,7 @@ func NewListRolesForbidden() *ListRolesForbidden {
 Forbidden
 */
 type ListRolesForbidden struct {
-	Payload ListRolesForbiddenBodyBody
+	Payload ListRolesForbiddenBody
 }
 
 func (o *ListRolesForbidden) Error() string {
@@ -166,14 +169,12 @@ func (o *ListRolesDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*ListRolesUnauthorizedBodyBody list roles unauthorized body body
-
-swagger:model ListRolesUnauthorizedBodyBody
+/*ListRolesForbiddenBody list roles forbidden body
+swagger:model ListRolesForbiddenBody
 */
-type ListRolesUnauthorizedBodyBody interface{}
+type ListRolesForbiddenBody interface{}
 
-/*ListRolesForbiddenBodyBody list roles forbidden body body
-
-swagger:model ListRolesForbiddenBodyBody
+/*ListRolesUnauthorizedBody list roles unauthorized body
+swagger:model ListRolesUnauthorizedBody
 */
-type ListRolesForbiddenBodyBody interface{}
+type ListRolesUnauthorizedBody interface{}

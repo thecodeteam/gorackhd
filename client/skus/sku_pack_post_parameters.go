@@ -4,7 +4,10 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,17 +36,73 @@ func NewSkuPackPostParamsWithTimeout(timeout time.Duration) *SkuPackPostParams {
 	}
 }
 
+// NewSkuPackPostParamsWithContext creates a new SkuPackPostParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewSkuPackPostParamsWithContext(ctx context.Context) *SkuPackPostParams {
+
+	return &SkuPackPostParams{
+
+		Context: ctx,
+	}
+}
+
+// NewSkuPackPostParamsWithHTTPClient creates a new SkuPackPostParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewSkuPackPostParamsWithHTTPClient(client *http.Client) *SkuPackPostParams {
+
+	return &SkuPackPostParams{
+		HTTPClient: client,
+	}
+}
+
 /*SkuPackPostParams contains all the parameters to send to the API endpoint
 for the sku pack post operation typically these are written to a http.Request
 */
 type SkuPackPostParams struct {
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the sku pack post params
+func (o *SkuPackPostParams) WithTimeout(timeout time.Duration) *SkuPackPostParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the sku pack post params
+func (o *SkuPackPostParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the sku pack post params
+func (o *SkuPackPostParams) WithContext(ctx context.Context) *SkuPackPostParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the sku pack post params
+func (o *SkuPackPostParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the sku pack post params
+func (o *SkuPackPostParams) WithHTTPClient(client *http.Client) *SkuPackPostParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the sku pack post params
+func (o *SkuPackPostParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *SkuPackPostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if len(res) > 0 {

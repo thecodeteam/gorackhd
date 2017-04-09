@@ -5,30 +5,24 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*Lookups20LookupBase A lookup record
-
-swagger:model Lookups.2.0_LookupBase
-*/
+// Lookups20LookupBase A lookup record
+// swagger:model Lookups.2.0_LookupBase
 type Lookups20LookupBase struct {
 
-	/* ip address
-	 */
+	// ip address
 	IPAddress strfmt.IPv4 `json:"ipAddress,omitempty"`
 
-	/* mac address
-
-	Pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
-	*/
+	// mac address
+	// Pattern: ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
 	MacAddress string `json:"macAddress,omitempty"`
 
-	/* node
-	 */
+	// node
 	Node string `json:"node,omitempty"`
 }
 

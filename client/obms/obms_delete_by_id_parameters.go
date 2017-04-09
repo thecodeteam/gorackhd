@@ -4,7 +4,10 @@ package obms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewObmsDeleteByIDParamsWithTimeout(timeout time.Duration) *ObmsDeleteByIDPa
 	}
 }
 
+// NewObmsDeleteByIDParamsWithContext creates a new ObmsDeleteByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewObmsDeleteByIDParamsWithContext(ctx context.Context) *ObmsDeleteByIDParams {
+	var ()
+	return &ObmsDeleteByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewObmsDeleteByIDParamsWithHTTPClient creates a new ObmsDeleteByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewObmsDeleteByIDParamsWithHTTPClient(client *http.Client) *ObmsDeleteByIDParams {
+	var ()
+	return &ObmsDeleteByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*ObmsDeleteByIDParams contains all the parameters to send to the API endpoint
 for the obms delete by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type ObmsDeleteByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) WithTimeout(timeout time.Duration) *ObmsDeleteByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) WithContext(ctx context.Context) *ObmsDeleteByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) WithHTTPClient(client *http.Client) *ObmsDeleteByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the obms delete by Id params
 func (o *ObmsDeleteByIDParams) WithIdentifier(identifier string) *ObmsDeleteByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the obms delete by Id params
+func (o *ObmsDeleteByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *ObmsDeleteByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

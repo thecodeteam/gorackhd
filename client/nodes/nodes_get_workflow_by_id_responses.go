@@ -19,7 +19,7 @@ type NodesGetWorkflowByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesGetWorkflowByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesGetWorkflowByIDReader) ReadResponse(response runtime.ClientRespons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesGetWorkflowByIDOK() *NodesGetWorkflowByIDOK {
 Successfully retrieved the workflows for specified node
 */
 type NodesGetWorkflowByIDOK struct {
-	Payload NodesGetWorkflowByIDOKBodyBody
+	Payload NodesGetWorkflowByIDOKBody
 }
 
 func (o *NodesGetWorkflowByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesGetWorkflowByIDDefault) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*NodesGetWorkflowByIDOKBodyBody nodes get workflow by ID o k body body
-
-swagger:model NodesGetWorkflowByIDOKBodyBody
+/*NodesGetWorkflowByIDOKBody nodes get workflow by ID o k body
+swagger:model NodesGetWorkflowByIDOKBody
 */
-type NodesGetWorkflowByIDOKBodyBody interface{}
+type NodesGetWorkflowByIDOKBody interface{}

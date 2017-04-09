@@ -19,7 +19,7 @@ type ProfilesGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ProfilesGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ProfilesGetReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewProfilesGetOK() *ProfilesGetOK {
 Successfully retrieved a list of profiles for specified mac / ip
 */
 type ProfilesGetOK struct {
-	Payload ProfilesGetOKBodyBody
+	Payload ProfilesGetOKBody
 }
 
 func (o *ProfilesGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ProfilesGetDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*ProfilesGetOKBodyBody profiles get o k body body
-
-swagger:model ProfilesGetOKBodyBody
+/*ProfilesGetOKBody profiles get o k body
+swagger:model ProfilesGetOKBody
 */
-type ProfilesGetOKBodyBody interface{}
+type ProfilesGetOKBody interface{}

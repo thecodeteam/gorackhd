@@ -4,7 +4,10 @@ package lookups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewLookupsGetParamsWithTimeout(timeout time.Duration) *LookupsGetParams {
 	}
 }
 
+// NewLookupsGetParamsWithContext creates a new LookupsGetParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewLookupsGetParamsWithContext(ctx context.Context) *LookupsGetParams {
+	var ()
+	return &LookupsGetParams{
+
+		Context: ctx,
+	}
+}
+
+// NewLookupsGetParamsWithHTTPClient creates a new LookupsGetParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewLookupsGetParamsWithHTTPClient(client *http.Client) *LookupsGetParams {
+	var ()
+	return &LookupsGetParams{
+		HTTPClient: client,
+	}
+}
+
 /*LookupsGetParams contains all the parameters to send to the API endpoint
 for the lookups get operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type LookupsGetParams struct {
 	*/
 	Q *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the lookups get params
+func (o *LookupsGetParams) WithTimeout(timeout time.Duration) *LookupsGetParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the lookups get params
+func (o *LookupsGetParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the lookups get params
+func (o *LookupsGetParams) WithContext(ctx context.Context) *LookupsGetParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the lookups get params
+func (o *LookupsGetParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the lookups get params
+func (o *LookupsGetParams) WithHTTPClient(client *http.Client) *LookupsGetParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the lookups get params
+func (o *LookupsGetParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithQ adds the q to the lookups get params
 func (o *LookupsGetParams) WithQ(q *string) *LookupsGetParams {
-	o.Q = q
+	o.SetQ(q)
 	return o
+}
+
+// SetQ adds the q to the lookups get params
+func (o *LookupsGetParams) SetQ(q *string) {
+	o.Q = q
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *LookupsGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Q != nil {

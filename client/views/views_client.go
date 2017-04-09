@@ -43,11 +43,14 @@ func (a *Client) ViewsDelete(params *ViewsDeleteParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &ViewsDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ViewsDeleteNoContent), nil
+
 }
 
 /*
@@ -72,11 +75,14 @@ func (a *Client) ViewsGet(params *ViewsGetParams, authInfo runtime.ClientAuthInf
 		Params:             params,
 		Reader:             &ViewsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ViewsGetOK), nil
+
 }
 
 /*
@@ -100,11 +106,14 @@ func (a *Client) ViewsGetByID(params *ViewsGetByIDParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &ViewsGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ViewsGetByIDOK), nil
+
 }
 
 /*
@@ -128,11 +137,14 @@ func (a *Client) ViewsPut(params *ViewsPutParams, authInfo runtime.ClientAuthInf
 		Params:             params,
 		Reader:             &ViewsPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ViewsPutCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

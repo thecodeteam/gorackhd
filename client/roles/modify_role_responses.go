@@ -19,7 +19,7 @@ type ModifyRoleReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ModifyRoleReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *ModifyRoleReader) ReadResponse(response runtime.ClientResponse, consume
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewModifyRoleOK() *ModifyRoleOK {
 Successfully modified the role
 */
 type ModifyRoleOK struct {
-	Payload ModifyRoleOKBodyBody
+	Payload ModifyRoleOKBody
 }
 
 func (o *ModifyRoleOK) Error() string {
@@ -90,7 +93,7 @@ func NewModifyRoleUnauthorized() *ModifyRoleUnauthorized {
 Unauthorized
 */
 type ModifyRoleUnauthorized struct {
-	Payload ModifyRoleUnauthorizedBodyBody
+	Payload ModifyRoleUnauthorizedBody
 }
 
 func (o *ModifyRoleUnauthorized) Error() string {
@@ -117,7 +120,7 @@ func NewModifyRoleForbidden() *ModifyRoleForbidden {
 Forbidden
 */
 type ModifyRoleForbidden struct {
-	Payload ModifyRoleForbiddenBodyBody
+	Payload ModifyRoleForbiddenBody
 }
 
 func (o *ModifyRoleForbidden) Error() string {
@@ -172,20 +175,17 @@ func (o *ModifyRoleDefault) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*ModifyRoleForbiddenBodyBody modify role forbidden body body
-
-swagger:model ModifyRoleForbiddenBodyBody
+/*ModifyRoleForbiddenBody modify role forbidden body
+swagger:model ModifyRoleForbiddenBody
 */
-type ModifyRoleForbiddenBodyBody interface{}
+type ModifyRoleForbiddenBody interface{}
 
-/*ModifyRoleOKBodyBody modify role o k body body
-
-swagger:model ModifyRoleOKBodyBody
+/*ModifyRoleOKBody modify role o k body
+swagger:model ModifyRoleOKBody
 */
-type ModifyRoleOKBodyBody interface{}
+type ModifyRoleOKBody interface{}
 
-/*ModifyRoleUnauthorizedBodyBody modify role unauthorized body body
-
-swagger:model ModifyRoleUnauthorizedBodyBody
+/*ModifyRoleUnauthorizedBody modify role unauthorized body
+swagger:model ModifyRoleUnauthorizedBody
 */
-type ModifyRoleUnauthorizedBodyBody interface{}
+type ModifyRoleUnauthorizedBody interface{}

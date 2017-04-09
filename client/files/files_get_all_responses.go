@@ -19,7 +19,7 @@ type FilesGetAllReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *FilesGetAllReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *FilesGetAllReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewFilesGetAllOK() *FilesGetAllOK {
 Successfully retrieved the files
 */
 type FilesGetAllOK struct {
-	Payload FilesGetAllOKBodyBody
+	Payload FilesGetAllOKBody
 }
 
 func (o *FilesGetAllOK) Error() string {
@@ -140,8 +143,7 @@ func (o *FilesGetAllDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*FilesGetAllOKBodyBody files get all o k body body
-
-swagger:model FilesGetAllOKBodyBody
+/*FilesGetAllOKBody files get all o k body
+swagger:model FilesGetAllOKBody
 */
-type FilesGetAllOKBodyBody interface{}
+type FilesGetAllOKBody interface{}

@@ -4,7 +4,10 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewRemoveUserParamsWithTimeout(timeout time.Duration) *RemoveUserParams {
 	}
 }
 
+// NewRemoveUserParamsWithContext creates a new RemoveUserParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewRemoveUserParamsWithContext(ctx context.Context) *RemoveUserParams {
+	var ()
+	return &RemoveUserParams{
+
+		Context: ctx,
+	}
+}
+
+// NewRemoveUserParamsWithHTTPClient creates a new RemoveUserParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewRemoveUserParamsWithHTTPClient(client *http.Client) *RemoveUserParams {
+	var ()
+	return &RemoveUserParams{
+		HTTPClient: client,
+	}
+}
+
 /*RemoveUserParams contains all the parameters to send to the API endpoint
 for the remove user operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type RemoveUserParams struct {
 	*/
 	Name string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the remove user params
+func (o *RemoveUserParams) WithTimeout(timeout time.Duration) *RemoveUserParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the remove user params
+func (o *RemoveUserParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the remove user params
+func (o *RemoveUserParams) WithContext(ctx context.Context) *RemoveUserParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the remove user params
+func (o *RemoveUserParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the remove user params
+func (o *RemoveUserParams) WithHTTPClient(client *http.Client) *RemoveUserParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the remove user params
+func (o *RemoveUserParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithName adds the name to the remove user params
 func (o *RemoveUserParams) WithName(name string) *RemoveUserParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the remove user params
+func (o *RemoveUserParams) SetName(name string) {
+	o.Name = name
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *RemoveUserParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param name

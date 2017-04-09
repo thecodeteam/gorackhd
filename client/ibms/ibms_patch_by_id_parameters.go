@@ -4,7 +4,10 @@ package ibms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewIbmsPatchByIDParamsWithTimeout(timeout time.Duration) *IbmsPatchByIDPara
 	}
 }
 
+// NewIbmsPatchByIDParamsWithContext creates a new IbmsPatchByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewIbmsPatchByIDParamsWithContext(ctx context.Context) *IbmsPatchByIDParams {
+	var ()
+	return &IbmsPatchByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewIbmsPatchByIDParamsWithHTTPClient creates a new IbmsPatchByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewIbmsPatchByIDParamsWithHTTPClient(client *http.Client) *IbmsPatchByIDParams {
+	var ()
+	return &IbmsPatchByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*IbmsPatchByIDParams contains all the parameters to send to the API endpoint
 for the ibms patch by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type IbmsPatchByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) WithTimeout(timeout time.Duration) *IbmsPatchByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) WithContext(ctx context.Context) *IbmsPatchByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) WithHTTPClient(client *http.Client) *IbmsPatchByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the ibms patch by Id params
 func (o *IbmsPatchByIDParams) WithBody(body *models.SSHIbmServiceIbm) *IbmsPatchByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) SetBody(body *models.SSHIbmServiceIbm) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the ibms patch by Id params
 func (o *IbmsPatchByIDParams) WithIdentifier(identifier string) *IbmsPatchByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the ibms patch by Id params
+func (o *IbmsPatchByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *IbmsPatchByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

@@ -19,7 +19,7 @@ type ModifyUserReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ModifyUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *ModifyUserReader) ReadResponse(response runtime.ClientResponse, consume
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewModifyUserOK() *ModifyUserOK {
 Successfully modified the specified user.
 */
 type ModifyUserOK struct {
-	Payload ModifyUserOKBodyBody
+	Payload ModifyUserOKBody
 }
 
 func (o *ModifyUserOK) Error() string {
@@ -90,7 +93,7 @@ func NewModifyUserUnauthorized() *ModifyUserUnauthorized {
 Unauthorized
 */
 type ModifyUserUnauthorized struct {
-	Payload ModifyUserUnauthorizedBodyBody
+	Payload ModifyUserUnauthorizedBody
 }
 
 func (o *ModifyUserUnauthorized) Error() string {
@@ -117,7 +120,7 @@ func NewModifyUserForbidden() *ModifyUserForbidden {
 Forbidden
 */
 type ModifyUserForbidden struct {
-	Payload ModifyUserForbiddenBodyBody
+	Payload ModifyUserForbiddenBody
 }
 
 func (o *ModifyUserForbidden) Error() string {
@@ -172,20 +175,17 @@ func (o *ModifyUserDefault) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*ModifyUserForbiddenBodyBody modify user forbidden body body
-
-swagger:model ModifyUserForbiddenBodyBody
+/*ModifyUserForbiddenBody modify user forbidden body
+swagger:model ModifyUserForbiddenBody
 */
-type ModifyUserForbiddenBodyBody interface{}
+type ModifyUserForbiddenBody interface{}
 
-/*ModifyUserOKBodyBody modify user o k body body
-
-swagger:model ModifyUserOKBodyBody
+/*ModifyUserOKBody modify user o k body
+swagger:model ModifyUserOKBody
 */
-type ModifyUserOKBodyBody interface{}
+type ModifyUserOKBody interface{}
 
-/*ModifyUserUnauthorizedBodyBody modify user unauthorized body body
-
-swagger:model ModifyUserUnauthorizedBodyBody
+/*ModifyUserUnauthorizedBody modify user unauthorized body
+swagger:model ModifyUserUnauthorizedBody
 */
-type ModifyUserUnauthorizedBodyBody interface{}
+type ModifyUserUnauthorizedBody interface{}

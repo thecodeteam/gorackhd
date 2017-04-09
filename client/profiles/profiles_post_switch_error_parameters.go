@@ -4,7 +4,10 @@ package profiles
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewProfilesPostSwitchErrorParamsWithTimeout(timeout time.Duration) *Profile
 	}
 }
 
+// NewProfilesPostSwitchErrorParamsWithContext creates a new ProfilesPostSwitchErrorParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewProfilesPostSwitchErrorParamsWithContext(ctx context.Context) *ProfilesPostSwitchErrorParams {
+	var ()
+	return &ProfilesPostSwitchErrorParams{
+
+		Context: ctx,
+	}
+}
+
+// NewProfilesPostSwitchErrorParamsWithHTTPClient creates a new ProfilesPostSwitchErrorParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewProfilesPostSwitchErrorParamsWithHTTPClient(client *http.Client) *ProfilesPostSwitchErrorParams {
+	var ()
+	return &ProfilesPostSwitchErrorParams{
+		HTTPClient: client,
+	}
+}
+
 /*ProfilesPostSwitchErrorParams contains all the parameters to send to the API endpoint
 for the profiles post switch error operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type ProfilesPostSwitchErrorParams struct {
 	*/
 	Body models.GenericObj
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) WithTimeout(timeout time.Duration) *ProfilesPostSwitchErrorParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) WithContext(ctx context.Context) *ProfilesPostSwitchErrorParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) WithHTTPClient(client *http.Client) *ProfilesPostSwitchErrorParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the profiles post switch error params
 func (o *ProfilesPostSwitchErrorParams) WithBody(body models.GenericObj) *ProfilesPostSwitchErrorParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the profiles post switch error params
+func (o *ProfilesPostSwitchErrorParams) SetBody(body models.GenericObj) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *ProfilesPostSwitchErrorParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if err := r.SetBodyParam(o.Body); err != nil {

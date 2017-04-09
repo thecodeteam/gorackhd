@@ -19,7 +19,7 @@ type WorkflowsActionReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsActionReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *WorkflowsActionReader) ReadResponse(response runtime.ClientResponse, co
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewWorkflowsActionAccepted() *WorkflowsActionAccepted {
 Successfully performed the action on the specified workflow
 */
 type WorkflowsActionAccepted struct {
-	Payload WorkflowsActionAcceptedBodyBody
+	Payload WorkflowsActionAcceptedBody
 }
 
 func (o *WorkflowsActionAccepted) Error() string {
@@ -140,8 +143,7 @@ func (o *WorkflowsActionDefault) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*WorkflowsActionAcceptedBodyBody workflows action accepted body body
-
-swagger:model WorkflowsActionAcceptedBodyBody
+/*WorkflowsActionAcceptedBody workflows action accepted body
+swagger:model WorkflowsActionAcceptedBody
 */
-type WorkflowsActionAcceptedBodyBody interface{}
+type WorkflowsActionAcceptedBody interface{}

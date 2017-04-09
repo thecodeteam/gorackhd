@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewNodesPostSSHByIDParamsWithTimeout(timeout time.Duration) *NodesPostSSHBy
 	}
 }
 
+// NewNodesPostSSHByIDParamsWithContext creates a new NodesPostSSHByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesPostSSHByIDParamsWithContext(ctx context.Context) *NodesPostSSHByIDParams {
+	var ()
+	return &NodesPostSSHByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesPostSSHByIDParamsWithHTTPClient creates a new NodesPostSSHByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesPostSSHByIDParamsWithHTTPClient(client *http.Client) *NodesPostSSHByIDParams {
+	var ()
+	return &NodesPostSSHByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesPostSSHByIDParams contains all the parameters to send to the API endpoint
 for the nodes post Ssh by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type NodesPostSSHByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) WithTimeout(timeout time.Duration) *NodesPostSSHByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) WithContext(ctx context.Context) *NodesPostSSHByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) WithHTTPClient(client *http.Client) *NodesPostSSHByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the nodes post Ssh by Id params
 func (o *NodesPostSSHByIDParams) WithBody(body *models.SSHIbmServiceIbm) *NodesPostSSHByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) SetBody(body *models.SSHIbmServiceIbm) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the nodes post Ssh by Id params
 func (o *NodesPostSSHByIDParams) WithIdentifier(identifier string) *NodesPostSSHByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes post Ssh by Id params
+func (o *NodesPostSSHByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesPostSSHByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

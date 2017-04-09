@@ -19,7 +19,7 @@ type NodesGetCatalogByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesGetCatalogByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesGetCatalogByIDReader) ReadResponse(response runtime.ClientResponse
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesGetCatalogByIDOK() *NodesGetCatalogByIDOK {
 Successfully retrieved catalogs of specified node
 */
 type NodesGetCatalogByIDOK struct {
-	Payload NodesGetCatalogByIDOKBodyBody
+	Payload NodesGetCatalogByIDOKBody
 }
 
 func (o *NodesGetCatalogByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesGetCatalogByIDDefault) readResponse(response runtime.ClientRespons
 	return nil
 }
 
-/*NodesGetCatalogByIDOKBodyBody nodes get catalog by ID o k body body
-
-swagger:model NodesGetCatalogByIDOKBodyBody
+/*NodesGetCatalogByIDOKBody nodes get catalog by ID o k body
+swagger:model NodesGetCatalogByIDOKBody
 */
-type NodesGetCatalogByIDOKBodyBody interface{}
+type NodesGetCatalogByIDOKBody interface{}

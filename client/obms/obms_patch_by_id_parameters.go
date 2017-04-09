@@ -4,7 +4,10 @@ package obms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewObmsPatchByIDParamsWithTimeout(timeout time.Duration) *ObmsPatchByIDPara
 	}
 }
 
+// NewObmsPatchByIDParamsWithContext creates a new ObmsPatchByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewObmsPatchByIDParamsWithContext(ctx context.Context) *ObmsPatchByIDParams {
+	var ()
+	return &ObmsPatchByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewObmsPatchByIDParamsWithHTTPClient creates a new ObmsPatchByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewObmsPatchByIDParamsWithHTTPClient(client *http.Client) *ObmsPatchByIDParams {
+	var ()
+	return &ObmsPatchByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*ObmsPatchByIDParams contains all the parameters to send to the API endpoint
 for the obms patch by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type ObmsPatchByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the obms patch by Id params
+func (o *ObmsPatchByIDParams) WithTimeout(timeout time.Duration) *ObmsPatchByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the obms patch by Id params
+func (o *ObmsPatchByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the obms patch by Id params
+func (o *ObmsPatchByIDParams) WithContext(ctx context.Context) *ObmsPatchByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the obms patch by Id params
+func (o *ObmsPatchByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the obms patch by Id params
+func (o *ObmsPatchByIDParams) WithHTTPClient(client *http.Client) *ObmsPatchByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the obms patch by Id params
+func (o *ObmsPatchByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the obms patch by Id params
 func (o *ObmsPatchByIDParams) WithBody(body *models.IPMIObmServiceObm) *ObmsPatchByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the obms patch by Id params
+func (o *ObmsPatchByIDParams) SetBody(body *models.IPMIObmServiceObm) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the obms patch by Id params
 func (o *ObmsPatchByIDParams) WithIdentifier(identifier string) *ObmsPatchByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the obms patch by Id params
+func (o *ObmsPatchByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *ObmsPatchByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

@@ -19,7 +19,7 @@ type ProfilesPutLibByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ProfilesPutLibByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ProfilesPutLibByNameReader) ReadResponse(response runtime.ClientRespons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewProfilesPutLibByNameCreated() *ProfilesPutLibByNameCreated {
 Successfully created or modified the specified profile
 */
 type ProfilesPutLibByNameCreated struct {
-	Payload ProfilesPutLibByNameCreatedBodyBody
+	Payload ProfilesPutLibByNameCreatedBody
 }
 
 func (o *ProfilesPutLibByNameCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *ProfilesPutLibByNameDefault) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*ProfilesPutLibByNameCreatedBodyBody profiles put lib by name created body body
-
-swagger:model ProfilesPutLibByNameCreatedBodyBody
+/*ProfilesPutLibByNameCreatedBody profiles put lib by name created body
+swagger:model ProfilesPutLibByNameCreatedBody
 */
-type ProfilesPutLibByNameCreatedBodyBody interface{}
+type ProfilesPutLibByNameCreatedBody interface{}

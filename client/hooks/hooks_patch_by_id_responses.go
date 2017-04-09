@@ -19,7 +19,7 @@ type HooksPatchByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *HooksPatchByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *HooksPatchByIDReader) ReadResponse(response runtime.ClientResponse, con
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewHooksPatchByIDOK() *HooksPatchByIDOK {
 Successfully modified the hook
 */
 type HooksPatchByIDOK struct {
-	Payload HooksPatchByIDOKBodyBody
+	Payload HooksPatchByIDOKBody
 }
 
 func (o *HooksPatchByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *HooksPatchByIDDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*HooksPatchByIDOKBodyBody hooks patch by ID o k body body
-
-swagger:model HooksPatchByIDOKBodyBody
+/*HooksPatchByIDOKBody hooks patch by ID o k body
+swagger:model HooksPatchByIDOKBody
 */
-type HooksPatchByIDOKBodyBody interface{}
+type HooksPatchByIDOKBody interface{}

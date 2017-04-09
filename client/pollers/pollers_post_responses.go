@@ -19,7 +19,7 @@ type PollersPostReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *PollersPostReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *PollersPostReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewPollersPostCreated() *PollersPostCreated {
 Poller created successfully
 */
 type PollersPostCreated struct {
-	Payload PollersPostCreatedBodyBody
+	Payload PollersPostCreatedBody
 }
 
 func (o *PollersPostCreated) Error() string {
@@ -104,8 +107,7 @@ func (o *PollersPostDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*PollersPostCreatedBodyBody pollers post created body body
-
-swagger:model PollersPostCreatedBodyBody
+/*PollersPostCreatedBody pollers post created body
+swagger:model PollersPostCreatedBody
 */
-type PollersPostCreatedBodyBody interface{}
+type PollersPostCreatedBody interface{}

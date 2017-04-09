@@ -19,7 +19,7 @@ type TemplatesMetaGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TemplatesMetaGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *TemplatesMetaGetReader) ReadResponse(response runtime.ClientResponse, c
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewTemplatesMetaGetOK() *TemplatesMetaGetOK {
 Successfully retrieved all template metadata
 */
 type TemplatesMetaGetOK struct {
-	Payload TemplatesMetaGetOKBodyBody
+	Payload TemplatesMetaGetOKBody
 }
 
 func (o *TemplatesMetaGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *TemplatesMetaGetDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*TemplatesMetaGetOKBodyBody templates meta get o k body body
-
-swagger:model TemplatesMetaGetOKBodyBody
+/*TemplatesMetaGetOKBody templates meta get o k body
+swagger:model TemplatesMetaGetOKBody
 */
-type TemplatesMetaGetOKBodyBody interface{}
+type TemplatesMetaGetOKBody interface{}

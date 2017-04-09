@@ -43,11 +43,14 @@ func (a *Client) LookupsDelByID(params *LookupsDelByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &LookupsDelByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*LookupsDelByIDNoContent), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) LookupsGet(params *LookupsGetParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &LookupsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*LookupsGetOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) LookupsGetByID(params *LookupsGetByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &LookupsGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*LookupsGetByIDOK), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) LookupsPatchByID(params *LookupsPatchByIDParams, authInfo runti
 		Params:             params,
 		Reader:             &LookupsPatchByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*LookupsPatchByIDOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) LookupsPost(params *LookupsPostParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &LookupsPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*LookupsPostCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

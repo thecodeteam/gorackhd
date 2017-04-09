@@ -4,7 +4,10 @@ package obms
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,17 +36,73 @@ func NewObmsDefinitionsGetAllParamsWithTimeout(timeout time.Duration) *ObmsDefin
 	}
 }
 
+// NewObmsDefinitionsGetAllParamsWithContext creates a new ObmsDefinitionsGetAllParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewObmsDefinitionsGetAllParamsWithContext(ctx context.Context) *ObmsDefinitionsGetAllParams {
+
+	return &ObmsDefinitionsGetAllParams{
+
+		Context: ctx,
+	}
+}
+
+// NewObmsDefinitionsGetAllParamsWithHTTPClient creates a new ObmsDefinitionsGetAllParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewObmsDefinitionsGetAllParamsWithHTTPClient(client *http.Client) *ObmsDefinitionsGetAllParams {
+
+	return &ObmsDefinitionsGetAllParams{
+		HTTPClient: client,
+	}
+}
+
 /*ObmsDefinitionsGetAllParams contains all the parameters to send to the API endpoint
 for the obms definitions get all operation typically these are written to a http.Request
 */
 type ObmsDefinitionsGetAllParams struct {
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) WithTimeout(timeout time.Duration) *ObmsDefinitionsGetAllParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) WithContext(ctx context.Context) *ObmsDefinitionsGetAllParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) WithHTTPClient(client *http.Client) *ObmsDefinitionsGetAllParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the obms definitions get all params
+func (o *ObmsDefinitionsGetAllParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *ObmsDefinitionsGetAllParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if len(res) > 0 {

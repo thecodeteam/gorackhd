@@ -9,26 +9,20 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*Obm obm
-
-swagger:model obm
-*/
+// Obm obm
+// swagger:model obm
 type Obm struct {
 
-	/* config
-	 */
+	// config
 	Config interface{} `json:"config,omitempty"`
 
-	/* id
-	 */
+	// id
 	ID string `json:"id,omitempty"`
 
-	/* node
-	 */
+	// node
 	Node string `json:"node,omitempty"`
 
-	/* service
-	 */
+	// service
 	Service string `json:"service,omitempty"`
 }
 

@@ -4,7 +4,10 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewSkusPutParamsWithTimeout(timeout time.Duration) *SkusPutParams {
 	}
 }
 
+// NewSkusPutParamsWithContext creates a new SkusPutParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewSkusPutParamsWithContext(ctx context.Context) *SkusPutParams {
+	var ()
+	return &SkusPutParams{
+
+		Context: ctx,
+	}
+}
+
+// NewSkusPutParamsWithHTTPClient creates a new SkusPutParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewSkusPutParamsWithHTTPClient(client *http.Client) *SkusPutParams {
+	var ()
+	return &SkusPutParams{
+		HTTPClient: client,
+	}
+}
+
 /*SkusPutParams contains all the parameters to send to the API endpoint
 for the skus put operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type SkusPutParams struct {
 	*/
 	Body *models.Skus20SkusUpsert
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the skus put params
+func (o *SkusPutParams) WithTimeout(timeout time.Duration) *SkusPutParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the skus put params
+func (o *SkusPutParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the skus put params
+func (o *SkusPutParams) WithContext(ctx context.Context) *SkusPutParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the skus put params
+func (o *SkusPutParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the skus put params
+func (o *SkusPutParams) WithHTTPClient(client *http.Client) *SkusPutParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the skus put params
+func (o *SkusPutParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the skus put params
 func (o *SkusPutParams) WithBody(body *models.Skus20SkusUpsert) *SkusPutParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the skus put params
+func (o *SkusPutParams) SetBody(body *models.Skus20SkusUpsert) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *SkusPutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

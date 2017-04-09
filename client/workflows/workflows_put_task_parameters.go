@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewWorkflowsPutTaskParamsWithTimeout(timeout time.Duration) *WorkflowsPutTa
 	}
 }
 
+// NewWorkflowsPutTaskParamsWithContext creates a new WorkflowsPutTaskParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsPutTaskParamsWithContext(ctx context.Context) *WorkflowsPutTaskParams {
+	var ()
+	return &WorkflowsPutTaskParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsPutTaskParamsWithHTTPClient creates a new WorkflowsPutTaskParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsPutTaskParamsWithHTTPClient(client *http.Client) *WorkflowsPutTaskParams {
+	var ()
+	return &WorkflowsPutTaskParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsPutTaskParams contains all the parameters to send to the API endpoint
 for the workflows put task operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type WorkflowsPutTaskParams struct {
 	*/
 	Body *models.WorkflowTask
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows put task params
+func (o *WorkflowsPutTaskParams) WithTimeout(timeout time.Duration) *WorkflowsPutTaskParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows put task params
+func (o *WorkflowsPutTaskParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows put task params
+func (o *WorkflowsPutTaskParams) WithContext(ctx context.Context) *WorkflowsPutTaskParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows put task params
+func (o *WorkflowsPutTaskParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows put task params
+func (o *WorkflowsPutTaskParams) WithHTTPClient(client *http.Client) *WorkflowsPutTaskParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows put task params
+func (o *WorkflowsPutTaskParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the workflows put task params
 func (o *WorkflowsPutTaskParams) WithBody(body *models.WorkflowTask) *WorkflowsPutTaskParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the workflows put task params
+func (o *WorkflowsPutTaskParams) SetBody(body *models.WorkflowTask) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsPutTaskParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

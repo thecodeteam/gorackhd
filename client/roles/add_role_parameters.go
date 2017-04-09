@@ -4,7 +4,10 @@ package roles
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewAddRoleParamsWithTimeout(timeout time.Duration) *AddRoleParams {
 	}
 }
 
+// NewAddRoleParamsWithContext creates a new AddRoleParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewAddRoleParamsWithContext(ctx context.Context) *AddRoleParams {
+	var ()
+	return &AddRoleParams{
+
+		Context: ctx,
+	}
+}
+
+// NewAddRoleParamsWithHTTPClient creates a new AddRoleParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewAddRoleParamsWithHTTPClient(client *http.Client) *AddRoleParams {
+	var ()
+	return &AddRoleParams{
+		HTTPClient: client,
+	}
+}
+
 /*AddRoleParams contains all the parameters to send to the API endpoint
 for the add role operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type AddRoleParams struct {
 	*/
 	Body *models.RoleObj
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the add role params
+func (o *AddRoleParams) WithTimeout(timeout time.Duration) *AddRoleParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the add role params
+func (o *AddRoleParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the add role params
+func (o *AddRoleParams) WithContext(ctx context.Context) *AddRoleParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the add role params
+func (o *AddRoleParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the add role params
+func (o *AddRoleParams) WithHTTPClient(client *http.Client) *AddRoleParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the add role params
+func (o *AddRoleParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the add role params
 func (o *AddRoleParams) WithBody(body *models.RoleObj) *AddRoleParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the add role params
+func (o *AddRoleParams) SetBody(body *models.RoleObj) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *AddRoleParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

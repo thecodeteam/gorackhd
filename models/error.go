@@ -9,22 +9,17 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*Error error
-
-swagger:model Error
-*/
+// Error error
+// swagger:model Error
 type Error struct {
 
-	/* code
-	 */
+	// code
 	Code int32 `json:"code,omitempty"`
 
-	/* fields
-	 */
+	// fields
 	Fields string `json:"fields,omitempty"`
 
-	/* message
-	 */
+	// message
 	Message string `json:"message,omitempty"`
 }
 

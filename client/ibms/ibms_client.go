@@ -43,11 +43,14 @@ func (a *Client) IbmsDefinitionsGetAll(params *IbmsDefinitionsGetAllParams, auth
 		Params:             params,
 		Reader:             &IbmsDefinitionsGetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsDefinitionsGetAllOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) IbmsDefinitionsGetByName(params *IbmsDefinitionsGetByNameParams
 		Params:             params,
 		Reader:             &IbmsDefinitionsGetByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsDefinitionsGetByNameOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) IbmsDeleteByID(params *IbmsDeleteByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &IbmsDeleteByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsDeleteByIDNoContent), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) IbmsGet(params *IbmsGetParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &IbmsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsGetOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) IbmsGetByID(params *IbmsGetByIDParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &IbmsGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsGetByIDOK), nil
+
 }
 
 /*
@@ -183,11 +198,14 @@ func (a *Client) IbmsPatchByID(params *IbmsPatchByIDParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &IbmsPatchByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsPatchByIDOK), nil
+
 }
 
 /*
@@ -211,11 +229,14 @@ func (a *Client) IbmsPut(params *IbmsPutParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &IbmsPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*IbmsPutCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

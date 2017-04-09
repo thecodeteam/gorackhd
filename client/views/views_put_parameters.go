@@ -4,7 +4,10 @@ package views
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewViewsPutParamsWithTimeout(timeout time.Duration) *ViewsPutParams {
 	}
 }
 
+// NewViewsPutParamsWithContext creates a new ViewsPutParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewViewsPutParamsWithContext(ctx context.Context) *ViewsPutParams {
+	var ()
+	return &ViewsPutParams{
+
+		Context: ctx,
+	}
+}
+
+// NewViewsPutParamsWithHTTPClient creates a new ViewsPutParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewViewsPutParamsWithHTTPClient(client *http.Client) *ViewsPutParams {
+	var ()
+	return &ViewsPutParams{
+		HTTPClient: client,
+	}
+}
+
 /*ViewsPutParams contains all the parameters to send to the API endpoint
 for the views put operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type ViewsPutParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the views put params
+func (o *ViewsPutParams) WithTimeout(timeout time.Duration) *ViewsPutParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the views put params
+func (o *ViewsPutParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the views put params
+func (o *ViewsPutParams) WithContext(ctx context.Context) *ViewsPutParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the views put params
+func (o *ViewsPutParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the views put params
+func (o *ViewsPutParams) WithHTTPClient(client *http.Client) *ViewsPutParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the views put params
+func (o *ViewsPutParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the views put params
 func (o *ViewsPutParams) WithIdentifier(identifier string) *ViewsPutParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the views put params
+func (o *ViewsPutParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *ViewsPutParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

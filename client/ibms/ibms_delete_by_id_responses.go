@@ -19,7 +19,7 @@ type IbmsDeleteByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsDeleteByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *IbmsDeleteByIDReader) ReadResponse(response runtime.ClientResponse, con
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewIbmsDeleteByIDNoContent() *IbmsDeleteByIDNoContent {
 Successfully deleted the specified IBMS settings
 */
 type IbmsDeleteByIDNoContent struct {
-	Payload IbmsDeleteByIDNoContentBodyBody
+	Payload IbmsDeleteByIDNoContentBody
 }
 
 func (o *IbmsDeleteByIDNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *IbmsDeleteByIDDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*IbmsDeleteByIDNoContentBodyBody ibms delete by ID no content body body
-
-swagger:model IbmsDeleteByIDNoContentBodyBody
+/*IbmsDeleteByIDNoContentBody ibms delete by ID no content body
+swagger:model IbmsDeleteByIDNoContentBody
 */
-type IbmsDeleteByIDNoContentBodyBody interface{}
+type IbmsDeleteByIDNoContentBody interface{}

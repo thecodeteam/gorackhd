@@ -5,28 +5,23 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*RelationsObj A key value set of node relations.
-
-swagger:model relations_obj
-*/
+// RelationsObj A key value set of node relations.
+// swagger:model relations_obj
 type RelationsObj struct {
 
-	/* info
-	 */
+	// info
 	Info string `json:"info,omitempty"`
 
-	/* Relation Type with the node.
-	 */
+	// Relation Type with the node.
 	RelationType string `json:"relationType,omitempty"`
 
-	/* Array of targets.
-	 */
-	Targets []string `json:"targets,omitempty"`
+	// Array of targets.
+	Targets []string `json:"targets"`
 }
 
 // Validate validates this relations obj

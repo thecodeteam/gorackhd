@@ -19,7 +19,7 @@ type NodesPutObmsByNodeIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesPutObmsByNodeIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesPutObmsByNodeIDReader) ReadResponse(response runtime.ClientRespons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesPutObmsByNodeIDCreated() *NodesPutObmsByNodeIDCreated {
 Successfully put the OBM service
 */
 type NodesPutObmsByNodeIDCreated struct {
-	Payload NodesPutObmsByNodeIDCreatedBodyBody
+	Payload NodesPutObmsByNodeIDCreatedBody
 }
 
 func (o *NodesPutObmsByNodeIDCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesPutObmsByNodeIDDefault) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*NodesPutObmsByNodeIDCreatedBodyBody nodes put obms by node ID created body body
-
-swagger:model NodesPutObmsByNodeIDCreatedBodyBody
+/*NodesPutObmsByNodeIDCreatedBody nodes put obms by node ID created body
+swagger:model NodesPutObmsByNodeIDCreatedBody
 */
-type NodesPutObmsByNodeIDCreatedBodyBody interface{}
+type NodesPutObmsByNodeIDCreatedBody interface{}

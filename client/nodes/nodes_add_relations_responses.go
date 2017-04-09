@@ -19,7 +19,7 @@ type NodesAddRelationsReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesAddRelationsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesAddRelationsReader) ReadResponse(response runtime.ClientResponse, 
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesAddRelationsOK() *NodesAddRelationsOK {
 Node relations update succeeded.
 */
 type NodesAddRelationsOK struct {
-	Payload NodesAddRelationsOKBodyBody
+	Payload NodesAddRelationsOKBody
 }
 
 func (o *NodesAddRelationsOK) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesAddRelationsDefault) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
-/*NodesAddRelationsOKBodyBody nodes add relations o k body body
-
-swagger:model NodesAddRelationsOKBodyBody
+/*NodesAddRelationsOKBody nodes add relations o k body
+swagger:model NodesAddRelationsOKBody
 */
-type NodesAddRelationsOKBodyBody interface{}
+type NodesAddRelationsOKBody interface{}

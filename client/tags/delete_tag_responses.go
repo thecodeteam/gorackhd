@@ -19,7 +19,7 @@ type DeleteTagReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *DeleteTagReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *DeleteTagReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewDeleteTagNoContent() *DeleteTagNoContent {
 Successfully deleted the specified tag.
 */
 type DeleteTagNoContent struct {
-	Payload DeleteTagNoContentBodyBody
+	Payload DeleteTagNoContentBody
 }
 
 func (o *DeleteTagNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *DeleteTagDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*DeleteTagNoContentBodyBody delete tag no content body body
-
-swagger:model DeleteTagNoContentBodyBody
+/*DeleteTagNoContentBody delete tag no content body
+swagger:model DeleteTagNoContentBody
 */
-type DeleteTagNoContentBodyBody interface{}
+type DeleteTagNoContentBody interface{}

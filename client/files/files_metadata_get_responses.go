@@ -19,7 +19,7 @@ type FilesMetadataGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *FilesMetadataGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *FilesMetadataGetReader) ReadResponse(response runtime.ClientResponse, c
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewFilesMetadataGetOK() *FilesMetadataGetOK {
 Successfully retrieved metadata of the specified file
 */
 type FilesMetadataGetOK struct {
-	Payload FilesMetadataGetOKBodyBody
+	Payload FilesMetadataGetOKBody
 }
 
 func (o *FilesMetadataGetOK) Error() string {
@@ -176,8 +179,7 @@ func (o *FilesMetadataGetDefault) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*FilesMetadataGetOKBodyBody files metadata get o k body body
-
-swagger:model FilesMetadataGetOKBodyBody
+/*FilesMetadataGetOKBody files metadata get o k body
+swagger:model FilesMetadataGetOKBody
 */
-type FilesMetadataGetOKBodyBody interface{}
+type FilesMetadataGetOKBody interface{}

@@ -4,7 +4,10 @@ package schemas
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -34,6 +37,25 @@ func NewTaskSchemasIDGetParamsWithTimeout(timeout time.Duration) *TaskSchemasIDG
 	}
 }
 
+// NewTaskSchemasIDGetParamsWithContext creates a new TaskSchemasIDGetParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewTaskSchemasIDGetParamsWithContext(ctx context.Context) *TaskSchemasIDGetParams {
+	var ()
+	return &TaskSchemasIDGetParams{
+
+		Context: ctx,
+	}
+}
+
+// NewTaskSchemasIDGetParamsWithHTTPClient creates a new TaskSchemasIDGetParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewTaskSchemasIDGetParamsWithHTTPClient(client *http.Client) *TaskSchemasIDGetParams {
+	var ()
+	return &TaskSchemasIDGetParams{
+		HTTPClient: client,
+	}
+}
+
 /*TaskSchemasIDGetParams contains all the parameters to send to the API endpoint
 for the task schemas Id get operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type TaskSchemasIDGetParams struct {
 	*/
 	ResolveRef *bool
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) WithTimeout(timeout time.Duration) *TaskSchemasIDGetParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) WithContext(ctx context.Context) *TaskSchemasIDGetParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) WithHTTPClient(client *http.Client) *TaskSchemasIDGetParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the task schemas Id get params
 func (o *TaskSchemasIDGetParams) WithIdentifier(identifier string) *TaskSchemasIDGetParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WithResolveRef adds the resolveRef to the task schemas Id get params
 func (o *TaskSchemasIDGetParams) WithResolveRef(resolveRef *bool) *TaskSchemasIDGetParams {
-	o.ResolveRef = resolveRef
+	o.SetResolveRef(resolveRef)
 	return o
+}
+
+// SetResolveRef adds the resolveRef to the task schemas Id get params
+func (o *TaskSchemasIDGetParams) SetResolveRef(resolveRef *bool) {
+	o.ResolveRef = resolveRef
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *TaskSchemasIDGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

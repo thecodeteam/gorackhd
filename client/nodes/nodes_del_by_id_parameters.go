@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewNodesDelByIDParamsWithTimeout(timeout time.Duration) *NodesDelByIDParams
 	}
 }
 
+// NewNodesDelByIDParamsWithContext creates a new NodesDelByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesDelByIDParamsWithContext(ctx context.Context) *NodesDelByIDParams {
+	var ()
+	return &NodesDelByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesDelByIDParamsWithHTTPClient creates a new NodesDelByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesDelByIDParamsWithHTTPClient(client *http.Client) *NodesDelByIDParams {
+	var ()
+	return &NodesDelByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesDelByIDParams contains all the parameters to send to the API endpoint
 for the nodes del by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type NodesDelByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes del by Id params
+func (o *NodesDelByIDParams) WithTimeout(timeout time.Duration) *NodesDelByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes del by Id params
+func (o *NodesDelByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes del by Id params
+func (o *NodesDelByIDParams) WithContext(ctx context.Context) *NodesDelByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes del by Id params
+func (o *NodesDelByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes del by Id params
+func (o *NodesDelByIDParams) WithHTTPClient(client *http.Client) *NodesDelByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes del by Id params
+func (o *NodesDelByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the nodes del by Id params
 func (o *NodesDelByIDParams) WithIdentifier(identifier string) *NodesDelByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes del by Id params
+func (o *NodesDelByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesDelByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

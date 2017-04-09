@@ -19,7 +19,7 @@ type ObmsGetByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsGetByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ObmsGetByIDReader) ReadResponse(response runtime.ClientResponse, consum
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewObmsGetByIDOK() *ObmsGetByIDOK {
 Successfully retrieved the specified OBM service
 */
 type ObmsGetByIDOK struct {
-	Payload ObmsGetByIDOKBodyBody
+	Payload ObmsGetByIDOKBody
 }
 
 func (o *ObmsGetByIDOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ObmsGetByIDDefault) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-/*ObmsGetByIDOKBodyBody obms get by ID o k body body
-
-swagger:model ObmsGetByIDOKBodyBody
+/*ObmsGetByIDOKBody obms get by ID o k body
+swagger:model ObmsGetByIDOKBody
 */
-type ObmsGetByIDOKBodyBody interface{}
+type ObmsGetByIDOKBody interface{}

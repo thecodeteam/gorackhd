@@ -44,11 +44,14 @@ func (a *Client) SkuPackPost(params *SkuPackPostParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &SkuPackPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkuPackPostCreated), nil
+
 }
 
 /*
@@ -73,11 +76,14 @@ func (a *Client) SkusGet(params *SkusGetParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &SkusGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusGetOK), nil
+
 }
 
 /*
@@ -101,11 +107,14 @@ func (a *Client) SkusIDDelete(params *SkusIDDeleteParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &SkusIDDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusIDDeleteNoContent), nil
+
 }
 
 /*
@@ -129,11 +138,14 @@ func (a *Client) SkusIDDeletePack(params *SkusIDDeletePackParams, authInfo runti
 		Params:             params,
 		Reader:             &SkusIDDeletePackReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusIDDeletePackNoContent), nil
+
 }
 
 /*
@@ -157,11 +169,14 @@ func (a *Client) SkusIDGet(params *SkusIDGetParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &SkusIDGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusIDGetOK), nil
+
 }
 
 /*
@@ -185,11 +200,14 @@ func (a *Client) SkusIDGetNodes(params *SkusIDGetNodesParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &SkusIDGetNodesReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusIDGetNodesOK), nil
+
 }
 
 /*
@@ -213,11 +231,14 @@ func (a *Client) SkusIDPutPack(params *SkusIDPutPackParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &SkusIDPutPackReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusIDPutPackCreated), nil
+
 }
 
 /*
@@ -241,11 +262,14 @@ func (a *Client) SkusPatch(params *SkusPatchParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &SkusPatchReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusPatchOK), nil
+
 }
 
 /*
@@ -269,11 +293,14 @@ func (a *Client) SkusPost(params *SkusPostParams, authInfo runtime.ClientAuthInf
 		Params:             params,
 		Reader:             &SkusPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusPostCreated), nil
+
 }
 
 /*
@@ -297,11 +324,14 @@ func (a *Client) SkusPut(params *SkusPutParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &SkusPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*SkusPutCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

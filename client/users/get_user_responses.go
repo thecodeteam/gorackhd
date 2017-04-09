@@ -19,7 +19,7 @@ type GetUserReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *GetUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -48,6 +48,9 @@ func (o *GetUserReader) ReadResponse(response runtime.ClientResponse, consumer r
 		result := NewGetUserDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
 		}
 		return nil, result
 	}
@@ -92,7 +95,7 @@ func NewGetUserUnauthorized() *GetUserUnauthorized {
 Unauthorized
 */
 type GetUserUnauthorized struct {
-	Payload GetUserUnauthorizedBodyBody
+	Payload GetUserUnauthorizedBody
 }
 
 func (o *GetUserUnauthorized) Error() string {
@@ -119,7 +122,7 @@ func NewGetUserForbidden() *GetUserForbidden {
 Forbidden
 */
 type GetUserForbidden struct {
-	Payload GetUserForbiddenBodyBody
+	Payload GetUserForbiddenBody
 }
 
 func (o *GetUserForbidden) Error() string {
@@ -174,14 +177,12 @@ func (o *GetUserDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*GetUserUnauthorizedBodyBody get user unauthorized body body
-
-swagger:model GetUserUnauthorizedBodyBody
+/*GetUserForbiddenBody get user forbidden body
+swagger:model GetUserForbiddenBody
 */
-type GetUserUnauthorizedBodyBody interface{}
+type GetUserForbiddenBody interface{}
 
-/*GetUserForbiddenBodyBody get user forbidden body body
-
-swagger:model GetUserForbiddenBodyBody
+/*GetUserUnauthorizedBody get user unauthorized body
+swagger:model GetUserUnauthorizedBody
 */
-type GetUserForbiddenBodyBody interface{}
+type GetUserUnauthorizedBody interface{}

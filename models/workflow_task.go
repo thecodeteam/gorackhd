@@ -9,30 +9,23 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*WorkflowTask workflow task
-
-swagger:model workflow_task
-*/
+// WorkflowTask workflow task
+// swagger:model workflow_task
 type WorkflowTask struct {
 
-	/* friendly name
-	 */
+	// friendly name
 	FriendlyName string `json:"friendlyName,omitempty"`
 
-	/* implements task
-	 */
+	// implements task
 	ImplementsTask string `json:"implementsTask,omitempty"`
 
-	/* injectable name
-	 */
+	// injectable name
 	InjectableName string `json:"injectableName,omitempty"`
 
-	/* options
-	 */
+	// options
 	Options interface{} `json:"options,omitempty"`
 
-	/* properties
-	 */
+	// properties
 	Properties interface{} `json:"properties,omitempty"`
 }
 

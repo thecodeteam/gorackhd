@@ -5,26 +5,21 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*ErrorResponse error response
-
-swagger:model ErrorResponse
-*/
+// ErrorResponse error response
+// swagger:model ErrorResponse
 type ErrorResponse struct {
 
-	/* errors
-	 */
-	Errors []string `json:"errors,omitempty"`
+	// errors
+	Errors []string `json:"errors"`
 
-	/* message
-
-	Required: true
-	*/
+	// message
+	// Required: true
 	Message *string `json:"message"`
 }
 

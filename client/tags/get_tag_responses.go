@@ -19,7 +19,7 @@ type GetTagReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *GetTagReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *GetTagReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewGetTagOK() *GetTagOK {
 Successfully retrieved information about the specified tag
 */
 type GetTagOK struct {
-	Payload GetTagOKBodyBody
+	Payload GetTagOKBody
 }
 
 func (o *GetTagOK) Error() string {
@@ -140,8 +143,7 @@ func (o *GetTagDefault) readResponse(response runtime.ClientResponse, consumer r
 	return nil
 }
 
-/*GetTagOKBodyBody get tag o k body body
-
-swagger:model GetTagOKBodyBody
+/*GetTagOKBody get tag o k body
+swagger:model GetTagOKBody
 */
-type GetTagOKBodyBody interface{}
+type GetTagOKBody interface{}

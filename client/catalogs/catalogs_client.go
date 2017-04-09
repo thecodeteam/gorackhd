@@ -43,11 +43,14 @@ func (a *Client) CatalogsGet(params *CatalogsGetParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &CatalogsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*CatalogsGetOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) CatalogsIDGet(params *CatalogsIDGetParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &CatalogsIDGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*CatalogsIDGetOK), nil
+
 }
 
 // SetTransport changes the transport on the client

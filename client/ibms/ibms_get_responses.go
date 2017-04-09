@@ -19,7 +19,7 @@ type IbmsGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *IbmsGetReader) ReadResponse(response runtime.ClientResponse, consumer r
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewIbmsGetOK() *IbmsGetOK {
 Successfully retrieved the list of IBMS service instances
 */
 type IbmsGetOK struct {
-	Payload IbmsGetOKBodyBody
+	Payload IbmsGetOKBody
 }
 
 func (o *IbmsGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *IbmsGetDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*IbmsGetOKBodyBody ibms get o k body body
-
-swagger:model IbmsGetOKBodyBody
+/*IbmsGetOKBody ibms get o k body
+swagger:model IbmsGetOKBody
 */
-type IbmsGetOKBodyBody interface{}
+type IbmsGetOKBody interface{}

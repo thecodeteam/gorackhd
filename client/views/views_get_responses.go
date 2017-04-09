@@ -19,7 +19,7 @@ type ViewsGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ViewsGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ViewsGetReader) ReadResponse(response runtime.ClientResponse, consumer 
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewViewsGetOK() *ViewsGetOK {
 Successfully retrieved views
 */
 type ViewsGetOK struct {
-	Payload ViewsGetOKBodyBody
+	Payload ViewsGetOKBody
 }
 
 func (o *ViewsGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ViewsGetDefault) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-/*ViewsGetOKBodyBody views get o k body body
-
-swagger:model ViewsGetOKBodyBody
+/*ViewsGetOKBody views get o k body
+swagger:model ViewsGetOKBody
 */
-type ViewsGetOKBodyBody interface{}
+type ViewsGetOKBody interface{}

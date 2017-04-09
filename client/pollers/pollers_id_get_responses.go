@@ -19,7 +19,7 @@ type PollersIDGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *PollersIDGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *PollersIDGetReader) ReadResponse(response runtime.ClientResponse, consu
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewPollersIDGetOK() *PollersIDGetOK {
 Poller information retrieved successfully
 */
 type PollersIDGetOK struct {
-	Payload PollersIDGetOKBodyBody
+	Payload PollersIDGetOKBody
 }
 
 func (o *PollersIDGetOK) Error() string {
@@ -140,8 +143,7 @@ func (o *PollersIDGetDefault) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
-/*PollersIDGetOKBodyBody pollers ID get o k body body
-
-swagger:model PollersIDGetOKBodyBody
+/*PollersIDGetOKBody pollers ID get o k body
+swagger:model PollersIDGetOKBody
 */
-type PollersIDGetOKBodyBody interface{}
+type PollersIDGetOKBody interface{}

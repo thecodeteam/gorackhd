@@ -4,7 +4,10 @@ package lookups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewLookupsPatchByIDParamsWithTimeout(timeout time.Duration) *LookupsPatchBy
 	}
 }
 
+// NewLookupsPatchByIDParamsWithContext creates a new LookupsPatchByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewLookupsPatchByIDParamsWithContext(ctx context.Context) *LookupsPatchByIDParams {
+	var ()
+	return &LookupsPatchByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewLookupsPatchByIDParamsWithHTTPClient creates a new LookupsPatchByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewLookupsPatchByIDParamsWithHTTPClient(client *http.Client) *LookupsPatchByIDParams {
+	var ()
+	return &LookupsPatchByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*LookupsPatchByIDParams contains all the parameters to send to the API endpoint
 for the lookups patch by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type LookupsPatchByIDParams struct {
 	*/
 	ID string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) WithTimeout(timeout time.Duration) *LookupsPatchByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) WithContext(ctx context.Context) *LookupsPatchByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) WithHTTPClient(client *http.Client) *LookupsPatchByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the lookups patch by Id params
 func (o *LookupsPatchByIDParams) WithBody(body *models.Lookups20LookupBase) *LookupsPatchByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) SetBody(body *models.Lookups20LookupBase) {
+	o.Body = body
 }
 
 // WithID adds the id to the lookups patch by Id params
 func (o *LookupsPatchByIDParams) WithID(id string) *LookupsPatchByIDParams {
-	o.ID = id
+	o.SetID(id)
 	return o
+}
+
+// SetID adds the id to the lookups patch by Id params
+func (o *LookupsPatchByIDParams) SetID(id string) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *LookupsPatchByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

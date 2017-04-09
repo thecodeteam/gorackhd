@@ -19,7 +19,7 @@ type NodesWorkflowActionByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesWorkflowActionByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesWorkflowActionByIDReader) ReadResponse(response runtime.ClientResp
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesWorkflowActionByIDAccepted() *NodesWorkflowActionByIDAccepted {
 Successfully performed the action on the specified workflow
 */
 type NodesWorkflowActionByIDAccepted struct {
-	Payload NodesWorkflowActionByIDAcceptedBodyBody
+	Payload NodesWorkflowActionByIDAcceptedBody
 }
 
 func (o *NodesWorkflowActionByIDAccepted) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesWorkflowActionByIDDefault) readResponse(response runtime.ClientRes
 	return nil
 }
 
-/*NodesWorkflowActionByIDAcceptedBodyBody nodes workflow action by ID accepted body body
-
-swagger:model NodesWorkflowActionByIDAcceptedBodyBody
+/*NodesWorkflowActionByIDAcceptedBody nodes workflow action by ID accepted body
+swagger:model NodesWorkflowActionByIDAcceptedBody
 */
-type NodesWorkflowActionByIDAcceptedBodyBody interface{}
+type NodesWorkflowActionByIDAcceptedBody interface{}

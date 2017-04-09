@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewNodesWorkflowActionByIDParamsWithTimeout(timeout time.Duration) *NodesWo
 	}
 }
 
+// NewNodesWorkflowActionByIDParamsWithContext creates a new NodesWorkflowActionByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesWorkflowActionByIDParamsWithContext(ctx context.Context) *NodesWorkflowActionByIDParams {
+	var ()
+	return &NodesWorkflowActionByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesWorkflowActionByIDParamsWithHTTPClient creates a new NodesWorkflowActionByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesWorkflowActionByIDParamsWithHTTPClient(client *http.Client) *NodesWorkflowActionByIDParams {
+	var ()
+	return &NodesWorkflowActionByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesWorkflowActionByIDParams contains all the parameters to send to the API endpoint
 for the nodes workflow action by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type NodesWorkflowActionByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) WithTimeout(timeout time.Duration) *NodesWorkflowActionByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) WithContext(ctx context.Context) *NodesWorkflowActionByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) WithHTTPClient(client *http.Client) *NodesWorkflowActionByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithAction adds the action to the nodes workflow action by Id params
 func (o *NodesWorkflowActionByIDParams) WithAction(action *models.Action) *NodesWorkflowActionByIDParams {
-	o.Action = action
+	o.SetAction(action)
 	return o
+}
+
+// SetAction adds the action to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) SetAction(action *models.Action) {
+	o.Action = action
 }
 
 // WithIdentifier adds the identifier to the nodes workflow action by Id params
 func (o *NodesWorkflowActionByIDParams) WithIdentifier(identifier string) *NodesWorkflowActionByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes workflow action by Id params
+func (o *NodesWorkflowActionByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesWorkflowActionByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Action == nil {

@@ -43,11 +43,14 @@ func (a *Client) ConfigGet(params *ConfigGetParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &ConfigGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ConfigGetOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) ConfigPatch(params *ConfigPatchParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &ConfigPatchReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ConfigPatchOK), nil
+
 }
 
 // SetTransport changes the transport on the client

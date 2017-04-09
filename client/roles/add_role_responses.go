@@ -19,7 +19,7 @@ type AddRoleReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *AddRoleReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *AddRoleReader) ReadResponse(response runtime.ClientResponse, consumer r
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewAddRoleCreated() *AddRoleCreated {
 Successfully created a new role
 */
 type AddRoleCreated struct {
-	Payload AddRoleCreatedBodyBody
+	Payload AddRoleCreatedBody
 }
 
 func (o *AddRoleCreated) Error() string {
@@ -90,7 +93,7 @@ func NewAddRoleUnauthorized() *AddRoleUnauthorized {
 Unauthorized
 */
 type AddRoleUnauthorized struct {
-	Payload AddRoleUnauthorizedBodyBody
+	Payload AddRoleUnauthorizedBody
 }
 
 func (o *AddRoleUnauthorized) Error() string {
@@ -117,7 +120,7 @@ func NewAddRoleForbidden() *AddRoleForbidden {
 Forbidden
 */
 type AddRoleForbidden struct {
-	Payload AddRoleForbiddenBodyBody
+	Payload AddRoleForbiddenBody
 }
 
 func (o *AddRoleForbidden) Error() string {
@@ -172,20 +175,17 @@ func (o *AddRoleDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*AddRoleCreatedBodyBody add role created body body
-
-swagger:model AddRoleCreatedBodyBody
+/*AddRoleCreatedBody add role created body
+swagger:model AddRoleCreatedBody
 */
-type AddRoleCreatedBodyBody interface{}
+type AddRoleCreatedBody interface{}
 
-/*AddRoleUnauthorizedBodyBody add role unauthorized body body
-
-swagger:model AddRoleUnauthorizedBodyBody
+/*AddRoleForbiddenBody add role forbidden body
+swagger:model AddRoleForbiddenBody
 */
-type AddRoleUnauthorizedBodyBody interface{}
+type AddRoleForbiddenBody interface{}
 
-/*AddRoleForbiddenBodyBody add role forbidden body body
-
-swagger:model AddRoleForbiddenBodyBody
+/*AddRoleUnauthorizedBody add role unauthorized body
+swagger:model AddRoleUnauthorizedBody
 */
-type AddRoleForbiddenBodyBody interface{}
+type AddRoleUnauthorizedBody interface{}

@@ -43,11 +43,14 @@ func (a *Client) TemplatesGetByName(params *TemplatesGetByNameParams, authInfo r
 		Params:             params,
 		Reader:             &TemplatesGetByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesGetByNameOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) TemplatesHeadByName(params *TemplatesHeadByNameParams, authInfo
 		Params:             params,
 		Reader:             &TemplatesHeadByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesHeadByNameOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) TemplatesLibDelete(params *TemplatesLibDeleteParams, authInfo r
 		Params:             params,
 		Reader:             &TemplatesLibDeleteReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesLibDeleteNoContent), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) TemplatesLibGet(params *TemplatesLibGetParams, authInfo runtime
 		Params:             params,
 		Reader:             &TemplatesLibGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesLibGetOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) TemplatesLibPut(params *TemplatesLibPutParams, authInfo runtime
 		Params:             params,
 		Reader:             &TemplatesLibPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesLibPutCreated), nil
+
 }
 
 /*
@@ -184,11 +199,14 @@ func (a *Client) TemplatesMetaGet(params *TemplatesMetaGetParams, authInfo runti
 		Params:             params,
 		Reader:             &TemplatesMetaGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesMetaGetOK), nil
+
 }
 
 /*
@@ -212,11 +230,14 @@ func (a *Client) TemplatesMetaGetByName(params *TemplatesMetaGetByNameParams, au
 		Params:             params,
 		Reader:             &TemplatesMetaGetByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*TemplatesMetaGetByNameOK), nil
+
 }
 
 // SetTransport changes the transport on the client

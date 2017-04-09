@@ -9,18 +9,14 @@ import (
 	"github.com/go-openapi/errors"
 )
 
-/*ObmLed obm led
-
-swagger:model obm_led
-*/
+// ObmLed obm led
+// swagger:model obm_led
 type ObmLed struct {
 
-	/* node Id
-	 */
+	// node Id
 	NodeID string `json:"nodeId,omitempty"`
 
-	/* value
-	 */
+	// value
 	Value bool `json:"value,omitempty"`
 }
 

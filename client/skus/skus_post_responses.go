@@ -19,7 +19,7 @@ type SkusPostReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *SkusPostReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *SkusPostReader) ReadResponse(response runtime.ClientResponse, consumer 
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewSkusPostCreated() *SkusPostCreated {
 Successfully created the SKU
 */
 type SkusPostCreated struct {
-	Payload SkusPostCreatedBodyBody
+	Payload SkusPostCreatedBody
 }
 
 func (o *SkusPostCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *SkusPostDefault) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-/*SkusPostCreatedBodyBody skus post created body body
-
-swagger:model SkusPostCreatedBodyBody
+/*SkusPostCreatedBody skus post created body
+swagger:model SkusPostCreatedBody
 */
-type SkusPostCreatedBodyBody interface{}
+type SkusPostCreatedBody interface{}

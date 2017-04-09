@@ -5,50 +5,41 @@ package models
 
 import (
 	"encoding/json"
+	"strconv"
 
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*Node20PartialNode Post a node into RackHD
-
-swagger:model node.2.0_PartialNode
-*/
+// Node20PartialNode Post a node into RackHD
+// swagger:model node.2.0_PartialNode
 type Node20PartialNode struct {
 
-	/* auto discover
-	 */
+	// auto discover
 	AutoDiscover string `json:"autoDiscover,omitempty"`
 
-	/* boot settings
-	 */
+	// boot settings
 	BootSettings interface{} `json:"bootSettings,omitempty"`
 
-	/* identifiers
-	 */
-	Identifiers []string `json:"identifiers,omitempty"`
+	// identifiers
+	Identifiers []string `json:"identifiers"`
 
-	/* Name of the node
-	 */
+	// Name of the node
 	Name string `json:"name,omitempty"`
 
-	/* The list of obm settings
-	 */
-	Obms []*NodesPostObmByID `json:"obms,omitempty"`
+	// The list of obm settings
+	Obms []*NodesPostObmByID `json:"obms"`
 
-	/* relations
-	 */
-	Relations []*RelationsObj `json:"relations,omitempty"`
+	// relations
+	Relations []*RelationsObj `json:"relations"`
 
-	/* tags
-	 */
-	Tags []string `json:"tags,omitempty"`
+	// tags
+	Tags []string `json:"tags"`
 
-	/* Type of node
-	 */
+	// Type of node
 	Type string `json:"type,omitempty"`
 }
 
@@ -115,6 +106,9 @@ func (m *Node20PartialNode) validateObms(formats strfmt.Registry) error {
 		if m.Obms[i] != nil {
 
 			if err := m.Obms[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("obms" + "." + strconv.Itoa(i))
+				}
 				return err
 			}
 		}
@@ -139,6 +133,9 @@ func (m *Node20PartialNode) validateRelations(formats strfmt.Registry) error {
 		if m.Relations[i] != nil {
 
 			if err := m.Relations[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("relations" + "." + strconv.Itoa(i))
+				}
 				return err
 			}
 		}
@@ -163,17 +160,37 @@ func (m *Node20PartialNode) validateTags(formats strfmt.Registry) error {
 
 var node20PartialNodeTypeTypePropEnum []interface{}
 
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["compute","compute-container","switch","dae","pdu","mgmt","enclosure","rack"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		node20PartialNodeTypeTypePropEnum = append(node20PartialNodeTypeTypePropEnum, v)
+	}
+}
+
+const (
+	// Node20PartialNodeTypeCompute captures enum value "compute"
+	Node20PartialNodeTypeCompute string = "compute"
+	// Node20PartialNodeTypeComputeContainer captures enum value "compute-container"
+	Node20PartialNodeTypeComputeContainer string = "compute-container"
+	// Node20PartialNodeTypeSwitch captures enum value "switch"
+	Node20PartialNodeTypeSwitch string = "switch"
+	// Node20PartialNodeTypeDae captures enum value "dae"
+	Node20PartialNodeTypeDae string = "dae"
+	// Node20PartialNodeTypePdu captures enum value "pdu"
+	Node20PartialNodeTypePdu string = "pdu"
+	// Node20PartialNodeTypeMgmt captures enum value "mgmt"
+	Node20PartialNodeTypeMgmt string = "mgmt"
+	// Node20PartialNodeTypeEnclosure captures enum value "enclosure"
+	Node20PartialNodeTypeEnclosure string = "enclosure"
+	// Node20PartialNodeTypeRack captures enum value "rack"
+	Node20PartialNodeTypeRack string = "rack"
+)
+
 // prop value enum
 func (m *Node20PartialNode) validateTypeEnum(path, location string, value string) error {
-	if node20PartialNodeTypeTypePropEnum == nil {
-		var res []string
-		if err := json.Unmarshal([]byte(`["compute","compute-container","switch","dae","pdu","mgmt","enclosure","rack"]`), &res); err != nil {
-			return err
-		}
-		for _, v := range res {
-			node20PartialNodeTypeTypePropEnum = append(node20PartialNodeTypeTypePropEnum, v)
-		}
-	}
 	if err := validate.Enum(path, location, value, node20PartialNodeTypeTypePropEnum); err != nil {
 		return err
 	}

@@ -19,7 +19,7 @@ type PollersLibByIDGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *PollersLibByIDGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *PollersLibByIDGetReader) ReadResponse(response runtime.ClientResponse, 
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewPollersLibByIDGetOK() *PollersLibByIDGetOK {
 Successful retrieval of the specified poller
 */
 type PollersLibByIDGetOK struct {
-	Payload PollersLibByIDGetOKBodyBody
+	Payload PollersLibByIDGetOKBody
 }
 
 func (o *PollersLibByIDGetOK) Error() string {
@@ -140,8 +143,7 @@ func (o *PollersLibByIDGetDefault) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
-/*PollersLibByIDGetOKBodyBody pollers lib by ID get o k body body
-
-swagger:model PollersLibByIDGetOKBodyBody
+/*PollersLibByIDGetOKBody pollers lib by ID get o k body
+swagger:model PollersLibByIDGetOKBody
 */
-type PollersLibByIDGetOKBodyBody interface{}
+type PollersLibByIDGetOKBody interface{}

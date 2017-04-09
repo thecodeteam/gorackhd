@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewWorkflowsDeleteGraphsByNameParamsWithTimeout(timeout time.Duration) *Wor
 	}
 }
 
+// NewWorkflowsDeleteGraphsByNameParamsWithContext creates a new WorkflowsDeleteGraphsByNameParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsDeleteGraphsByNameParamsWithContext(ctx context.Context) *WorkflowsDeleteGraphsByNameParams {
+	var ()
+	return &WorkflowsDeleteGraphsByNameParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsDeleteGraphsByNameParamsWithHTTPClient creates a new WorkflowsDeleteGraphsByNameParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsDeleteGraphsByNameParamsWithHTTPClient(client *http.Client) *WorkflowsDeleteGraphsByNameParams {
+	var ()
+	return &WorkflowsDeleteGraphsByNameParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsDeleteGraphsByNameParams contains all the parameters to send to the API endpoint
 for the workflows delete graphs by name operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type WorkflowsDeleteGraphsByNameParams struct {
 	*/
 	InjectableName string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) WithTimeout(timeout time.Duration) *WorkflowsDeleteGraphsByNameParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) WithContext(ctx context.Context) *WorkflowsDeleteGraphsByNameParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) WithHTTPClient(client *http.Client) *WorkflowsDeleteGraphsByNameParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithInjectableName adds the injectableName to the workflows delete graphs by name params
 func (o *WorkflowsDeleteGraphsByNameParams) WithInjectableName(injectableName string) *WorkflowsDeleteGraphsByNameParams {
-	o.InjectableName = injectableName
+	o.SetInjectableName(injectableName)
 	return o
+}
+
+// SetInjectableName adds the injectableName to the workflows delete graphs by name params
+func (o *WorkflowsDeleteGraphsByNameParams) SetInjectableName(injectableName string) {
+	o.InjectableName = injectableName
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsDeleteGraphsByNameParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param injectableName

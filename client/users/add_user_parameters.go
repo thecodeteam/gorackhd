@@ -4,7 +4,10 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewAddUserParamsWithTimeout(timeout time.Duration) *AddUserParams {
 	}
 }
 
+// NewAddUserParamsWithContext creates a new AddUserParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewAddUserParamsWithContext(ctx context.Context) *AddUserParams {
+	var ()
+	return &AddUserParams{
+
+		Context: ctx,
+	}
+}
+
+// NewAddUserParamsWithHTTPClient creates a new AddUserParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewAddUserParamsWithHTTPClient(client *http.Client) *AddUserParams {
+	var ()
+	return &AddUserParams{
+		HTTPClient: client,
+	}
+}
+
 /*AddUserParams contains all the parameters to send to the API endpoint
 for the add user operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type AddUserParams struct {
 	*/
 	Body *models.UserObj
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the add user params
+func (o *AddUserParams) WithTimeout(timeout time.Duration) *AddUserParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the add user params
+func (o *AddUserParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the add user params
+func (o *AddUserParams) WithContext(ctx context.Context) *AddUserParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the add user params
+func (o *AddUserParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the add user params
+func (o *AddUserParams) WithHTTPClient(client *http.Client) *AddUserParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the add user params
+func (o *AddUserParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the add user params
 func (o *AddUserParams) WithBody(body *models.UserObj) *AddUserParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the add user params
+func (o *AddUserParams) SetBody(body *models.UserObj) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *AddUserParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

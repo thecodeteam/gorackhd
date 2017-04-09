@@ -10,22 +10,16 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-/*SSHIbmServiceIbm SSH settings
-
-swagger:model ssh-ibm-service_Ibm
-*/
+// SSHIbmServiceIbm SSH settings
+// swagger:model ssh-ibm-service_Ibm
 type SSHIbmServiceIbm struct {
 
-	/* config
-
-	Required: true
-	*/
+	// config
+	// Required: true
 	Config *SSHIbmServiceIbmConfig `json:"config"`
 
-	/* service
-
-	Required: true
-	*/
+	// service
+	// Required: true
 	Service *string `json:"service"`
 }
 
@@ -58,6 +52,9 @@ func (m *SSHIbmServiceIbm) validateConfig(formats strfmt.Registry) error {
 	if m.Config != nil {
 
 		if err := m.Config.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("config")
+			}
 			return err
 		}
 	}
@@ -74,22 +71,17 @@ func (m *SSHIbmServiceIbm) validateService(formats strfmt.Registry) error {
 	return nil
 }
 
-/*SSHIbmServiceIbmConfig SSH ibm service ibm config
-
-swagger:model SSHIbmServiceIbmConfig
-*/
+// SSHIbmServiceIbmConfig SSH ibm service ibm config
+// swagger:model SSHIbmServiceIbmConfig
 type SSHIbmServiceIbmConfig struct {
 
-	/* IP address
-	 */
+	// IP address
 	Host string `json:"host,omitempty"`
 
-	/* Password
-	 */
+	// Password
 	Password string `json:"password,omitempty"`
 
-	/* Username
-	 */
+	// Username
 	User string `json:"user,omitempty"`
 }
 

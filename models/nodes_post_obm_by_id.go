@@ -10,22 +10,16 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-/*NodesPostObmByID OBM settings
-
-swagger:model nodes_post_obm_by_id
-*/
+// NodesPostObmByID OBM settings
+// swagger:model nodes_post_obm_by_id
 type NodesPostObmByID struct {
 
-	/* config
-
-	Required: true
-	*/
+	// config
+	// Required: true
 	Config interface{} `json:"config"`
 
-	/* service
-
-	Required: true
-	*/
+	// service
+	// Required: true
 	Service *string `json:"service"`
 }
 

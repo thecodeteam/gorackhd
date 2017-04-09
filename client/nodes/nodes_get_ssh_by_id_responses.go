@@ -19,7 +19,7 @@ type NodesGetSSHByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NodesGetSSHByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NodesGetSSHByIDReader) ReadResponse(response runtime.ClientResponse, co
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewNodesGetSSHByIDOK() *NodesGetSSHByIDOK {
 Successfully retrieved the ssh settings
 */
 type NodesGetSSHByIDOK struct {
-	Payload NodesGetSSHByIDOKBodyBody
+	Payload NodesGetSSHByIDOKBody
 }
 
 func (o *NodesGetSSHByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *NodesGetSSHByIDDefault) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*NodesGetSSHByIDOKBodyBody nodes get SSH by ID o k body body
-
-swagger:model NodesGetSSHByIDOKBodyBody
+/*NodesGetSSHByIDOKBody nodes get SSH by ID o k body
+swagger:model NodesGetSSHByIDOKBody
 */
-type NodesGetSSHByIDOKBodyBody interface{}
+type NodesGetSSHByIDOKBody interface{}

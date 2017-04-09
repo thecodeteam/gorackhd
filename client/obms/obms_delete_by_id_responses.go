@@ -19,7 +19,7 @@ type ObmsDeleteByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsDeleteByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ObmsDeleteByIDReader) ReadResponse(response runtime.ClientResponse, con
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewObmsDeleteByIDNoContent() *ObmsDeleteByIDNoContent {
 Successfully deleted the specified OBM settings
 */
 type ObmsDeleteByIDNoContent struct {
-	Payload ObmsDeleteByIDNoContentBodyBody
+	Payload ObmsDeleteByIDNoContentBody
 }
 
 func (o *ObmsDeleteByIDNoContent) Error() string {
@@ -140,8 +143,7 @@ func (o *ObmsDeleteByIDDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*ObmsDeleteByIDNoContentBodyBody obms delete by ID no content body body
-
-swagger:model ObmsDeleteByIDNoContentBodyBody
+/*ObmsDeleteByIDNoContentBody obms delete by ID no content body
+swagger:model ObmsDeleteByIDNoContentBody
 */
-type ObmsDeleteByIDNoContentBodyBody interface{}
+type ObmsDeleteByIDNoContentBody interface{}

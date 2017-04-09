@@ -19,7 +19,7 @@ type WorkflowsGetAllTasksReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsGetAllTasksReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *WorkflowsGetAllTasksReader) ReadResponse(response runtime.ClientRespons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewWorkflowsGetAllTasksOK() *WorkflowsGetAllTasksOK {
 Successfully retrieved workflow tasks
 */
 type WorkflowsGetAllTasksOK struct {
-	Payload WorkflowsGetAllTasksOKBodyBody
+	Payload WorkflowsGetAllTasksOKBody
 }
 
 func (o *WorkflowsGetAllTasksOK) Error() string {
@@ -104,8 +107,7 @@ func (o *WorkflowsGetAllTasksDefault) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*WorkflowsGetAllTasksOKBodyBody workflows get all tasks o k body body
-
-swagger:model WorkflowsGetAllTasksOKBodyBody
+/*WorkflowsGetAllTasksOKBody workflows get all tasks o k body
+swagger:model WorkflowsGetAllTasksOKBody
 */
-type WorkflowsGetAllTasksOKBodyBody interface{}
+type WorkflowsGetAllTasksOKBody interface{}

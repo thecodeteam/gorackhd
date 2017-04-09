@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewNodesGetCatalogByIDParamsWithTimeout(timeout time.Duration) *NodesGetCat
 	}
 }
 
+// NewNodesGetCatalogByIDParamsWithContext creates a new NodesGetCatalogByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesGetCatalogByIDParamsWithContext(ctx context.Context) *NodesGetCatalogByIDParams {
+	var ()
+	return &NodesGetCatalogByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesGetCatalogByIDParamsWithHTTPClient creates a new NodesGetCatalogByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesGetCatalogByIDParamsWithHTTPClient(client *http.Client) *NodesGetCatalogByIDParams {
+	var ()
+	return &NodesGetCatalogByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesGetCatalogByIDParams contains all the parameters to send to the API endpoint
 for the nodes get catalog by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type NodesGetCatalogByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) WithTimeout(timeout time.Duration) *NodesGetCatalogByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) WithContext(ctx context.Context) *NodesGetCatalogByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) WithHTTPClient(client *http.Client) *NodesGetCatalogByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithIdentifier adds the identifier to the nodes get catalog by Id params
 func (o *NodesGetCatalogByIDParams) WithIdentifier(identifier string) *NodesGetCatalogByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes get catalog by Id params
+func (o *NodesGetCatalogByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesGetCatalogByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param identifier

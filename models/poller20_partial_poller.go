@@ -7,32 +7,26 @@ import (
 	"encoding/json"
 
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*Poller20PartialPoller A poller for periodic collection of telemetry data
-
-swagger:model poller.2.0_PartialPoller
-*/
+// Poller20PartialPoller A poller for periodic collection of telemetry data
+// swagger:model poller.2.0_PartialPoller
 type Poller20PartialPoller struct {
 
-	/* Poller configuration object
-	 */
+	// Poller configuration object
 	Config interface{} `json:"config,omitempty"`
 
-	/* Asserted if poller is paused
-	 */
+	// Asserted if poller is paused
 	Paused bool `json:"paused,omitempty"`
 
-	/* Interval at which poller will run
-	 */
+	// Interval at which poller will run
 	PollInterval float64 `json:"pollInterval,omitempty"`
 
-	/* Type of poller
-	 */
+	// Type of poller
 	Type string `json:"type,omitempty"`
 }
 
@@ -53,17 +47,27 @@ func (m *Poller20PartialPoller) Validate(formats strfmt.Registry) error {
 
 var poller20PartialPollerTypeTypePropEnum []interface{}
 
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["ipmi","snmp","redfish"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		poller20PartialPollerTypeTypePropEnum = append(poller20PartialPollerTypeTypePropEnum, v)
+	}
+}
+
+const (
+	// Poller20PartialPollerTypeIPMI captures enum value "ipmi"
+	Poller20PartialPollerTypeIPMI string = "ipmi"
+	// Poller20PartialPollerTypeSnmp captures enum value "snmp"
+	Poller20PartialPollerTypeSnmp string = "snmp"
+	// Poller20PartialPollerTypeRedfish captures enum value "redfish"
+	Poller20PartialPollerTypeRedfish string = "redfish"
+)
+
 // prop value enum
 func (m *Poller20PartialPoller) validateTypeEnum(path, location string, value string) error {
-	if poller20PartialPollerTypeTypePropEnum == nil {
-		var res []string
-		if err := json.Unmarshal([]byte(`["ipmi","snmp","redfish"]`), &res); err != nil {
-			return err
-		}
-		for _, v := range res {
-			poller20PartialPollerTypeTypePropEnum = append(poller20PartialPollerTypeTypePropEnum, v)
-		}
-	}
 	if err := validate.Enum(path, location, value, poller20PartialPollerTypeTypePropEnum); err != nil {
 		return err
 	}

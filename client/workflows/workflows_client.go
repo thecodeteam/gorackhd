@@ -44,11 +44,14 @@ func (a *Client) WorkflowsAction(params *WorkflowsActionParams, authInfo runtime
 		Params:             params,
 		Reader:             &WorkflowsActionReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsActionAccepted), nil
+
 }
 
 /*
@@ -72,11 +75,14 @@ func (a *Client) WorkflowsDeleteByInstanceID(params *WorkflowsDeleteByInstanceID
 		Params:             params,
 		Reader:             &WorkflowsDeleteByInstanceIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsDeleteByInstanceIDNoContent), nil
+
 }
 
 /*
@@ -100,11 +106,14 @@ func (a *Client) WorkflowsDeleteGraphsByName(params *WorkflowsDeleteGraphsByName
 		Params:             params,
 		Reader:             &WorkflowsDeleteGraphsByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsDeleteGraphsByNameNoContent), nil
+
 }
 
 /*
@@ -128,11 +137,14 @@ func (a *Client) WorkflowsDeleteTasksByName(params *WorkflowsDeleteTasksByNamePa
 		Params:             params,
 		Reader:             &WorkflowsDeleteTasksByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsDeleteTasksByNameNoContent), nil
+
 }
 
 /*
@@ -156,11 +168,14 @@ func (a *Client) WorkflowsGet(params *WorkflowsGetParams, authInfo runtime.Clien
 		Params:             params,
 		Reader:             &WorkflowsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetOK), nil
+
 }
 
 /*
@@ -184,11 +199,14 @@ func (a *Client) WorkflowsGetAllTasks(params *WorkflowsGetAllTasksParams, authIn
 		Params:             params,
 		Reader:             &WorkflowsGetAllTasksReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetAllTasksOK), nil
+
 }
 
 /*
@@ -212,11 +230,14 @@ func (a *Client) WorkflowsGetByInstanceID(params *WorkflowsGetByInstanceIDParams
 		Params:             params,
 		Reader:             &WorkflowsGetByInstanceIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetByInstanceIDOK), nil
+
 }
 
 /*
@@ -240,11 +261,14 @@ func (a *Client) WorkflowsGetGraphs(params *WorkflowsGetGraphsParams, authInfo r
 		Params:             params,
 		Reader:             &WorkflowsGetGraphsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetGraphsOK), nil
+
 }
 
 /*
@@ -268,11 +292,14 @@ func (a *Client) WorkflowsGetGraphsByName(params *WorkflowsGetGraphsByNameParams
 		Params:             params,
 		Reader:             &WorkflowsGetGraphsByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetGraphsByNameOK), nil
+
 }
 
 /*
@@ -296,11 +323,14 @@ func (a *Client) WorkflowsGetTasksByName(params *WorkflowsGetTasksByNameParams, 
 		Params:             params,
 		Reader:             &WorkflowsGetTasksByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsGetTasksByNameOK), nil
+
 }
 
 /*
@@ -325,11 +355,14 @@ func (a *Client) WorkflowsPost(params *WorkflowsPostParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &WorkflowsPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsPostCreated), nil
+
 }
 
 /*
@@ -353,11 +386,14 @@ func (a *Client) WorkflowsPutGraphs(params *WorkflowsPutGraphsParams, authInfo r
 		Params:             params,
 		Reader:             &WorkflowsPutGraphsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsPutGraphsCreated), nil
+
 }
 
 /*
@@ -381,11 +417,14 @@ func (a *Client) WorkflowsPutTask(params *WorkflowsPutTaskParams, authInfo runti
 		Params:             params,
 		Reader:             &WorkflowsPutTaskReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*WorkflowsPutTaskCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

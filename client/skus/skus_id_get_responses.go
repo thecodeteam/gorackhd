@@ -19,7 +19,7 @@ type SkusIDGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *SkusIDGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *SkusIDGetReader) ReadResponse(response runtime.ClientResponse, consumer
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewSkusIDGetOK() *SkusIDGetOK {
 Successfull retrieved the specified SKU
 */
 type SkusIDGetOK struct {
-	Payload SkusIDGetOKBodyBody
+	Payload SkusIDGetOKBody
 }
 
 func (o *SkusIDGetOK) Error() string {
@@ -140,8 +143,7 @@ func (o *SkusIDGetDefault) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-/*SkusIDGetOKBodyBody skus ID get o k body body
-
-swagger:model SkusIDGetOKBodyBody
+/*SkusIDGetOKBody skus ID get o k body
+swagger:model SkusIDGetOKBody
 */
-type SkusIDGetOKBodyBody interface{}
+type SkusIDGetOKBody interface{}

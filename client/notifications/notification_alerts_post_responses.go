@@ -19,7 +19,7 @@ type NotificationAlertsPostReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *NotificationAlertsPostReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *NotificationAlertsPostReader) ReadResponse(response runtime.ClientRespo
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -57,7 +60,7 @@ Specifics of the alert
 
 */
 type NotificationAlertsPostCreated struct {
-	Payload NotificationAlertsPostCreatedBodyBody
+	Payload NotificationAlertsPostCreatedBody
 }
 
 func (o *NotificationAlertsPostCreated) Error() string {
@@ -142,8 +145,7 @@ func (o *NotificationAlertsPostDefault) readResponse(response runtime.ClientResp
 	return nil
 }
 
-/*NotificationAlertsPostCreatedBodyBody notification alerts post created body body
-
-swagger:model NotificationAlertsPostCreatedBodyBody
+/*NotificationAlertsPostCreatedBody notification alerts post created body
+swagger:model NotificationAlertsPostCreatedBody
 */
-type NotificationAlertsPostCreatedBodyBody interface{}
+type NotificationAlertsPostCreatedBody interface{}

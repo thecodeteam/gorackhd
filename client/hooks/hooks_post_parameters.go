@@ -4,7 +4,10 @@ package hooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewHooksPostParamsWithTimeout(timeout time.Duration) *HooksPostParams {
 	}
 }
 
+// NewHooksPostParamsWithContext creates a new HooksPostParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewHooksPostParamsWithContext(ctx context.Context) *HooksPostParams {
+	var ()
+	return &HooksPostParams{
+
+		Context: ctx,
+	}
+}
+
+// NewHooksPostParamsWithHTTPClient creates a new HooksPostParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewHooksPostParamsWithHTTPClient(client *http.Client) *HooksPostParams {
+	var ()
+	return &HooksPostParams{
+		HTTPClient: client,
+	}
+}
+
 /*HooksPostParams contains all the parameters to send to the API endpoint
 for the hooks post operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type HooksPostParams struct {
 	*/
 	Body *models.Hooks20HookPost
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the hooks post params
+func (o *HooksPostParams) WithTimeout(timeout time.Duration) *HooksPostParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the hooks post params
+func (o *HooksPostParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the hooks post params
+func (o *HooksPostParams) WithContext(ctx context.Context) *HooksPostParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the hooks post params
+func (o *HooksPostParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the hooks post params
+func (o *HooksPostParams) WithHTTPClient(client *http.Client) *HooksPostParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the hooks post params
+func (o *HooksPostParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the hooks post params
 func (o *HooksPostParams) WithBody(body *models.Hooks20HookPost) *HooksPostParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the hooks post params
+func (o *HooksPostParams) SetBody(body *models.Hooks20HookPost) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *HooksPostParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

@@ -19,7 +19,7 @@ type WorkflowsGetGraphsByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsGetGraphsByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *WorkflowsGetGraphsByNameReader) ReadResponse(response runtime.ClientRes
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewWorkflowsGetGraphsByNameOK() *WorkflowsGetGraphsByNameOK {
 Successfully retrieved the workflow graph with the specified injectable name
 */
 type WorkflowsGetGraphsByNameOK struct {
-	Payload WorkflowsGetGraphsByNameOKBodyBody
+	Payload WorkflowsGetGraphsByNameOKBody
 }
 
 func (o *WorkflowsGetGraphsByNameOK) Error() string {
@@ -104,8 +107,7 @@ func (o *WorkflowsGetGraphsByNameDefault) readResponse(response runtime.ClientRe
 	return nil
 }
 
-/*WorkflowsGetGraphsByNameOKBodyBody workflows get graphs by name o k body body
-
-swagger:model WorkflowsGetGraphsByNameOKBodyBody
+/*WorkflowsGetGraphsByNameOKBody workflows get graphs by name o k body
+swagger:model WorkflowsGetGraphsByNameOKBody
 */
-type WorkflowsGetGraphsByNameOKBodyBody interface{}
+type WorkflowsGetGraphsByNameOKBody interface{}

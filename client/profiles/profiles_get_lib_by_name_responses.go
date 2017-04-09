@@ -19,7 +19,7 @@ type ProfilesGetLibByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ProfilesGetLibByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ProfilesGetLibByNameReader) ReadResponse(response runtime.ClientRespons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewProfilesGetLibByNameOK() *ProfilesGetLibByNameOK {
 Successfully returned profile
 */
 type ProfilesGetLibByNameOK struct {
-	Payload ProfilesGetLibByNameOKBodyBody
+	Payload ProfilesGetLibByNameOKBody
 }
 
 func (o *ProfilesGetLibByNameOK) Error() string {
@@ -140,8 +143,7 @@ func (o *ProfilesGetLibByNameDefault) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*ProfilesGetLibByNameOKBodyBody profiles get lib by name o k body body
-
-swagger:model ProfilesGetLibByNameOKBodyBody
+/*ProfilesGetLibByNameOKBody profiles get lib by name o k body
+swagger:model ProfilesGetLibByNameOKBody
 */
-type ProfilesGetLibByNameOKBodyBody interface{}
+type ProfilesGetLibByNameOKBody interface{}

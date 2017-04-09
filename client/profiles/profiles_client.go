@@ -44,11 +44,14 @@ func (a *Client) ProfilesGet(params *ProfilesGetParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &ProfilesGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesGetOK), nil
+
 }
 
 /*
@@ -72,11 +75,14 @@ func (a *Client) ProfilesGetLibByName(params *ProfilesGetLibByNameParams, authIn
 		Params:             params,
 		Reader:             &ProfilesGetLibByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesGetLibByNameOK), nil
+
 }
 
 /*
@@ -100,11 +106,14 @@ func (a *Client) ProfilesGetMetadata(params *ProfilesGetMetadataParams, authInfo
 		Params:             params,
 		Reader:             &ProfilesGetMetadataReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesGetMetadataOK), nil
+
 }
 
 /*
@@ -128,11 +137,14 @@ func (a *Client) ProfilesGetMetadataByName(params *ProfilesGetMetadataByNamePara
 		Params:             params,
 		Reader:             &ProfilesGetMetadataByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesGetMetadataByNameOK), nil
+
 }
 
 /*
@@ -156,11 +168,14 @@ func (a *Client) ProfilesGetSwitchVendor(params *ProfilesGetSwitchVendorParams, 
 		Params:             params,
 		Reader:             &ProfilesGetSwitchVendorReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesGetSwitchVendorOK), nil
+
 }
 
 /*
@@ -184,11 +199,14 @@ func (a *Client) ProfilesPostSwitchError(params *ProfilesPostSwitchErrorParams, 
 		Params:             params,
 		Reader:             &ProfilesPostSwitchErrorReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesPostSwitchErrorCreated), nil
+
 }
 
 /*
@@ -212,11 +230,14 @@ func (a *Client) ProfilesPutLibByName(params *ProfilesPutLibByNameParams, authIn
 		Params:             params,
 		Reader:             &ProfilesPutLibByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ProfilesPutLibByNameCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

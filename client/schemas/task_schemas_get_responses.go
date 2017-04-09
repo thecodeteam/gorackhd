@@ -19,7 +19,7 @@ type TaskSchemasGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TaskSchemasGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *TaskSchemasGetReader) ReadResponse(response runtime.ClientResponse, con
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewTaskSchemasGetOK() *TaskSchemasGetOK {
 Successfully retrieved the list of task schema names
 */
 type TaskSchemasGetOK struct {
-	Payload TaskSchemasGetOKBodyBody
+	Payload TaskSchemasGetOKBody
 }
 
 func (o *TaskSchemasGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *TaskSchemasGetDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*TaskSchemasGetOKBodyBody task schemas get o k body body
-
-swagger:model TaskSchemasGetOKBodyBody
+/*TaskSchemasGetOKBody task schemas get o k body
+swagger:model TaskSchemasGetOKBody
 */
-type TaskSchemasGetOKBodyBody interface{}
+type TaskSchemasGetOKBody interface{}

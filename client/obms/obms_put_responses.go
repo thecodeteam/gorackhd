@@ -19,7 +19,7 @@ type ObmsPutReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsPutReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *ObmsPutReader) ReadResponse(response runtime.ClientResponse, consumer r
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewObmsPutCreated() *ObmsPutCreated {
 Successfully put the OBM service
 */
 type ObmsPutCreated struct {
-	Payload ObmsPutCreatedBodyBody
+	Payload ObmsPutCreatedBody
 }
 
 func (o *ObmsPutCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *ObmsPutDefault) readResponse(response runtime.ClientResponse, consumer 
 	return nil
 }
 
-/*ObmsPutCreatedBodyBody obms put created body body
-
-swagger:model ObmsPutCreatedBodyBody
+/*ObmsPutCreatedBody obms put created body
+swagger:model ObmsPutCreatedBody
 */
-type ObmsPutCreatedBodyBody interface{}
+type ObmsPutCreatedBody interface{}

@@ -19,7 +19,7 @@ type IbmsPatchByIDReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsPatchByIDReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *IbmsPatchByIDReader) ReadResponse(response runtime.ClientResponse, cons
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewIbmsPatchByIDOK() *IbmsPatchByIDOK {
 Successfully patched the specified IBMS settings
 */
 type IbmsPatchByIDOK struct {
-	Payload IbmsPatchByIDOKBodyBody
+	Payload IbmsPatchByIDOKBody
 }
 
 func (o *IbmsPatchByIDOK) Error() string {
@@ -140,8 +143,7 @@ func (o *IbmsPatchByIDDefault) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-/*IbmsPatchByIDOKBodyBody ibms patch by ID o k body body
-
-swagger:model IbmsPatchByIDOKBodyBody
+/*IbmsPatchByIDOKBody ibms patch by ID o k body
+swagger:model IbmsPatchByIDOKBody
 */
-type IbmsPatchByIDOKBodyBody interface{}
+type IbmsPatchByIDOKBody interface{}

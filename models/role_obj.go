@@ -5,23 +5,19 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 )
 
-/*RoleObj role obj
-
-swagger:model role_obj
-*/
+// RoleObj role obj
+// swagger:model role_obj
 type RoleObj struct {
 
-	/* privileges
-	 */
-	Privileges []string `json:"privileges,omitempty"`
+	// privileges
+	Privileges []string `json:"privileges"`
 
-	/* role
-	 */
+	// role
 	Role string `json:"role,omitempty"`
 }
 

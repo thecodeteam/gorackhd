@@ -19,7 +19,7 @@ type WorkflowsPutGraphsReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsPutGraphsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *WorkflowsPutGraphsReader) ReadResponse(response runtime.ClientResponse,
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewWorkflowsPutGraphsCreated() *WorkflowsPutGraphsCreated {
 Successfully created or modified a workflow graph.
 */
 type WorkflowsPutGraphsCreated struct {
-	Payload WorkflowsPutGraphsCreatedBodyBody
+	Payload WorkflowsPutGraphsCreatedBody
 }
 
 func (o *WorkflowsPutGraphsCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *WorkflowsPutGraphsDefault) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-/*WorkflowsPutGraphsCreatedBodyBody workflows put graphs created body body
-
-swagger:model WorkflowsPutGraphsCreatedBodyBody
+/*WorkflowsPutGraphsCreatedBody workflows put graphs created body
+swagger:model WorkflowsPutGraphsCreatedBody
 */
-type WorkflowsPutGraphsCreatedBodyBody interface{}
+type WorkflowsPutGraphsCreatedBody interface{}

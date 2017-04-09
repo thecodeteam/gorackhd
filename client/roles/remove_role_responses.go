@@ -19,7 +19,7 @@ type RemoveRoleReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *RemoveRoleReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -48,6 +48,9 @@ func (o *RemoveRoleReader) ReadResponse(response runtime.ClientResponse, consume
 		result := NewRemoveRoleDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
 		}
 		return nil, result
 	}
@@ -84,7 +87,7 @@ func NewRemoveRoleUnauthorized() *RemoveRoleUnauthorized {
 Unauthorized
 */
 type RemoveRoleUnauthorized struct {
-	Payload RemoveRoleUnauthorizedBodyBody
+	Payload RemoveRoleUnauthorizedBody
 }
 
 func (o *RemoveRoleUnauthorized) Error() string {
@@ -111,7 +114,7 @@ func NewRemoveRoleForbidden() *RemoveRoleForbidden {
 Forbidden
 */
 type RemoveRoleForbidden struct {
-	Payload RemoveRoleForbiddenBodyBody
+	Payload RemoveRoleForbiddenBody
 }
 
 func (o *RemoveRoleForbidden) Error() string {
@@ -166,14 +169,12 @@ func (o *RemoveRoleDefault) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*RemoveRoleUnauthorizedBodyBody remove role unauthorized body body
-
-swagger:model RemoveRoleUnauthorizedBodyBody
+/*RemoveRoleForbiddenBody remove role forbidden body
+swagger:model RemoveRoleForbiddenBody
 */
-type RemoveRoleUnauthorizedBodyBody interface{}
+type RemoveRoleForbiddenBody interface{}
 
-/*RemoveRoleForbiddenBodyBody remove role forbidden body body
-
-swagger:model RemoveRoleForbiddenBodyBody
+/*RemoveRoleUnauthorizedBody remove role unauthorized body
+swagger:model RemoveRoleUnauthorizedBody
 */
-type RemoveRoleForbiddenBodyBody interface{}
+type RemoveRoleUnauthorizedBody interface{}

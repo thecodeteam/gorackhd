@@ -4,7 +4,10 @@ package workflows
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewWorkflowsPutGraphsParamsWithTimeout(timeout time.Duration) *WorkflowsPut
 	}
 }
 
+// NewWorkflowsPutGraphsParamsWithContext creates a new WorkflowsPutGraphsParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewWorkflowsPutGraphsParamsWithContext(ctx context.Context) *WorkflowsPutGraphsParams {
+	var ()
+	return &WorkflowsPutGraphsParams{
+
+		Context: ctx,
+	}
+}
+
+// NewWorkflowsPutGraphsParamsWithHTTPClient creates a new WorkflowsPutGraphsParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewWorkflowsPutGraphsParamsWithHTTPClient(client *http.Client) *WorkflowsPutGraphsParams {
+	var ()
+	return &WorkflowsPutGraphsParams{
+		HTTPClient: client,
+	}
+}
+
 /*WorkflowsPutGraphsParams contains all the parameters to send to the API endpoint
 for the workflows put graphs operation typically these are written to a http.Request
 */
@@ -46,19 +68,61 @@ type WorkflowsPutGraphsParams struct {
 	*/
 	Body *models.WorkflowGraph
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) WithTimeout(timeout time.Duration) *WorkflowsPutGraphsParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) WithContext(ctx context.Context) *WorkflowsPutGraphsParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) WithHTTPClient(client *http.Client) *WorkflowsPutGraphsParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the workflows put graphs params
 func (o *WorkflowsPutGraphsParams) WithBody(body *models.WorkflowGraph) *WorkflowsPutGraphsParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the workflows put graphs params
+func (o *WorkflowsPutGraphsParams) SetBody(body *models.WorkflowGraph) {
+	o.Body = body
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *WorkflowsPutGraphsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

@@ -19,7 +19,7 @@ type ObmsDefinitionsGetAllReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *ObmsDefinitionsGetAllReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *ObmsDefinitionsGetAllReader) ReadResponse(response runtime.ClientRespon
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewObmsDefinitionsGetAllOK() *ObmsDefinitionsGetAllOK {
 Successfully retrieved a list of OBM schemas
 */
 type ObmsDefinitionsGetAllOK struct {
-	Payload ObmsDefinitionsGetAllOKBodyBody
+	Payload ObmsDefinitionsGetAllOKBody
 }
 
 func (o *ObmsDefinitionsGetAllOK) Error() string {
@@ -104,8 +107,7 @@ func (o *ObmsDefinitionsGetAllDefault) readResponse(response runtime.ClientRespo
 	return nil
 }
 
-/*ObmsDefinitionsGetAllOKBodyBody obms definitions get all o k body body
-
-swagger:model ObmsDefinitionsGetAllOKBodyBody
+/*ObmsDefinitionsGetAllOKBody obms definitions get all o k body
+swagger:model ObmsDefinitionsGetAllOKBody
 */
-type ObmsDefinitionsGetAllOKBodyBody interface{}
+type ObmsDefinitionsGetAllOKBody interface{}

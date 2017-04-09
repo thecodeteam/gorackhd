@@ -19,7 +19,7 @@ type PollersDataGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *PollersDataGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -49,6 +49,9 @@ func (o *PollersDataGetReader) ReadResponse(response runtime.ClientResponse, con
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -63,7 +66,7 @@ func NewPollersDataGetOK() *PollersDataGetOK {
 Successfully retrieved poller data
 */
 type PollersDataGetOK struct {
-	Payload PollersDataGetOKBodyBody
+	Payload PollersDataGetOKBody
 }
 
 func (o *PollersDataGetOK) Error() string {
@@ -90,7 +93,7 @@ func NewPollersDataGetNoContent() *PollersDataGetNoContent {
 Successfully processed the request and did not return any data
 */
 type PollersDataGetNoContent struct {
-	Payload PollersDataGetNoContentBodyBody
+	Payload PollersDataGetNoContentBody
 }
 
 func (o *PollersDataGetNoContent) Error() string {
@@ -174,14 +177,12 @@ func (o *PollersDataGetDefault) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*PollersDataGetNoContentBodyBody pollers data get no content body body
-
-swagger:model PollersDataGetNoContentBodyBody
+/*PollersDataGetNoContentBody pollers data get no content body
+swagger:model PollersDataGetNoContentBody
 */
-type PollersDataGetNoContentBodyBody interface{}
+type PollersDataGetNoContentBody interface{}
 
-/*PollersDataGetOKBodyBody pollers data get o k body body
-
-swagger:model PollersDataGetOKBodyBody
+/*PollersDataGetOKBody pollers data get o k body
+swagger:model PollersDataGetOKBody
 */
-type PollersDataGetOKBodyBody interface{}
+type PollersDataGetOKBody interface{}

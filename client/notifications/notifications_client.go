@@ -44,11 +44,14 @@ func (a *Client) NotificationAlertsPost(params *NotificationAlertsPostParams, au
 		Params:             params,
 		Reader:             &NotificationAlertsPostReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*NotificationAlertsPostCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

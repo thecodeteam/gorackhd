@@ -19,7 +19,7 @@ type IbmsDefinitionsGetAllReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *IbmsDefinitionsGetAllReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *IbmsDefinitionsGetAllReader) ReadResponse(response runtime.ClientRespon
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewIbmsDefinitionsGetAllOK() *IbmsDefinitionsGetAllOK {
 Successfully retrieved a list of IBMS schemas
 */
 type IbmsDefinitionsGetAllOK struct {
-	Payload IbmsDefinitionsGetAllOKBodyBody
+	Payload IbmsDefinitionsGetAllOKBody
 }
 
 func (o *IbmsDefinitionsGetAllOK) Error() string {
@@ -104,8 +107,7 @@ func (o *IbmsDefinitionsGetAllDefault) readResponse(response runtime.ClientRespo
 	return nil
 }
 
-/*IbmsDefinitionsGetAllOKBodyBody ibms definitions get all o k body body
-
-swagger:model IbmsDefinitionsGetAllOKBodyBody
+/*IbmsDefinitionsGetAllOKBody ibms definitions get all o k body
+swagger:model IbmsDefinitionsGetAllOKBody
 */
-type IbmsDefinitionsGetAllOKBodyBody interface{}
+type IbmsDefinitionsGetAllOKBody interface{}

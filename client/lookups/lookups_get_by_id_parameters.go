@@ -4,7 +4,10 @@ package lookups
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewLookupsGetByIDParamsWithTimeout(timeout time.Duration) *LookupsGetByIDPa
 	}
 }
 
+// NewLookupsGetByIDParamsWithContext creates a new LookupsGetByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewLookupsGetByIDParamsWithContext(ctx context.Context) *LookupsGetByIDParams {
+	var ()
+	return &LookupsGetByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewLookupsGetByIDParamsWithHTTPClient creates a new LookupsGetByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewLookupsGetByIDParamsWithHTTPClient(client *http.Client) *LookupsGetByIDParams {
+	var ()
+	return &LookupsGetByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*LookupsGetByIDParams contains all the parameters to send to the API endpoint
 for the lookups get by Id operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type LookupsGetByIDParams struct {
 	*/
 	ID string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the lookups get by Id params
+func (o *LookupsGetByIDParams) WithTimeout(timeout time.Duration) *LookupsGetByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the lookups get by Id params
+func (o *LookupsGetByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the lookups get by Id params
+func (o *LookupsGetByIDParams) WithContext(ctx context.Context) *LookupsGetByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the lookups get by Id params
+func (o *LookupsGetByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the lookups get by Id params
+func (o *LookupsGetByIDParams) WithHTTPClient(client *http.Client) *LookupsGetByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the lookups get by Id params
+func (o *LookupsGetByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithID adds the id to the lookups get by Id params
 func (o *LookupsGetByIDParams) WithID(id string) *LookupsGetByIDParams {
-	o.ID = id
+	o.SetID(id)
 	return o
+}
+
+// SetID adds the id to the lookups get by Id params
+func (o *LookupsGetByIDParams) SetID(id string) {
+	o.ID = id
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *LookupsGetByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param id

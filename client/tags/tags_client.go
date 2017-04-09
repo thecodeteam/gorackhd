@@ -43,11 +43,14 @@ func (a *Client) CreateTag(params *CreateTagParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &CreateTagReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*CreateTagCreated), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) DeleteTag(params *DeleteTagParams, authInfo runtime.ClientAuthI
 		Params:             params,
 		Reader:             &DeleteTagReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*DeleteTagNoContent), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) GetAllTags(params *GetAllTagsParams, authInfo runtime.ClientAut
 		Params:             params,
 		Reader:             &GetAllTagsReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetAllTagsOK), nil
+
 }
 
 /*
@@ -127,11 +136,14 @@ func (a *Client) GetNodesByTag(params *GetNodesByTagParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &GetNodesByTagReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetNodesByTagOK), nil
+
 }
 
 /*
@@ -155,11 +167,14 @@ func (a *Client) GetTag(params *GetTagParams, authInfo runtime.ClientAuthInfoWri
 		Params:             params,
 		Reader:             &GetTagReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*GetTagOK), nil
+
 }
 
 /*
@@ -183,11 +198,14 @@ func (a *Client) PostWorkflowByID(params *PostWorkflowByIDParams, authInfo runti
 		Params:             params,
 		Reader:             &PostWorkflowByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*PostWorkflowByIDAccepted), nil
+
 }
 
 // SetTransport changes the transport on the client

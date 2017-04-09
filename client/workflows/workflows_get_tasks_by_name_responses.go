@@ -19,7 +19,7 @@ type WorkflowsGetTasksByNameReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *WorkflowsGetTasksByNameReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *WorkflowsGetTasksByNameReader) ReadResponse(response runtime.ClientResp
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewWorkflowsGetTasksByNameOK() *WorkflowsGetTasksByNameOK {
 Successfully retrieved the workflow task with the specified injectable name
 */
 type WorkflowsGetTasksByNameOK struct {
-	Payload WorkflowsGetTasksByNameOKBodyBody
+	Payload WorkflowsGetTasksByNameOKBody
 }
 
 func (o *WorkflowsGetTasksByNameOK) Error() string {
@@ -104,8 +107,7 @@ func (o *WorkflowsGetTasksByNameDefault) readResponse(response runtime.ClientRes
 	return nil
 }
 
-/*WorkflowsGetTasksByNameOKBodyBody workflows get tasks by name o k body body
-
-swagger:model WorkflowsGetTasksByNameOKBodyBody
+/*WorkflowsGetTasksByNameOKBody workflows get tasks by name o k body
+swagger:model WorkflowsGetTasksByNameOKBody
 */
-type WorkflowsGetTasksByNameOKBodyBody interface{}
+type WorkflowsGetTasksByNameOKBody interface{}

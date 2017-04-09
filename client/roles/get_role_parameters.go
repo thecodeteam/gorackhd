@@ -4,7 +4,10 @@ package roles
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewGetRoleParamsWithTimeout(timeout time.Duration) *GetRoleParams {
 	}
 }
 
+// NewGetRoleParamsWithContext creates a new GetRoleParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewGetRoleParamsWithContext(ctx context.Context) *GetRoleParams {
+	var ()
+	return &GetRoleParams{
+
+		Context: ctx,
+	}
+}
+
+// NewGetRoleParamsWithHTTPClient creates a new GetRoleParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewGetRoleParamsWithHTTPClient(client *http.Client) *GetRoleParams {
+	var ()
+	return &GetRoleParams{
+		HTTPClient: client,
+	}
+}
+
 /*GetRoleParams contains all the parameters to send to the API endpoint
 for the get role operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type GetRoleParams struct {
 	*/
 	Name string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the get role params
+func (o *GetRoleParams) WithTimeout(timeout time.Duration) *GetRoleParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the get role params
+func (o *GetRoleParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the get role params
+func (o *GetRoleParams) WithContext(ctx context.Context) *GetRoleParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the get role params
+func (o *GetRoleParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the get role params
+func (o *GetRoleParams) WithHTTPClient(client *http.Client) *GetRoleParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the get role params
+func (o *GetRoleParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithName adds the name to the get role params
 func (o *GetRoleParams) WithName(name string) *GetRoleParams {
-	o.Name = name
+	o.SetName(name)
 	return o
+}
+
+// SetName adds the name to the get role params
+func (o *GetRoleParams) SetName(name string) {
+	o.Name = name
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *GetRoleParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	// path param name

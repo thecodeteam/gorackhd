@@ -10,28 +10,20 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-/*IPMIObmServiceObm OBM settings
-
-swagger:model ipmi-obm-service_Obm
-*/
+// IPMIObmServiceObm OBM settings
+// swagger:model ipmi-obm-service_Obm
 type IPMIObmServiceObm struct {
 
-	/* config
-
-	Required: true
-	*/
+	// config
+	// Required: true
 	Config *IPMIObmServiceObmConfig `json:"config"`
 
-	/* node Id
-
-	Required: true
-	*/
+	// node Id
+	// Required: true
 	NodeID *string `json:"nodeId"`
 
-	/* service
-
-	Required: true
-	*/
+	// service
+	// Required: true
 	Service *string `json:"service"`
 }
 
@@ -69,6 +61,9 @@ func (m *IPMIObmServiceObm) validateConfig(formats strfmt.Registry) error {
 	if m.Config != nil {
 
 		if err := m.Config.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("config")
+			}
 			return err
 		}
 	}
@@ -94,22 +89,17 @@ func (m *IPMIObmServiceObm) validateService(formats strfmt.Registry) error {
 	return nil
 }
 
-/*IPMIObmServiceObmConfig IP m i obm service obm config
-
-swagger:model IPMIObmServiceObmConfig
-*/
+// IPMIObmServiceObmConfig IP m i obm service obm config
+// swagger:model IPMIObmServiceObmConfig
 type IPMIObmServiceObmConfig struct {
 
-	/* BMC address
-	 */
+	// BMC address
 	Host string `json:"host,omitempty"`
 
-	/* IPMI password
-	 */
+	// IPMI password
 	Password string `json:"password,omitempty"`
 
-	/* IPMI username
-	 */
+	// IPMI username
 	User string `json:"user,omitempty"`
 }
 

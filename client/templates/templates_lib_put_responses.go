@@ -19,7 +19,7 @@ type TemplatesLibPutReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *TemplatesLibPutReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -42,6 +42,9 @@ func (o *TemplatesLibPutReader) ReadResponse(response runtime.ClientResponse, co
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -56,7 +59,7 @@ func NewTemplatesLibPutCreated() *TemplatesLibPutCreated {
 Successfully created or updated the specified template.
 */
 type TemplatesLibPutCreated struct {
-	Payload TemplatesLibPutCreatedBodyBody
+	Payload TemplatesLibPutCreatedBody
 }
 
 func (o *TemplatesLibPutCreated) Error() string {
@@ -140,8 +143,7 @@ func (o *TemplatesLibPutDefault) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*TemplatesLibPutCreatedBodyBody templates lib put created body body
-
-swagger:model TemplatesLibPutCreatedBodyBody
+/*TemplatesLibPutCreatedBody templates lib put created body
+swagger:model TemplatesLibPutCreatedBody
 */
-type TemplatesLibPutCreatedBodyBody interface{}
+type TemplatesLibPutCreatedBody interface{}

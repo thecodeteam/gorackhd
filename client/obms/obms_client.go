@@ -43,11 +43,14 @@ func (a *Client) ObmsDefinitionsGetAll(params *ObmsDefinitionsGetAllParams, auth
 		Params:             params,
 		Reader:             &ObmsDefinitionsGetAllReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsDefinitionsGetAllOK), nil
+
 }
 
 /*
@@ -71,11 +74,14 @@ func (a *Client) ObmsDefinitionsGetByName(params *ObmsDefinitionsGetByNameParams
 		Params:             params,
 		Reader:             &ObmsDefinitionsGetByNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsDefinitionsGetByNameOK), nil
+
 }
 
 /*
@@ -99,11 +105,14 @@ func (a *Client) ObmsDeleteByID(params *ObmsDeleteByIDParams, authInfo runtime.C
 		Params:             params,
 		Reader:             &ObmsDeleteByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsDeleteByIDNoContent), nil
+
 }
 
 /*
@@ -128,11 +137,14 @@ func (a *Client) ObmsGet(params *ObmsGetParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &ObmsGetReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsGetOK), nil
+
 }
 
 /*
@@ -156,11 +168,14 @@ func (a *Client) ObmsGetByID(params *ObmsGetByIDParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &ObmsGetByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsGetByIDOK), nil
+
 }
 
 /*
@@ -184,11 +199,14 @@ func (a *Client) ObmsPatchByID(params *ObmsPatchByIDParams, authInfo runtime.Cli
 		Params:             params,
 		Reader:             &ObmsPatchByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsPatchByIDOK), nil
+
 }
 
 /*
@@ -212,11 +230,14 @@ func (a *Client) ObmsPostLed(params *ObmsPostLedParams, authInfo runtime.ClientA
 		Params:             params,
 		Reader:             &ObmsPostLedReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsPostLedCreated), nil
+
 }
 
 /*
@@ -240,11 +261,14 @@ func (a *Client) ObmsPut(params *ObmsPutParams, authInfo runtime.ClientAuthInfoW
 		Params:             params,
 		Reader:             &ObmsPutReader{formats: a.formats},
 		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
 	})
 	if err != nil {
 		return nil, err
 	}
 	return result.(*ObmsPutCreated), nil
+
 }
 
 // SetTransport changes the transport on the client

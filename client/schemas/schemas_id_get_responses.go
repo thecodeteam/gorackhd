@@ -19,7 +19,7 @@ type SchemasIDGetReader struct {
 	formats strfmt.Registry
 }
 
-// ReadResponse reads a server response into the recieved o.
+// ReadResponse reads a server response into the received o.
 func (o *SchemasIDGetReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 
@@ -35,6 +35,9 @@ func (o *SchemasIDGetReader) ReadResponse(response runtime.ClientResponse, consu
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
 		return nil, result
 	}
 }
@@ -49,7 +52,7 @@ func NewSchemasIDGetOK() *SchemasIDGetOK {
 Successfully retrieved the schema
 */
 type SchemasIDGetOK struct {
-	Payload SchemasIDGetOKBodyBody
+	Payload SchemasIDGetOKBody
 }
 
 func (o *SchemasIDGetOK) Error() string {
@@ -104,8 +107,7 @@ func (o *SchemasIDGetDefault) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
-/*SchemasIDGetOKBodyBody schemas ID get o k body body
-
-swagger:model SchemasIDGetOKBodyBody
+/*SchemasIDGetOKBody schemas ID get o k body
+swagger:model SchemasIDGetOKBody
 */
-type SchemasIDGetOKBodyBody interface{}
+type SchemasIDGetOKBody interface{}

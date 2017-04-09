@@ -4,7 +4,10 @@ package skus
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewSkusPatchParamsWithTimeout(timeout time.Duration) *SkusPatchParams {
 	}
 }
 
+// NewSkusPatchParamsWithContext creates a new SkusPatchParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewSkusPatchParamsWithContext(ctx context.Context) *SkusPatchParams {
+	var ()
+	return &SkusPatchParams{
+
+		Context: ctx,
+	}
+}
+
+// NewSkusPatchParamsWithHTTPClient creates a new SkusPatchParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewSkusPatchParamsWithHTTPClient(client *http.Client) *SkusPatchParams {
+	var ()
+	return &SkusPatchParams{
+		HTTPClient: client,
+	}
+}
+
 /*SkusPatchParams contains all the parameters to send to the API endpoint
 for the skus patch operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type SkusPatchParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the skus patch params
+func (o *SkusPatchParams) WithTimeout(timeout time.Duration) *SkusPatchParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the skus patch params
+func (o *SkusPatchParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the skus patch params
+func (o *SkusPatchParams) WithContext(ctx context.Context) *SkusPatchParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the skus patch params
+func (o *SkusPatchParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the skus patch params
+func (o *SkusPatchParams) WithHTTPClient(client *http.Client) *SkusPatchParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the skus patch params
+func (o *SkusPatchParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the skus patch params
 func (o *SkusPatchParams) WithBody(body *models.Skus20SkusUpsert) *SkusPatchParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the skus patch params
+func (o *SkusPatchParams) SetBody(body *models.Skus20SkusUpsert) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the skus patch params
 func (o *SkusPatchParams) WithIdentifier(identifier string) *SkusPatchParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the skus patch params
+func (o *SkusPatchParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *SkusPatchParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

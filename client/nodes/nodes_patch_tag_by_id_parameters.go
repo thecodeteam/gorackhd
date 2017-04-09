@@ -4,7 +4,10 @@ package nodes
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewNodesPatchTagByIDParamsWithTimeout(timeout time.Duration) *NodesPatchTag
 	}
 }
 
+// NewNodesPatchTagByIDParamsWithContext creates a new NodesPatchTagByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewNodesPatchTagByIDParamsWithContext(ctx context.Context) *NodesPatchTagByIDParams {
+	var ()
+	return &NodesPatchTagByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewNodesPatchTagByIDParamsWithHTTPClient creates a new NodesPatchTagByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewNodesPatchTagByIDParamsWithHTTPClient(client *http.Client) *NodesPatchTagByIDParams {
+	var ()
+	return &NodesPatchTagByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*NodesPatchTagByIDParams contains all the parameters to send to the API endpoint
 for the nodes patch tag by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type NodesPatchTagByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) WithTimeout(timeout time.Duration) *NodesPatchTagByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) WithContext(ctx context.Context) *NodesPatchTagByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) WithHTTPClient(client *http.Client) *NodesPatchTagByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the nodes patch tag by Id params
 func (o *NodesPatchTagByIDParams) WithBody(body *models.PostTags) *NodesPatchTagByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetBody(body *models.PostTags) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the nodes patch tag by Id params
 func (o *NodesPatchTagByIDParams) WithIdentifier(identifier string) *NodesPatchTagByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *NodesPatchTagByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

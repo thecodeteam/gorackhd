@@ -5,66 +5,51 @@ package models
 
 import (
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
-/*TagRule tag rule
-
-swagger:model tag_rule
-*/
+// TagRule tag rule
+// swagger:model tag_rule
 type TagRule struct {
 
-	/* contains
-	 */
+	// contains
 	Contains string `json:"contains,omitempty"`
 
-	/* equals
-	 */
+	// equals
 	Equals string `json:"equals,omitempty"`
 
-	/* greater than
-	 */
+	// greater than
 	GreaterThan float64 `json:"greaterThan,omitempty"`
 
-	/* in
-	 */
-	In []string `json:"in,omitempty"`
+	// in
+	In []string `json:"in"`
 
-	/* less than
-	 */
+	// less than
 	LessThan float64 `json:"lessThan,omitempty"`
 
-	/* max
-	 */
+	// max
 	Max float64 `json:"max,omitempty"`
 
-	/* min
-	 */
+	// min
 	Min float64 `json:"min,omitempty"`
 
-	/* not contains
-	 */
+	// not contains
 	NotContains string `json:"notContains,omitempty"`
 
-	/* not in
-	 */
-	NotIn []string `json:"notIn,omitempty"`
+	// not in
+	NotIn []string `json:"notIn"`
 
-	/* not regex
-	 */
+	// not regex
 	NotRegex string `json:"notRegex,omitempty"`
 
-	/* path
-
-	Required: true
-	*/
+	// path
+	// Required: true
 	Path *string `json:"path"`
 
-	/* regex
-	 */
+	// regex
 	Regex string `json:"regex,omitempty"`
 }
 

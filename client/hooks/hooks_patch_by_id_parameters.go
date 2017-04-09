@@ -4,7 +4,10 @@ package hooks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -35,6 +38,25 @@ func NewHooksPatchByIDParamsWithTimeout(timeout time.Duration) *HooksPatchByIDPa
 	}
 }
 
+// NewHooksPatchByIDParamsWithContext creates a new HooksPatchByIDParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewHooksPatchByIDParamsWithContext(ctx context.Context) *HooksPatchByIDParams {
+	var ()
+	return &HooksPatchByIDParams{
+
+		Context: ctx,
+	}
+}
+
+// NewHooksPatchByIDParamsWithHTTPClient creates a new HooksPatchByIDParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewHooksPatchByIDParamsWithHTTPClient(client *http.Client) *HooksPatchByIDParams {
+	var ()
+	return &HooksPatchByIDParams{
+		HTTPClient: client,
+	}
+}
+
 /*HooksPatchByIDParams contains all the parameters to send to the API endpoint
 for the hooks patch by Id operation typically these are written to a http.Request
 */
@@ -51,25 +73,72 @@ type HooksPatchByIDParams struct {
 	*/
 	Identifier string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the hooks patch by Id params
+func (o *HooksPatchByIDParams) WithTimeout(timeout time.Duration) *HooksPatchByIDParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the hooks patch by Id params
+func (o *HooksPatchByIDParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the hooks patch by Id params
+func (o *HooksPatchByIDParams) WithContext(ctx context.Context) *HooksPatchByIDParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the hooks patch by Id params
+func (o *HooksPatchByIDParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the hooks patch by Id params
+func (o *HooksPatchByIDParams) WithHTTPClient(client *http.Client) *HooksPatchByIDParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the hooks patch by Id params
+func (o *HooksPatchByIDParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithBody adds the body to the hooks patch by Id params
 func (o *HooksPatchByIDParams) WithBody(body *models.Hooks20HookBase) *HooksPatchByIDParams {
-	o.Body = body
+	o.SetBody(body)
 	return o
+}
+
+// SetBody adds the body to the hooks patch by Id params
+func (o *HooksPatchByIDParams) SetBody(body *models.Hooks20HookBase) {
+	o.Body = body
 }
 
 // WithIdentifier adds the identifier to the hooks patch by Id params
 func (o *HooksPatchByIDParams) WithIdentifier(identifier string) *HooksPatchByIDParams {
-	o.Identifier = identifier
+	o.SetIdentifier(identifier)
 	return o
+}
+
+// SetIdentifier adds the identifier to the hooks patch by Id params
+func (o *HooksPatchByIDParams) SetIdentifier(identifier string) {
+	o.Identifier = identifier
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *HooksPatchByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Body == nil {

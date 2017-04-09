@@ -4,7 +4,10 @@ package templates
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -33,6 +36,25 @@ func NewTemplatesMetaGetParamsWithTimeout(timeout time.Duration) *TemplatesMetaG
 	}
 }
 
+// NewTemplatesMetaGetParamsWithContext creates a new TemplatesMetaGetParams object
+// with the default values initialized, and the ability to set a context for a request
+func NewTemplatesMetaGetParamsWithContext(ctx context.Context) *TemplatesMetaGetParams {
+	var ()
+	return &TemplatesMetaGetParams{
+
+		Context: ctx,
+	}
+}
+
+// NewTemplatesMetaGetParamsWithHTTPClient creates a new TemplatesMetaGetParams object
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
+func NewTemplatesMetaGetParamsWithHTTPClient(client *http.Client) *TemplatesMetaGetParams {
+	var ()
+	return &TemplatesMetaGetParams{
+		HTTPClient: client,
+	}
+}
+
 /*TemplatesMetaGetParams contains all the parameters to send to the API endpoint
 for the templates meta get operation typically these are written to a http.Request
 */
@@ -44,19 +66,61 @@ type TemplatesMetaGetParams struct {
 	*/
 	Sort *string
 
-	timeout time.Duration
+	timeout    time.Duration
+	Context    context.Context
+	HTTPClient *http.Client
+}
+
+// WithTimeout adds the timeout to the templates meta get params
+func (o *TemplatesMetaGetParams) WithTimeout(timeout time.Duration) *TemplatesMetaGetParams {
+	o.SetTimeout(timeout)
+	return o
+}
+
+// SetTimeout adds the timeout to the templates meta get params
+func (o *TemplatesMetaGetParams) SetTimeout(timeout time.Duration) {
+	o.timeout = timeout
+}
+
+// WithContext adds the context to the templates meta get params
+func (o *TemplatesMetaGetParams) WithContext(ctx context.Context) *TemplatesMetaGetParams {
+	o.SetContext(ctx)
+	return o
+}
+
+// SetContext adds the context to the templates meta get params
+func (o *TemplatesMetaGetParams) SetContext(ctx context.Context) {
+	o.Context = ctx
+}
+
+// WithHTTPClient adds the HTTPClient to the templates meta get params
+func (o *TemplatesMetaGetParams) WithHTTPClient(client *http.Client) *TemplatesMetaGetParams {
+	o.SetHTTPClient(client)
+	return o
+}
+
+// SetHTTPClient adds the HTTPClient to the templates meta get params
+func (o *TemplatesMetaGetParams) SetHTTPClient(client *http.Client) {
+	o.HTTPClient = client
 }
 
 // WithSort adds the sort to the templates meta get params
 func (o *TemplatesMetaGetParams) WithSort(sort *string) *TemplatesMetaGetParams {
-	o.Sort = sort
+	o.SetSort(sort)
 	return o
+}
+
+// SetSort adds the sort to the templates meta get params
+func (o *TemplatesMetaGetParams) SetSort(sort *string) {
+	o.Sort = sort
 }
 
 // WriteToRequest writes these params to a swagger request
 func (o *TemplatesMetaGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
-	r.SetTimeout(o.timeout)
+	if err := r.SetTimeout(o.timeout); err != nil {
+		return err
+	}
 	var res []error
 
 	if o.Sort != nil {
