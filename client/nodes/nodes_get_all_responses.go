@@ -59,7 +59,7 @@ func NewNodesGetAllOK() *NodesGetAllOK {
 Successfully retrieved the list of nodes
 */
 type NodesGetAllOK struct {
-	Payload []*models.Node20PartialNode
+	Payload []*models.Node20Node
 }
 
 func (o *NodesGetAllOK) Error() string {

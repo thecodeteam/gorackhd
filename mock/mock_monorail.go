@@ -41,9 +41,9 @@ func (_mr *_MockIfaceRecorder) Login(arg0, arg1 interface{}) *gomock.Call {
 	return _mr.mock.ctrl.RecordCall(_mr.mock, "Login", arg0, arg1)
 }
 
-func (_m *MockIface) Nodes() monorail.NodeIface {
+func (_m *MockIface) Nodes() *monorail.NodeIface {
 	ret := _m.ctrl.Call(_m, "Nodes")
-	ret0, _ := ret[0].(monorail.NodeIface)
+	ret0, _ := ret[0].(*monorail.NodeIface)
 	return ret0
 }
 
@@ -51,9 +51,9 @@ func (_mr *_MockIfaceRecorder) Nodes() *gomock.Call {
 	return _mr.mock.ctrl.RecordCall(_mr.mock, "Nodes")
 }
 
-func (_m *MockIface) Skus() monorail.SkuIface {
+func (_m *MockIface) Skus() *monorail.SkuIface {
 	ret := _m.ctrl.Call(_m, "Skus")
-	ret0, _ := ret[0].(monorail.SkuIface)
+	ret0, _ := ret[0].(*monorail.SkuIface)
 	return ret0
 }
 
@@ -61,9 +61,9 @@ func (_mr *_MockIfaceRecorder) Skus() *gomock.Call {
 	return _mr.mock.ctrl.RecordCall(_mr.mock, "Skus")
 }
 
-func (_m *MockIface) Tags() monorail.TagIface {
+func (_m *MockIface) Tags() *monorail.TagIface {
 	ret := _m.ctrl.Call(_m, "Tags")
-	ret0, _ := ret[0].(monorail.TagIface)
+	ret0, _ := ret[0].(*monorail.TagIface)
 	return ret0
 }
 
