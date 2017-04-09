@@ -14,9 +14,9 @@ func TestMonorail(t *testing.T) {
 }
 
 var _ = Describe("Monorail Client", func() {
-	var client Monorail
+	var client *Monorail
 	// configure the host. include port with environment variable. For instance the vagrant image would be localhost:9090
-	var rackhdEndpoint = "https://localhost:9093"
+	var rackhdEndpoint = "http://localhost:9090"
 	if os.Getenv("GORACKHD_ENDPOINT") != "" {
 		rackhdEndpoint = os.Getenv("GORACKHD_ENDPOINT")
 	}
@@ -27,7 +27,18 @@ var _ = Describe("Monorail Client", func() {
 		})
 
 		It("should instantiate a client", func() {
-			client.Endpoint.Should(Equal(rackhdEndpoint))
+			Ω(client.Endpoint.String()).Should(Equal(rackhdEndpoint))
+		})
+
+		Context("With valid user", func() {
+			username := "admin"
+			password := "admin123"
+
+			It("should log into RackHD", func() {
+				auth, err := client.Login(username, password)
+				Ω(err).Should(Succeed())
+				Ω(auth).ShouldNot(BeNil())
+			})
 		})
 
 	})
