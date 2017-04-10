@@ -10,9 +10,9 @@ import (
 // Iface provides an interface to enable mocking
 type Iface interface {
 	Login(string, string) (runtime.ClientAuthInfoWriter, error)
-	Nodes() *NodeIface
-	Skus() *SkuIface
-	Tags() *TagIface
+	Nodes() NodeIface
+	Skus() SkuIface
+	Tags() TagIface
 }
 
 // NodeIface provides an interface to enable mocking
