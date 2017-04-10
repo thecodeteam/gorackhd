@@ -62,16 +62,16 @@ for the nodes patch tag by Id operation typically these are written to a http.Re
 */
 type NodesPatchTagByIDParams struct {
 
-	/*Body
-	  The tag properties to patch
-
-	*/
-	Body *models.PostTags
 	/*Identifier
 	  The node identifier
 
 	*/
 	Identifier string
+	/*Tags
+	  The tag properties to patch
+
+	*/
+	Tags *models.NodesPatchTags
 
 	timeout    time.Duration
 	Context    context.Context
@@ -111,17 +111,6 @@ func (o *NodesPatchTagByIDParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the nodes patch tag by Id params
-func (o *NodesPatchTagByIDParams) WithBody(body *models.PostTags) *NodesPatchTagByIDParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the nodes patch tag by Id params
-func (o *NodesPatchTagByIDParams) SetBody(body *models.PostTags) {
-	o.Body = body
-}
-
 // WithIdentifier adds the identifier to the nodes patch tag by Id params
 func (o *NodesPatchTagByIDParams) WithIdentifier(identifier string) *NodesPatchTagByIDParams {
 	o.SetIdentifier(identifier)
@@ -133,6 +122,17 @@ func (o *NodesPatchTagByIDParams) SetIdentifier(identifier string) {
 	o.Identifier = identifier
 }
 
+// WithTags adds the tags to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) WithTags(tags *models.NodesPatchTags) *NodesPatchTagByIDParams {
+	o.SetTags(tags)
+	return o
+}
+
+// SetTags adds the tags to the nodes patch tag by Id params
+func (o *NodesPatchTagByIDParams) SetTags(tags *models.NodesPatchTags) {
+	o.Tags = tags
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *NodesPatchTagByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -141,16 +141,16 @@ func (o *NodesPatchTagByIDParams) WriteToRequest(r runtime.ClientRequest, reg st
 	}
 	var res []error
 
-	if o.Body == nil {
-		o.Body = new(models.PostTags)
-	}
-
-	if err := r.SetBodyParam(o.Body); err != nil {
+	// path param identifier
+	if err := r.SetPathParam("identifier", o.Identifier); err != nil {
 		return err
 	}
 
-	// path param identifier
-	if err := r.SetPathParam("identifier", o.Identifier); err != nil {
+	if o.Tags == nil {
+		o.Tags = new(models.NodesPatchTags)
+	}
+
+	if err := r.SetBodyParam(o.Tags); err != nil {
 		return err
 	}
 

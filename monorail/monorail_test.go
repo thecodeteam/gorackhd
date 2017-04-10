@@ -55,6 +55,7 @@ var _ = Describe("Monorail Client", func() {
 var _ = Describe("Monorail Nodes Client", func() {
 	var client *Monorail
 	var auth runtime.ClientAuthInfoWriter
+	var nodeID string
 
 	BeforeEach(func() {
 		username := "admin"
@@ -102,4 +103,66 @@ var _ = Describe("Monorail Nodes Client", func() {
 		Ω(err).Should(BeNil())
 		Ω(getAllResp.Payload).Should(BeEmpty())
 	})
+
+	Context("with an existing node", func() {
+
+		BeforeEach(func() {
+			postParams := nodes.NewNodesPostParams().
+				WithIdentifiers(
+					&models.Node20PartialNode{
+						AutoDiscover: "false",
+						Identifiers:  []string{"08:00:27:A4:52:95"},
+						Name:         "vbox1",
+						Type:         "compute",
+						Obms:         []*models.NodesPostObmByID{},
+						Relations:    []*models.RelationsObj{},
+						Tags:         []string{},
+					},
+				)
+			client.Nodes().NodesPost(postParams, auth)
+			getAllResp, _ := client.Nodes().NodesGetAll(nil, auth)
+			nodeID = getAllResp.Payload[0].ID
+		})
+
+		AfterEach(func() {
+			delParams := nodes.NewNodesDelByIDParams().
+				WithIdentifier(nodeID)
+			client.Nodes().NodesDelByID(delParams, auth)
+		})
+
+		It("should handle node tag CRUD operations", func() {
+			getParams := nodes.NewNodesGetTagsByIDParams().
+				WithIdentifier(nodeID)
+			getAllTagsResp, err := client.Nodes().NodesGetTagsByID(getParams, auth)
+			Ω(err).Should(BeNil())
+			Ω(getAllTagsResp.Payload).Should(BeEmpty())
+
+			patchParams := nodes.NewNodesPatchTagByIDParams().
+				WithIdentifier(nodeID).
+				WithTags(&models.NodesPatchTags{
+					Tags: []string{"testTag"},
+				})
+			patchTagResp, err := client.Nodes().NodesPatchTagByID(patchParams, auth)
+			Ω(err).Should(BeNil())
+			Ω(patchTagResp.Payload).ShouldNot(BeNil())
+
+			getAllTagsResp, err = client.Nodes().NodesGetTagsByID(getParams, auth)
+			Ω(err).Should(BeNil())
+			Ω(getAllTagsResp.Payload).Should(HaveLen(1))
+			Ω(getAllTagsResp.Payload[0]).Should(Equal("testTag"))
+
+			delParams := nodes.NewNodesDelTagByIDParams().
+				WithIdentifier(nodeID).
+				WithTagName("testTag")
+			delTagResp, err := client.Nodes().NodesDelTagByID(delParams, auth)
+			Ω(err).Should(BeNil())
+			Ω(delTagResp).ShouldNot(BeNil())
+
+			getAllTagsResp, err = client.Nodes().NodesGetTagsByID(getParams, auth)
+			Ω(err).Should(BeNil())
+			Ω(getAllTagsResp.Payload).Should(BeEmpty())
+		})
+
+	})
+
 })

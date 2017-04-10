@@ -59,7 +59,7 @@ func NewNodesGetTagsByIDOK() *NodesGetTagsByIDOK {
 Successfully retrieved node tags
 */
 type NodesGetTagsByIDOK struct {
-	Payload []interface{}
+	Payload []string
 }
 
 func (o *NodesGetTagsByIDOK) Error() string {
