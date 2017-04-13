@@ -59,7 +59,7 @@ func NewNodesGetWorkflowByIDOK() *NodesGetWorkflowByIDOK {
 Successfully retrieved the workflows for specified node
 */
 type NodesGetWorkflowByIDOK struct {
-	Payload NodesGetWorkflowByIDOKBody
+	Payload []interface{}
 }
 
 func (o *NodesGetWorkflowByIDOK) Error() string {
@@ -142,8 +142,3 @@ func (o *NodesGetWorkflowByIDDefault) readResponse(response runtime.ClientRespon
 
 	return nil
 }
-
-/*NodesGetWorkflowByIDOKBody nodes get workflow by ID o k body
-swagger:model NodesGetWorkflowByIDOKBody
-*/
-type NodesGetWorkflowByIDOKBody interface{}

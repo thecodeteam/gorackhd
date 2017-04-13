@@ -37,7 +37,7 @@ type Node20PartialNode struct {
 	Relations []*RelationsObj `json:"relations"`
 
 	// tags
-	Tags []string `json:"tags"`
+	Tags string `json:"tags,omitempty"`
 
 	// Type of node
 	Type string `json:"type,omitempty"`
@@ -58,11 +58,6 @@ func (m *Node20PartialNode) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRelations(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateTags(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -139,19 +134,6 @@ func (m *Node20PartialNode) validateRelations(formats strfmt.Registry) error {
 				return err
 			}
 		}
-
-	}
-
-	return nil
-}
-
-func (m *Node20PartialNode) validateTags(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.Tags) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Tags); i++ {
 
 	}
 

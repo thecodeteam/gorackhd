@@ -59,7 +59,7 @@ func NewSkusIDGetNodesOK() *SkusIDGetNodesOK {
 Successfully retrieved the nodes associated with the specified SKU
 */
 type SkusIDGetNodesOK struct {
-	Payload []*models.Node20PartialNode
+	Payload []*models.Node20SkuNode
 }
 
 func (o *SkusIDGetNodesOK) Error() string {

@@ -59,7 +59,7 @@ func NewSkusIDGetOK() *SkusIDGetOK {
 Successfull retrieved the specified SKU
 */
 type SkusIDGetOK struct {
-	Payload SkusIDGetOKBody
+	Payload *models.Skus20Sku
 }
 
 func (o *SkusIDGetOK) Error() string {
@@ -68,8 +68,10 @@ func (o *SkusIDGetOK) Error() string {
 
 func (o *SkusIDGetOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.Skus20Sku)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -142,8 +144,3 @@ func (o *SkusIDGetDefault) readResponse(response runtime.ClientResponse, consume
 
 	return nil
 }
-
-/*SkusIDGetOKBody skus ID get o k body
-swagger:model SkusIDGetOKBody
-*/
-type SkusIDGetOKBody interface{}

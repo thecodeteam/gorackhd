@@ -52,7 +52,7 @@ func NewSkusGetOK() *SkusGetOK {
 Successfully retrieved the list of SKUs
 */
 type SkusGetOK struct {
-	Payload []*models.Skus20SkusUpsert
+	Payload []*models.Skus20Sku
 }
 
 func (o *SkusGetOK) Error() string {
