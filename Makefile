@@ -11,7 +11,7 @@ REVISION?=$(shell git rev-list -1 HEAD)
 GIT := /usr/local/bin/git
 SWAGGER_PKG := github.com/go-swagger/go-swagger
 SWAGGER_CMD := swagger
-SPEC_DIR := on-http/static
+SPEC_DIR := _resources/on-http/static
 SPEC_FILE := monorail-2.0.yaml
 CLIENT := client
 MODELS := models
@@ -34,7 +34,7 @@ clean:
 	rm -fr $(COVER_OUT)
 
 clean_generated:
-	rm -fr $(CLIENT) $(MODELS) $(MOCK)
+	rm -fr $(CLIENT) $(MODELS) $(MOCK)/mock_*
 
 clobber: clean
 	rm -fr vendor
@@ -66,12 +66,19 @@ build:
 	@echo "+ $@"
 	@go build ${GO_LDFLAGS} $(PKGS)
 
+generate_models:
+	$(if $(shell which $(SWAGGER_CMD) || echo ''), , \
+		$(error Please install golint: `go get -u $(SWAGGER_PKG)`))
+	@cd $(SPEC_DIR) && $(SWAGGER_CMD) generate model -f $(SPEC_FILE) -t ../../../
+	@cd ../..
+	@echo "+ $@"
+
 generate:
 	$(if $(shell which mockgen || echo ''), , \
 		$(error Please install golint: `go get -u github.com/golang/mock/mockgen`))
 	$(if $(shell which $(SWAGGER_CMD) || echo ''), , \
 		$(error Please install golint: `go get -u $(SWAGGER_PKG)`))
-	@cd $(SPEC_DIR) && $(SWAGGER_CMD) generate client -f $(SPEC_FILE) -t ../../
+	@cd $(SPEC_DIR) && $(SWAGGER_CMD) generate client --skip-models -f $(SPEC_FILE) -t ../../../
 	@cd ../..
 	@echo "+ $@"
 	@go generate -x $(REPO)/mock
