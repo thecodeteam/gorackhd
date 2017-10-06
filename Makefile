@@ -1,37 +1,105 @@
-export GO15VENDOREXPERIMENT=1
+# REPO
+REPO?=github.com/spiegela/gorackhd
 
-GLIDE := $(GOPATH)/bin/glide
-GLIDE_LOCK := glide.lock
+# Set an output prefix, which is the local directory if not specified
+PREFIX?=$(shell pwd -L)
+
+# Used to populate version variable in main package.
+VERSION?=$(shell git describe --match 'v[0-9]*' --dirty='.m' --always)
+REVISION?=$(shell git rev-list -1 HEAD)
+
+GIT := /usr/local/bin/git
 SWAGGER_PKG := github.com/go-swagger/go-swagger
-SWAGGER_CMD := $(SWAGGER_PKG)/cmd/swagger/swagger.go
-VENDORED_SWAGGER_CMD := vendor/$(SWAGGER_CMD)
-SPEC_FILE := swagger-spec/monorail.yml
+SWAGGER_CMD := swagger
+SPEC_DIR := _resources/on-http/static
+SPEC_FILE := monorail-2.0.yaml
 CLIENT := client
 MODELS := models
+MOCK := mock
 CLIENT_BINDINGS := $(CLIENT)/monorail_client.go
 
-all: install
+# Allow turning off function inlining and variable registerization
+ifeq (${DISABLE_OPTIMIZATION},true)
+	GO_GCFLAGS=-gcflags "-N -l"
+	VERSION:="$(VERSION)-noopt"
+endif
 
-$(GLIDE):
-	go get -u github.com/Masterminds/glide
+.PHONY: clean all swagger_deps fmt vet lint build test get-tools \
+	clean clobber
+.DEFAULT: all
 
-swagger_deps: $(GLIDE_LOCK) | $(GLIDE)
-	$(GLIDE) --home $(HOME) install
-
-$(CLIENT_BINDINGS): swagger_deps $(SPEC_FILE)
-	go run $(VENDORED_SWAGGER_CMD) generate client -f $(SPEC_FILE)
-
-install: $(CLIENT_BINDINGS)
-	go install -v $$($(GLIDE) nv)
-
-test:
-	go test -v
+all: clean fmt vet lint build test
 
 clean:
-	rm -fr $(COVER_OUT) $(CLIENT) $(MODELS)
+	rm -fr $(COVER_OUT)
+
+clean_generated:
+	rm -fr $(CLIENT) $(MODELS) $(MOCK)/mock_*
 
 clobber: clean
 	rm -fr vendor
 
-.PHONY: all swagger_deps install test \
-	clean clobber
+# Package list
+PKGS_AND_MOCKS := $(shell go list ./... | grep -v ^${REPO}/vendor/)
+PKGS := $(shell echo $(PKGS_AND_MOCKS) | tr ' ' '\n' | grep -v /mock$)
+
+vet:
+	@echo "+ $@"
+	@go vet $(PKGS)
+
+fmt:
+	@echo "+ $@"
+	@test -z "$$(gofmt -s -l . 2>&1 | grep -v ^vendor/ | tee /dev/stderr)" || \
+		(echo >&2 "+ please format Go code with 'gofmt -s', or use 'make fmt-save'" && false)
+
+lint:
+	@echo "+ $@"
+	$(if $(shell which golint || echo ''), , \
+		$(error Please install golint: `go get -u github.com/golang/lint/golint`))
+	@test -z "$$(golint ./... 2>&1 | grep -v ^vendor/ | grep -v ^mock/ | grep -v ^client/ | grep -v ^models/ | tee /dev/stderr)"
+
+fmt-save:
+	@echo "+ $@"
+	@gofmt -s -l . 2>&1 | grep -v ^vendor/ | xargs gofmt -s -l -w
+
+build:
+	@echo "+ $@"
+	@go build ${GO_LDFLAGS} $(PKGS)
+
+generate_models:
+	$(if $(shell which $(SWAGGER_CMD) || echo ''), , \
+		$(error Please install golint: `go get -u $(SWAGGER_PKG)`))
+	@cd $(SPEC_DIR) && $(SWAGGER_CMD) generate model -f $(SPEC_FILE) -t ../../../
+	@cd ../..
+	@echo "+ $@"
+
+generate:
+	$(if $(shell which mockgen || echo ''), , \
+		$(error Please install golint: `go get -u github.com/golang/mock/mockgen`))
+	$(if $(shell which $(SWAGGER_CMD) || echo ''), , \
+		$(error Please install golint: `go get -u $(SWAGGER_PKG)`))
+	@cd $(SPEC_DIR) && $(SWAGGER_CMD) generate client --skip-models -f $(SPEC_FILE) -t ../../../
+	@cd ../..
+	@echo "+ $@"
+	@go generate -x $(REPO)/mock
+
+test:
+	@echo "+ $@"
+	@go test -test.short -race -v $(PKGS)
+
+coverage:
+	@echo "+ $@"
+	@for pkg in $(PKGS); do \
+	  go test -test.short -coverprofile="../../../$$pkg/coverage.txt" $${pkg} || exit 1; \
+	done
+
+test-full:
+	@echo "+ $@"
+	@go test -race $(PKGS)
+
+get-tools:
+	@echo "+ $@"
+	@go get -u \
+		github.com/golang/lint/golint \
+		github.com/wfarner/blockcheck \
+		github.com/rancher/trash
