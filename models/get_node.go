@@ -26,8 +26,8 @@ type GetNode struct {
 	// boot settings
 	BootSettings interface{} `json:"bootSettings,omitempty"`
 
-	// identifier
-	Identifier string `json:"identifier,omitempty"`
+	// id
+	ID string `json:"id,omitempty"`
 
 	// identifiers
 	Identifiers []string `json:"identifiers"`
@@ -52,7 +52,7 @@ type GetNode struct {
 
 /* polymorph GetNode bootSettings false */
 
-/* polymorph GetNode identifier false */
+/* polymorph GetNode id false */
 
 /* polymorph GetNode identifiers false */
 

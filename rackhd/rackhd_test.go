@@ -94,7 +94,7 @@ var _ = Describe("RackHD Nodes Client", func() {
 		Ω(getAllResp.Payload).Should(HaveLen(1))
 
 		delParams := nodes.NewNodesDelByIDParams().
-			WithIdentifier(getAllResp.Payload[0].Identifier)
+			WithIdentifier(getAllResp.Payload[0].ID)
 		nodesDeleted, err := client.Nodes().NodesDelByID(delParams, auth)
 		Ω(err).Should(BeNil())
 		Ω(nodesDeleted).ShouldNot(BeNil())
@@ -121,7 +121,7 @@ var _ = Describe("RackHD Nodes Client", func() {
 				)
 			client.Nodes().NodesPost(postParams, auth)
 			getAllResp, _ := client.Nodes().NodesGetAll(nil, auth)
-			nodeID = getAllResp.Payload[0].Identifier
+			nodeID = getAllResp.Payload[0].ID
 		})
 
 		AfterEach(func() {
