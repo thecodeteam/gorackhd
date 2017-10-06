@@ -68,7 +68,7 @@ type NodesPatchTagByIDParams struct {
 	  The tag properties to patch
 
 	*/
-	Body *models.PostTags
+	Body *models.NodePatchTags
 	/*Identifier
 	  The node identifier
 
@@ -114,13 +114,13 @@ func (o *NodesPatchTagByIDParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the nodes patch tag by Id params
-func (o *NodesPatchTagByIDParams) WithBody(body *models.PostTags) *NodesPatchTagByIDParams {
+func (o *NodesPatchTagByIDParams) WithBody(body *models.NodePatchTags) *NodesPatchTagByIDParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the nodes patch tag by Id params
-func (o *NodesPatchTagByIDParams) SetBody(body *models.PostTags) {
+func (o *NodesPatchTagByIDParams) SetBody(body *models.NodePatchTags) {
 	o.Body = body
 }
 
@@ -144,7 +144,7 @@ func (o *NodesPatchTagByIDParams) WriteToRequest(r runtime.ClientRequest, reg st
 	var res []error
 
 	if o.Body == nil {
-		o.Body = new(models.PostTags)
+		o.Body = new(models.NodePatchTags)
 	}
 
 	if err := r.SetBodyParam(o.Body); err != nil {

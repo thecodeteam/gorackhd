@@ -139,7 +139,7 @@ var _ = Describe("RackHD Nodes Client", func() {
 
 			patchParams := nodes.NewNodesPatchTagByIDParams().
 				WithIdentifier(nodeID).
-				WithBody(&models.PostTags{Name: "testTag"})
+				WithBody(&models.NodePatchTags{Tags: []string{"testTag"}})
 			patchTagResp, err := client.Nodes().NodesPatchTagByID(patchParams, auth)
 			Ω(err).Should(BeNil())
 			Ω(patchTagResp.Payload).ShouldNot(BeNil())
